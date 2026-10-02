@@ -69,6 +69,28 @@ td b{color:var(--ink)}
 .daftar li{display:flex;justify-content:space-between;gap:12px;font-size:19px;padding:8px 0;border-bottom:1px solid var(--line)}
 .daftar li span:first-child{font-weight:600}
 .daftar li span:last-child{color:var(--soft)}
+.dua{display:grid;grid-template-columns:1.45fr 1fr;gap:20px;margin-top:4px}
+.dua .kartu{display:flex;flex-direction:column;gap:4px;padding:22px 26px 24px}
+.dua .tag{align-self:flex-start}
+.dua .kartu b{font-size:24px;margin-bottom:8px}
+.dua .kartu p{font-size:18px}
+.tumpuk{display:flex;flex-direction:column;gap:20px}
+.tbl{font-size:18px}
+.tbl th{font-size:13px;padding:0 12px 8px 0;border-bottom:2px solid var(--ink)}
+.tbl td{padding:9px 12px 9px 0;color:var(--ink);width:auto}
+.tbl td:first-child{font-weight:600;color:var(--ink);width:auto}
+.tbl .redup{color:var(--soft)}
+.tbl tr.opsi td{color:var(--soft)}
+.tbl tr.opsi td:first-child::after{content:" · opsi";font-weight:400;font-size:14px}
+.dua .catatan{font-size:16px;margin-top:12px}
+.elemen2{margin-top:28px}
+.judul2{font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.judul2 span{text-transform:none;letter-spacing:0;font-weight:400;color:var(--soft);font-size:16px}
+.cara{font-size:19px;line-height:1.45;margin-top:8px}
+.empat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.empat div{background:var(--accent-soft);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.empat b{font-size:19px;color:var(--accent)}
+.empat span{font-size:16px;line-height:1.4;color:var(--ink)}
 /* keputusan */
 .tanya{display:flex;flex-direction:column;gap:14px}
 .tanya div{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 20px}
@@ -97,14 +119,26 @@ td b{color:var(--ink)}
 <section class="slide">
   <p class="alis">Persiapan</p>
   <h2>Data dan task untuk anotasi</h2>
-  <div class="kartu3">
-    <div class="kartu"><span class="tag ok">Data</span><b>Teks rusak disaring dulu</b>
-      <p>Filter aturan membuang teks yang jelas rusak: 6 dari 1.900, kebanyakan spam togel. Berikutnya disaring LLM dan dicek manusia sebelum sampai ke annotator.</p></div>
-    <div class="kartu"><span class="tag ok">Task</span><b>Tiga task</b>
-      <ul class="daftar"><li><span>Sentimen</span><span>SmSA</span></li><li><span>Toksisitas</span><span>IndoToxic2024</span></li><li><span>NLI</span><span>IndoNLI</span></li></ul>
-      <p>Dua klasifikasi satu kalimat dan satu pasangan kalimat. Benchmark budaya dihindari.</p></div>
-    <div class="kartu"><span class="tag ok">Tampilan</span><b>Fokus ke teks</b>
-      <p>Annotator hanya melihat teks, deskripsi task, dan jenis teks. Topik, keluarga task, dan nama dataset tidak ditampilkan.</p></div>
+  <div class="dua">
+    <div class="kartu">
+      <span class="tag ok">Task</span>
+      <b>Task dan dataset</b>
+      <table class="tbl">
+        <tr><th>Task</th><th>Data asli</th><th>Pembanding terjemahan</th></tr>
+        <tr><td>Sentimen</td><td>SmSA</td><td class="redup">belum ada</td></tr>
+        <tr><td>Toksisitas</td><td>IndoToxic2024</td><td>RTP-LX</td></tr>
+        <tr><td>NLI</td><td>IndoNLI</td><td>MNLI (terjemahan mesin)</td></tr>
+        <tr class="opsi"><td>Story cloze</td><td>IndoStoryCloze</td><td>XStoryCloze</td></tr>
+        <tr class="opsi"><td>MCQA</td><td>IndoMMLU</td><td>Global-MMLU</td></tr>
+      </table>
+      <p class="catatan">Tiga task pertama dipakai. Story cloze dan MCQA sedang ditimbang. Benchmark budaya dihindari.</p>
+    </div>
+    <div class="tumpuk">
+      <div class="kartu"><span class="tag ok">Data</span><b>Teks rusak disaring dulu</b>
+        <p>Teks yang jelas rusak (spam, aksara kacau, isi kosong) dibuang dengan filter aturan. Berikutnya disaring LLM dan dicek manusia sebelum sampai ke annotator.</p></div>
+      <div class="kartu"><span class="tag ok">Tampilan</span><b>Fokus ke teks</b>
+        <p>Annotator hanya melihat teks, deskripsi task, dan jenis teks. Topik, keluarga task, dan nama dataset tidak ditampilkan.</p></div>
+    </div>
   </div>
   <div class="kaki"><span>Mockup: arpinasaran.github.io/nusarasa-mockup</span><span>1 / 2</span></div>
 </section>
@@ -122,11 +156,14 @@ td b{color:var(--ink)}
     <div class="panah">→</div>
     <div class="langkah"><span class="n">4</span><b>Label asli</b><span>Label dibuka. Kalau beda: karena budaya atau hal lain?</span></div>
   </div>
-  <div class="elemen">
-    <p class="judul">4 elemen<br>Hershcovich dkk.<br>(ACL 2022)</p>
-    <div>
-      <div class="chips"><span>Bentuk dan gaya bahasa</span><span>Pengetahuan bersama</span><span>Pokok bahasan</span><span>Nilai dan norma</span></div>
-      <p style="margin-top:14px">Menggantikan 5 dimensi lama, yang tidak setara (ada yang menunjuk benda, isi, atau pengetahuan). Keempat elemen ini setingkat dan menjawab <b>kenapa</b> teks terasa khas atau asing. Elemen hanya dipakai sebagai alasan, sesuai masukan Pak Rahmad.</p>
+  <div class="elemen2">
+    <p class="judul2">4 elemen budaya <span>· Hershcovich dkk. (ACL 2022), menggantikan 5 dimensi lama</span></p>
+    <p class="cara">Elemen tidak dinilai satu per satu. Annotator cukup mencentang elemen yang membuat isi terasa khas atau asing (langkah 3), atau yang membuat jawabannya beda dari label asli (langkah 4).</p>
+    <div class="empat">
+      <div><b>Bentuk dan gaya bahasa</b><span>Ungkapan, sindiran, umpatan, tingkat sopan, kalimat yang terasa terjemahan</span></div>
+      <div><b>Pengetahuan bersama</b><span>Tokoh, tempat, barang, peristiwa, sejarah, aturan yang dianggap sudah diketahui pembaca</span></div>
+      <div><b>Pokok bahasan</b><span>Apakah hal yang dibicarakan memang biasa dibicarakan atau dipedulikan orang Indonesia</span></div>
+      <div><b>Nilai dan norma</b><span>Anggapan soal baik-buruk, pantas-tidak, sopan-kasar, halal-haram</span></div>
     </div>
   </div>
   <div class="kaki"><span>Mockup: arpinasaran.github.io/nusarasa-mockup</span><span>2 / 2</span></div>
