@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mockup Form v13</title>
+<style>
+:root{
+  --bg:#f6f4f3; --surface:#ffffff; --surface-2:#faf8f7; --text:#1d1b1b; --muted:#6c6567;
+  --line:#e6e0df; --line-strong:#d3c9c8;
+  --accent:#c8102e; --accent-strong:#a00d25; --accent-soft:#fdeef0; --accent-line:#f1c3ca; --on-accent:#ffffff;
+  --ok:#1f6b3a; --ok-soft:#e8f4ec; --warn:#8a5a0f; --warn-soft:#fff5de; --shadow:rgba(30,15,15,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141213; --surface:#1d1a1b; --surface-2:#242021; --text:#eeeaea; --muted:#a59d9f;
+    --line:#332e2f; --line-strong:#4a4243;
+    --accent:#ff6378; --accent-strong:#ff8696; --accent-soft:#3a1d23; --accent-line:#6d2c37; --on-accent:#1b0b0e;
+    --ok:#86d6a0; --ok-soft:#18301f; --warn:#f0c46a; --warn-soft:#33290f; --shadow:rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141213; --surface:#1d1a1b; --surface-2:#242021; --text:#eeeaea; --muted:#a59d9f;
+  --line:#332e2f; --line-strong:#4a4243;
+  --accent:#ff6378; --accent-strong:#ff8696; --accent-soft:#3a1d23; --accent-line:#6d2c37; --on-accent:#1b0b0e;
+  --ok:#86d6a0; --ok-soft:#18301f; --warn:#f0c46a; --warn-soft:#33290f; --shadow:rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);display:flex;flex-direction:column;height:100dvh;overflow:hidden;
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 14px;font-size:14px}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.utama{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.btn.utama:hover:not(:disabled){background:var(--accent-strong);border-color:var(--accent-strong)}
+.btn.tipis{border-color:transparent;background:none;color:var(--muted);padding:5px 8px;font-size:13px}
+.btn.tipis:hover:not(:disabled){color:var(--accent)}
+.btn.tipis.on{color:var(--accent);font-weight:600}
+
+/* header */
+header{flex:none;background:var(--surface);border-bottom:1px solid var(--line)}
+header .isi{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:8px 16px}
+header h1{font-size:15px;margin:0;font-weight:700;margin-right:auto}
+header h1 span{color:var(--accent)}
+.navteks{display:flex;align-items:center;gap:6px;font-size:14px}
+.navteks .btn{padding:4px 10px}
+.navteks .pos b{font-weight:700}
+.navteks .pos small{color:var(--muted)}
+.demo{display:flex;align-items:center;gap:2px;border-left:1px solid var(--line);padding-left:10px;font-size:12px;color:var(--muted)}
+
+/* dua kolom */
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;padding:16px;max-width:1280px;width:100%;margin:0 auto}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px;padding:10px 16px}}
+.kiri{min-height:0;overflow:auto}
+@media (max-width:860px){.kiri{max-height:40dvh}}
+.meta{font-size:13px;color:var(--muted);margin:0 2px 8px}
+.meta b{color:var(--text);font-weight:600}
+.inst{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 24px 0;box-shadow:0 2px 10px var(--shadow);overflow:hidden}
+@media (max-width:640px){.inst{padding:14px 14px 0}}
+.bag{margin-bottom:14px}
+.bag-k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;margin-bottom:3px}
+.bag-v{font-size:19px;line-height:1.6;overflow-wrap:anywhere}
+@media (max-width:640px){.bag-v{font-size:17px}}
+.labelrow{margin:0 -24px;padding:11px 24px;border-top:1px solid var(--line);background:var(--surface-2);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:14px;color:var(--muted)}
+@media (max-width:640px){.labelrow{margin:0 -14px;padding:10px 14px}}
+.labelrow .v{font-size:16px;font-weight:700}
+.labelrow.buka{background:var(--accent-soft)}
+.labelrow.buka .v{color:var(--accent-strong)}
+.cmp{font-size:12.5px;font-weight:600;border-radius:999px;padding:1px 9px}
+.cmp.sama{background:var(--ok-soft);color:var(--ok)}
+.cmp.beda{background:var(--warn-soft);color:var(--warn)}
+.contoh{font-size:13px;background:var(--ok-soft);border-radius:10px;padding:10px 12px;margin-top:12px}
+.contoh b{color:var(--ok)}
+
+/* kartu pertanyaan */
+.kanan{min-height:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 10px var(--shadow)}
+.stepper{flex:none;display:flex;gap:4px;padding:10px 12px;border-bottom:1px solid var(--line);overflow-x:auto}
+.stepper button{flex:none;border:0;background:none;border-radius:999px;padding:4px 10px;font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.stepper button .n{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line-strong);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.stepper button.ini{background:var(--accent-soft);color:var(--accent-strong);font-weight:600}
+.stepper button.ini .n{border-color:var(--accent);color:var(--accent)}
+.stepper button.beres .n{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.stepper button:disabled{cursor:default;opacity:.5}
+.qbody{flex:1;min-height:0;overflow:auto;padding:16px 18px}
+.qfoot{flex:none;display:flex;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.tanya{font-size:17px;font-weight:650;margin:0 0 4px;line-height:1.4}
+.bantu{font-size:13px;color:var(--muted);margin:0 0 10px}
+.d{font-size:12.5px;color:var(--muted)}
+body:not(.penjelasan) .bantu, body:not(.penjelasan) .d{display:none}
+.jarak{height:10px}
+
+.opsi{display:grid;gap:7px}
+.opsi button{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px}
+.opsi button:hover:not(:disabled){border-color:var(--accent-line)}
+.opsi .bul{flex:none;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line-strong);margin-top:2px}
+.opsi button.on{border-color:var(--accent);background:var(--accent-soft)}
+.opsi button.on .bul{border:5px solid var(--accent)}
+.opsi button:disabled{cursor:default}
+.opsi button:disabled:not(.on){opacity:.45}
+.opsi .t{font-weight:600;font-size:14.5px}
+.opsi .key{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px;align-self:center}
+@media (max-width:640px){.opsi .key{display:none}}
+.cek{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer}
+.cek:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.cek input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
+.cek .t{font-weight:600;font-size:14px}
+.cek.mati{opacity:.45;cursor:default}
+.grup{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin:12px 0 6px}
+.lewati{margin-top:8px}
+.stop{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:14px}
+.stop b{display:block;margin-bottom:6px}
+textarea{width:100%;min-height:52px;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font-size:14px;background:var(--surface);resize:vertical}
+textarea:focus{outline:2px solid var(--accent-line);border-color:var(--accent)}
+.ringkasan{font-size:13.5px;border:1px solid var(--line);border-radius:10px;padding:4px 12px;margin:0 0 14px}
+.ringkasan div{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line)}
+.ringkasan div:first-child{border-top:0}
+.ringkasan span:first-child{color:var(--muted)}
+.ringkasan span:last-child{font-weight:600;text-align:right}
+.kunci-note{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.selesai-box{background:var(--ok-soft);color:var(--ok);border-radius:10px;padding:10px 14px;font-size:14px;font-weight:600;margin-bottom:12px}
+.terkunci{font-size:12.5px;color:var(--muted);background:var(--surface-2);border-radius:8px;padding:6px 10px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<header><div class="isi">
+  <h1>NusaRasa <span>Anotasi</span></h1>
+  <div class="navteks">
+    <button class="btn" id="tPrev" title="Teks sebelumnya">‹</button>
+    <span class="pos" id="posisi"></span>
+    <button class="btn" id="tNext" title="Teks berikutnya">›</button>
+  </div>
+  <div class="demo">Demo:
+    <button class="btn tipis" id="btnContoh">Isi contoh</button>
+    <button class="btn tipis" id="btnReset">Kosongkan</button>
+    <button class="btn tipis" id="btnPenjelasan">Penjelasan</button>
+  </div>
+</div></header>
+
+<main>
+  <section class="kiri" id="kiri"></section>
+  <section class="kanan">
+    <nav class="stepper" id="stepper"></nav>
+    <div class="qbody" id="qbody"></div>
+    <div class="qfoot">
+      <button class="btn" id="qPrev">‹ Sebelumnya</button>
+      <button class="btn utama" id="qNext">Lanjut ›</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const TASKS = {
+  sentimen: {
+    nama: "Klasifikasi sentimen", desk: "menentukan apakah teks bernada positif, netral, atau negatif.",
+    tanya: "Menurut Anda, sentimen teks ini apa?",
+    bantu: "Jawab menurut Anda sendiri. Label aslinya baru dibuka di langkah terakhir.",
+    opsi: [["positif", "Positif"], ["netral", "Netral"], ["negatif", "Negatif"]]
+  },
+  toksisitas: {
+    nama: "Klasifikasi toksisitas", desk: "menentukan apakah unggahan mengandung ujaran kasar, hinaan, ancaman, atau serangan terhadap kelompok.",
+    tanya: "Menurut Anda, apakah unggahan ini toksik?",
+    bantu: "Jawab menurut penilaian Anda sendiri sebagai pembaca media sosial Indonesia.",
+    opsi: [["bersih", "Tidak toksik"], ["toksik", "Toksik"]]
+  },
+  nli: {
+    nama: "Natural Language Inference", desk: "menentukan apakah hipotesis pasti benar, mungkin benar, atau pasti salah kalau premisnya benar.",
+    tanya: "Kalau premisnya benar, hipotesisnya…",
+    bantu: "Jawab menurut Anda sendiri. Label aslinya baru dibuka di langkah terakhir.",
+    opsi: [["benar", "Pasti benar"], ["mungkin", "Mungkin benar"], ["salah", "Pasti salah"]]
+  }
+};
+
+const ITEMS = [
+  {task: "sentimen", register: "Ulasan",
+    bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
+    gold: "positif",
+    contoh: {g: "bisa", t1: "positif", r: "khas", r2: ["pengetahuan"], t2: [],
+      jelas: "Jawaban <b>positif</b>, karena \"enak legit dan gurih\". Isinya <b>khas Indonesia</b>: serabi Solo sudah dikenal luas. Khasnya dari <b>pengetahuan bersama</b> (serabi, santan). Label asli juga positif, jadi selesai. Huruf kecil dan spasi sebelum titik itu format dataset, bukan tulisan kacau."}},
+  {task: "toksisitas", register: "Media sosial",
+    bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
+    gold: "bersih",
+    contoh: {g: "bisa", t1: "bersih", r: "sebagian", r2: ["bahasa", "pengetahuan", "topik"], t2: [],
+      jelas: "Jawaban <b>tidak toksik</b>: umpatannya dipakai untuk melampiaskan kesal, tidak untuk menyerang siapa pun. Isinya <b>khas daerah</b>, karena KRL Cikarang terutama akrab bagi warga Jabodetabek. Khasnya dari <b>bentuk dan gaya bahasa</b> (umpatan akrab), <b>pengetahuan bersama</b> (KRL Cikarang), dan <b>pokok bahasan</b> (keluhan komuter memang sering dibicarakan di sini)."}},
+  {task: "nli", register: "Wikipedia",
+    bagian: [
+      {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
+      {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
+    gold: "salah",
+    contoh: {g: "bisa", t1: "salah", r: "umum", r2: [], t2: [],
+      jelas: "<b>Jalur tercepat: 4 klik.</b> \"Ribuan\" lawan \"puluhan\" langsung bertentangan. Isinya berlaku di mana saja, jadi tidak ada pertanyaan lanjutan."}},
+  {task: "nli", register: "Panduan wisata",
+    bagian: [
+      {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
+      {k: "Hipotesis", v: "prancis diperintah oleh keponakan napoleon setelah mereka memenangkan revolusi pada tahun 1848."}],
+    gold: "benar",
+    contoh: {g: "bisa", t1: "mungkin", r: "adaptasi", r2: ["bahasa"], t2: ["pengetahuan", "masukakal"],
+      jelas: "Jawaban <b>mungkin benar</b>: premisnya tidak menyebut Prancis, dan \"muncul kemenangan\" belum tentu berarti memerintah. Isinya <b>kurang pas, tapi bisa disesuaikan</b>: kalimatnya terasa terjemahan. Label asli <b>pasti benar</b>, jadi muncul pertanyaan kenapa beda. (Sumber: MNLI terjemahan mesin. Annotator Inggris aslinya pun terbelah 3–2.)"}},
+  {task: "nli", register: "Percakapan telepon (transkrip)",
+    bagian: [
+      {k: "Premis", v: "nah hal pertama bagi saya adalah saya bertanya-tanya saya melihat beberapa cara yang berbeda berbicara tentang apa itu privasi um jika privasi adalah sesuatu yang mengganggu negara pribadi anda maksud saya invasi privasi adalah sesuatu yang mengganggu negara pribadi anda yang satu hal dan jika privasi adalah sesuatu yang datang ke negara pribadi anda dan mengekstrak informasi dari itu …"},
+      {k: "Hipotesis", v: "semua invasi privasi harus dihukum berat, karena itu akan mengajarkan para penjahat bahwa itu tidak layak dilakukan."}],
+    gold: "mungkin",
+    contoh: {g: "kacau", t1: null, r: null, r2: [], t2: [],
+      jelas: "<b>Berhenti di langkah 1.</b> <i>Private state</i> diterjemahkan jadi \"negara pribadi\", sehingga premisnya tidak bermakna. Ini kesalahan terjemahan, bukan soal budaya. (Sumber: MNLI terjemahan mesin.)"}}
+];
+
+const G = [
+  ["bisa", "Bisa dipakai", "teksnya utuh dan wajar"],
+  ["hilang", "Ada yang hilang", "terpotong di awal atau akhir, atau bolong di tengah"],
+  ["kacau", "Tulisannya kacau", "bahkan untuk ukuran {reg}"],
+  ["bukan", "Bukan teks yang semestinya", "spam, iklan, bukan bahasa Indonesia, atau campur aduk"]
+];
+const R = [
+  ["khas", "Cocok, khas Indonesia", "dekat dengan kehidupan orang Indonesia pada umumnya"],
+  ["sebagian", "Cocok, khas daerah atau kelompok tertentu", "hanya akrab bagi sebagian orang Indonesia, misalnya satu daerah, suku, atau agama"],
+  ["umum", "Cocok, berlaku di mana saja", "tidak terikat budaya tertentu, misalnya soal sains atau berita dunia"],
+  ["adaptasi", "Kurang pas, tapi bisa disesuaikan", "ada bagian yang asing, tapi kalau diganti padanan Indonesia isinya tetap sama"],
+  ["tidak", "Tidak cocok", "isinya bergantung pada budaya lain, jadi harus ditulis ulang"]
+];
+// Empat elemen Hershcovich dkk. (ACL 2022): linguistic form & style, common ground, aboutness, objectives & values
+const ELEMEN = [
+  ["bahasa", "Bentuk dan gaya bahasa", "cara teksnya ditulis atau diucapkan: ungkapan, sindiran, umpatan, tingkat sopan, atau kalimat yang terasa terjemahan"],
+  ["pengetahuan", "Pengetahuan bersama", "hal yang dianggap sudah diketahui pembaca: tokoh, tempat, barang, peristiwa, sejarah, atau aturan"],
+  ["topik", "Pokok bahasan", "apakah hal yang dibicarakan memang biasa dibicarakan atau dipedulikan orang Indonesia"],
+  ["nilai", "Nilai dan norma", "anggapan soal baik-buruk, pantas-tidak, sopan-kasar, atau halal-haram"]
+];
+const T2_BUDAYA = [
+  ["bahasa", "Bentuk dan gaya bahasa", "ungkapannya dibaca lain di sini"],
+  ["pengetahuan", "Pengetahuan bersama", "perlu tahu hal yang tidak umum diketahui orang Indonesia"],
+  ["nilai", "Nilai dan norma", "ukuran pantas atau baik-buruknya berbeda"]
+];
+const T2_LAIN = [
+  ["masukakal", "Label asli juga masuk akal", "saya hanya lebih condong ke jawaban saya"],
+  ["keliru", "Label asli salah", "maknanya jelas, labelnya yang keliru"],
+  ["salahbaca", "Saya yang keliru", "setelah dibaca lagi, label asli benar"]
+];
+const NAMA_LANGKAH = {g: "Kualitas teks", t1: "Jawaban Anda", r: "Kecocokan isi", r2: "Sumbernya", label: "Label asli"};
+
+let idx = 0;
+const kosong = () => ({g: null, lewati: false, t1: null, r: null, r2: [], revealed: false, t2: [], catatan: "", contoh: false, step: 0});
+const jawab = ITEMS.map(kosong);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"}[c]));
+const labelOf = (s, v) => (TASKS[s.task].opsi.find(o => o[0] === v) || [, v])[1];
+const sama = (a, s) => a.t1 === s.gold;
+const perluElemen = a => a.r && a.r !== "umum";
+const berhenti = a => a.lewati || (a.g && a.g !== "bisa");
+
+function langkahList(a) {
+  if (berhenti(a)) return ["g"];
+  return perluElemen(a) ? ["g", "t1", "r", "r2", "label"] : ["g", "t1", "r", "label"];
+}
+function beres(a, s, key) {
+  switch (key) {
+    case "g": return !!(a.g || a.lewati);
+    case "t1": return !!a.t1;
+    case "r": return !!a.r;
+    case "r2": return a.r2.length > 0;
+    case "label": return a.revealed && (sama(a, s) || a.t2.length > 0);
+  }
+}
+const selesai = (a, s) => berhenti(a) || beres(a, s, "label");
+function bisaDibuka(a, s, i) {
+  const L = langkahList(a);
+  return L.slice(0, i).every(k => beres(a, s, k));
+}
+
+function opsiList(nama, daftar, nilai, mati, reg) {
+  return `<div class="opsi">${daftar.map(([v, t, d], i) =>
+    `<button class="${nilai === v ? "on" : ""}" data-act="set" data-f="${nama}" data-v="${v}"${mati ? " disabled" : ""}>
+      <span class="bul"></span><span><span class="t">${esc(t)}</span><span class="d"><br>${esc(d.replace("{reg}", reg || ""))}</span></span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
+}
+function cekList(nama, daftar, terpilih, mati) {
+  return daftar.map(([v, t, d]) => `<label class="cek${mati ? " mati" : ""}"><input type="checkbox" data-cek="${nama}" value="${v}"${terpilih.includes(v) ? " checked" : ""}${mati ? " disabled" : ""}>
+    <span><span class="t">${esc(t)}</span><span class="d"><br>${esc(d)}</span></span></label>`).join("");
+}
+
+function renderKiri() {
+  const s = ITEMS[idx], a = jawab[idx], t = TASKS[s.task];
+  let label;
+  if (a.revealed) {
+    const cocok = sama(a, s);
+    label = `<div class="labelrow buka"><span>Label asli:</span><span class="v">${esc(labelOf(s, s.gold))}</span>
+      <span class="cmp ${cocok ? "sama" : "beda"}">${cocok ? "sama dengan jawaban Anda" : "beda dari jawaban Anda"}</span></div>`;
+  } else {
+    label = `<div class="labelrow">🔒 Label asli dibuka di langkah terakhir.</div>`;
+  }
+  document.getElementById("kiri").innerHTML = `
+    <p class="meta"><b>${esc(t.nama)}:</b> ${esc(t.desk)} · Jenis teks: <b>${esc(s.register)}</b></p>
+    <div class="inst">
+      ${s.bagian.map(b => `<div class="bag">${s.bagian.length > 1 ? `<div class="bag-k">${esc(b.k)}</div>` : ""}<div class="bag-v">${esc(b.v)}</div></div>`).join("")}
+      ${label}
+    </div>
+    ${a.contoh ? `<div class="contoh"><b>Kenapa contoh jawabannya begini:</b> ${s.contoh.jelas}</div>` : ""}`;
+}
+
+function renderStepper() {
+  const s = ITEMS[idx], a = jawab[idx], L = langkahList(a);
+  document.getElementById("stepper").innerHTML = L.map((k, i) => {
+    const nomor = k === "r2" ? "3b" : k === "label" ? 4 : i + 1;
+    return `<button class="${i === a.step ? "ini" : ""}${beres(a, s, k) ? " beres" : ""}" data-act="langkah" data-i="${i}"${bisaDibuka(a, s, i) ? "" : " disabled"}>
+      <span class="n">${beres(a, s, k) ? "✓" : nomor}</span>${esc(NAMA_LANGKAH[k])}</button>`;
+  }).join("");
+}
+
+function renderQ() {
+  const s = ITEMS[idx], a = jawab[idx], t = TASKS[s.task], L = langkahList(a);
+  a.step = Math.min(a.step, L.length - 1);
+  const key = L[a.step], kunci = a.revealed;
+  const noteKunci = kunci && key !== "label" ? `<div class="terkunci">🔒 Label sudah dibuka, jawaban ini tidak bisa diubah.</div>` : "";
+  let h = "";
+  if (key === "g") {
+    h = `<div class="tanya">Teks ini bisa dipakai?</div>
+      <p class="bantu">Nilai sesuai jenis teksnya. Di media sosial, huruf kecil semua, singkatan, dan salah ketik itu biasa.</p>
+      ${noteKunci}${opsiList("g", G, a.g, kunci || a.lewati, s.register.toLowerCase())}
+      <div class="lewati"><button class="btn tipis" data-act="lewati" style="padding-left:0"${kunci ? " disabled" : ""}>${a.lewati ? "↩ Batal lewati" : "Saya tidak paham bahasanya, lewati teks ini"}</button></div>`;
+    if (berhenti(a)) {
+      h += `<div class="stop"><b>${a.lewati ? "Teks ini akan diberikan ke annotator lain." : "Teks ini selesai di sini."}</b>
+        <textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea></div>`;
+    }
+  } else if (key === "t1") {
+    h = `<div class="tanya">${esc(t.tanya)}</div><p class="bantu">${esc(t.bantu)}</p>${noteKunci}
+      ${opsiList("t1", t.opsi.map(([v, l]) => [v, l, ""]), a.t1, kunci)}`;
+  } else if (key === "r") {
+    h = `<div class="tanya">Seberapa cocok isi teks ini untuk orang Indonesia?</div>
+      <p class="bantu">Nilai isinya saja, bukan labelnya, dan bukan soal sopan atau tidak. Teks tentang luar negeri tetap bisa cocok kalau wajar dibaca orang Indonesia.</p>
+      ${noteKunci}${opsiList("r", R, a.r, kunci)}`;
+  } else if (key === "r2") {
+    const khas = a.r === "khas" || a.r === "sebagian";
+    h = `<div class="tanya">${khas ? "Khasnya terasa dari mana?" : "Asingnya terasa dari mana?"}</div>
+      <p class="bantu">Anda menjawab "${esc(R.find(x => x[0] === a.r)[1])}". Boleh pilih lebih dari satu.</p>
+      ${noteKunci}${cekList("r2", ELEMEN, a.r2, kunci)}`;
+  } else if (key === "label") {
+    if (!kunci) {
+      const EN = Object.fromEntries(ELEMEN.map(e => [e[0], e[1]]));
+      h = `<div class="tanya">Siap melihat label asli?</div>
+        <div class="ringkasan">
+          <div><span>Jawaban Anda</span><span>${esc(labelOf(s, a.t1))}</span></div>
+          <div><span>Kecocokan isi</span><span>${esc(R.find(x => x[0] === a.r)[1])}</span></div>
+          ${a.r2.length ? `<div><span>Sumbernya</span><span>${esc(a.r2.map(v => EN[v]).join(", "))}</span></div>` : ""}
+        </div>
+        <button class="btn utama" data-act="kunci">Kunci jawaban dan lihat label asli</button>
+        <p class="kunci-note">Setelah label dibuka, jawaban sebelumnya tidak bisa diubah lagi.</p>`;
+    } else if (sama(a, s)) {
+      h = `<div class="selesai-box">Label asli sama dengan jawaban Anda. Teks ini selesai.</div>
+        <textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea>`;
+    } else {
+      h = `<div class="tanya">Label aslinya ${esc(labelOf(s, s.gold))}, jawaban Anda ${esc(labelOf(s, a.t1))}. Kenapa bisa beda?</div>
+        <p class="bantu">Boleh pilih lebih dari satu.</p>
+        <div class="grup">Karena cara orang memahaminya berbeda</div>${cekList("t2", T2_BUDAYA, a.t2, a.t2.includes("salahbaca"))}
+        <div class="grup">Karena hal lain</div>${cekList("t2", T2_LAIN, a.t2, false)}
+        <div class="jarak"></div><textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea>`;
+    }
+  }
+  document.getElementById("qbody").innerHTML = h;
+
+  const prev = document.getElementById("qPrev"), next = document.getElementById("qNext");
+  prev.disabled = a.step === 0;
+  const terakhir = a.step === L.length - 1;
+  if (terakhir) {
+    next.textContent = "Teks berikutnya ›";
+    next.disabled = !selesai(a, s) || idx === ITEMS.length - 1;
+  } else {
+    next.textContent = "Lanjut ›";
+    next.disabled = !beres(a, s, key);
+  }
+}
+
+function render() {
+  const s = ITEMS[idx];
+  const n = ITEMS.filter((x, i) => selesai(jawab[i], x)).length;
+  document.getElementById("posisi").innerHTML = `Teks <b>${idx + 1}</b> dari ${ITEMS.length} <small>· ${n} selesai</small>`;
+  document.getElementById("tPrev").disabled = idx === 0;
+  document.getElementById("tNext").disabled = idx === ITEMS.length - 1;
+  renderKiri(); renderStepper(); renderQ();
+}
+
+function majuOtomatis(key) {
+  const a = jawab[idx], L = langkahList(a), now = a.step;
+  if (L[now] !== key || now >= L.length - 1) return;
+  setTimeout(() => { if (jawab[idx] === a && a.step === now) { a.step++; render(); } }, 220);
+}
+function pilih(f, v) {
+  const a = jawab[idx];
+  a.contoh = false;
+  a[f] = v;
+  if (f === "g" && v !== "bisa") { a.t1 = null; a.r = null; a.r2 = []; }
+  if (f === "r" && v === "umum") a.r2 = [];
+  render();
+  if (!(f === "g" && v !== "bisa")) majuOtomatis(f);
+}
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-act]");
+  if (!el || el.disabled) return;
+  const a = jawab[idx], act = el.dataset.act;
+  if (act === "set") return pilih(el.dataset.f, el.dataset.v);
+  a.contoh = false;
+  if (act === "langkah") a.step = +el.dataset.i;
+  else if (act === "lewati") { a.lewati = !a.lewati; if (a.lewati) { a.g = null; a.t1 = null; a.r = null; a.r2 = []; } a.step = 0; }
+  else if (act === "kunci") a.revealed = true;
+  render();
+});
+document.addEventListener("change", e => {
+  const el = e.target, f = el.dataset.cek;
+  if (!f) return;
+  const a = jawab[idx], list = a[f], v = el.value;
+  a.contoh = false;
+  if (el.checked) {
+    if (f === "t2" && v === "salahbaca") list.splice(0, list.length);
+    else if (f === "t2") { const j = list.indexOf("salahbaca"); if (j >= 0) list.splice(j, 1); }
+    list.push(v);
+  } else list.splice(list.indexOf(v), 1);
+  render();
+});
+document.addEventListener("input", e => { const f = e.target.dataset.txt; if (f) jawab[idx][f] = e.target.value; });
+document.addEventListener("keydown", e => {
+  if (e.target.matches("textarea, input")) return;
+  const a = jawab[idx], s = ITEMS[idx], key = langkahList(a)[a.step];
+  const n = parseInt(e.key, 10);
+  if (n >= 1 && !a.revealed) {
+    const daftar = key === "g" ? G : key === "t1" ? TASKS[s.task].opsi : key === "r" ? R : null;
+    if (daftar && daftar[n - 1] && !a.lewati) pilih(key, daftar[n - 1][0]);
+  } else if (e.key === "Enter" || e.key === "ArrowRight") {
+    const b = document.getElementById("qNext"); if (!b.disabled) b.click();
+  } else if (e.key === "ArrowLeft") {
+    const b = document.getElementById("qPrev"); if (!b.disabled) b.click();
+  }
+});
+
+document.getElementById("qPrev").onclick = () => { const a = jawab[idx]; if (a.step > 0) { a.step--; render(); } };
+document.getElementById("qNext").onclick = () => {
+  const a = jawab[idx], L = langkahList(a);
+  if (a.step < L.length - 1) { a.step++; render(); }
+  else if (idx < ITEMS.length - 1) { idx++; render(); }
+};
+document.getElementById("tPrev").onclick = () => { if (idx > 0) { idx--; render(); } };
+document.getElementById("tNext").onclick = () => { if (idx < ITEMS.length - 1) { idx++; render(); } };
+document.getElementById("btnReset").onclick = () => { jawab[idx] = kosong(); render(); };
+document.getElementById("btnContoh").onclick = () => {
+  const c = ITEMS[idx].contoh, a = kosong();
+  a.g = c.g; a.t1 = c.t1; a.r = c.r; a.r2 = [...c.r2]; a.t2 = [...c.t2];
+  a.revealed = c.g === "bisa"; a.contoh = true;
+  a.step = langkahList(a).length - 1;
+  jawab[idx] = a; render();
+};
+document.getElementById("btnPenjelasan").onclick = e => {
+  document.body.classList.toggle("penjelasan");
+  e.currentTarget.classList.toggle("on", document.body.classList.contains("penjelasan"));
+};
+
+render();
+</script>
+</body>
+</html>
