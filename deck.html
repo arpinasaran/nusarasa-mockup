@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Update NusaRasa</title>
+<title>NusaRasa Desain Anotasi</title>
 <style>
 :root{
   --bg:#ece8e6; --slide:#fbf9f8; --ink:#1f1b1c; --soft:#5d5557; --line:#e2dbd9;
@@ -60,6 +60,15 @@ td b{color:var(--ink)}
 .kartu b{display:block;font-size:22px;margin-bottom:6px}
 .kartu p{font-size:18px;color:var(--soft);line-height:1.4}
 
+.kartu3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.kartu3 .kartu{display:flex;flex-direction:column;gap:4px;padding:26px 26px 28px}
+.kartu3 .kartu b{font-size:26px;margin-bottom:8px}
+.kartu3 .tag{align-self:flex-start}
+.kartu3 .kartu p{font-size:19px}
+.daftar{list-style:none;margin:2px 0 14px;padding:0}
+.daftar li{display:flex;justify-content:space-between;gap:12px;font-size:19px;padding:8px 0;border-bottom:1px solid var(--line)}
+.daftar li span:first-child{font-weight:600}
+.daftar li span:last-child{color:var(--soft)}
 /* keputusan */
 .tanya{display:flex;flex-direction:column;gap:14px}
 .tanya div{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 20px}
@@ -86,34 +95,21 @@ td b{color:var(--ink)}
 
 <!-- 1 -->
 <section class="slide">
-  <p class="alis">Rapat 2 Oktober 2026 · Pak Fajri, Pak Rahmad</p>
-  <h1>Update NusaRasa:<br>dari pilot ke form baru</h1>
-  <p class="lead">Ringkasan perubahan sejak rapat Jumat lalu, dan lima keputusan yang perlu diambil hari ini.</p>
-  <div class="angka">
-    <div><b>1–2,3×</b><span>waktu pengerjaan pilot 1 dibanding perkiraan</span></div>
-    <div><b>κ 0,25–0,49</b><span>kesepakatan annotator per dimensi lama</span></div>
-    <div><b>9 → 4–5</b><span>klik per teks di form baru</span></div>
+  <p class="alis">Persiapan</p>
+  <h2>Data dan task untuk anotasi</h2>
+  <div class="kartu3">
+    <div class="kartu"><span class="tag ok">Data</span><b>Teks rusak disaring dulu</b>
+      <p>Filter aturan membuang teks yang jelas rusak: 6 dari 1.900, kebanyakan spam togel. Berikutnya disaring LLM dan dicek manusia sebelum sampai ke annotator.</p></div>
+    <div class="kartu"><span class="tag ok">Task</span><b>Tiga task</b>
+      <ul class="daftar"><li><span>Sentimen</span><span>SmSA</span></li><li><span>Toksisitas</span><span>IndoToxic2024</span></li><li><span>NLI</span><span>IndoNLI</span></li></ul>
+      <p>Dua klasifikasi satu kalimat dan satu pasangan kalimat. Benchmark budaya dihindari.</p></div>
+    <div class="kartu"><span class="tag ok">Tampilan</span><b>Fokus ke teks</b>
+      <p>Annotator hanya melihat teks, deskripsi task, dan jenis teks. Topik, keluarga task, dan nama dataset tidak ditampilkan.</p></div>
   </div>
-  <div class="kaki"><span>NusaRasa</span><span>1 / 5</span></div>
+  <div class="kaki"><span>Mockup: arpinasaran.github.io/nusarasa-mockup</span><span>1 / 2</span></div>
 </section>
 
 <!-- 2 -->
-<section class="slide">
-  <p class="alis">Yang sudah dijalankan</p>
-  <h2>Masukan rapat dan Pak Rahmad sudah masuk ke desain</h2>
-  <table>
-    <tr><th>Masukan</th><th>Yang dilakukan</th></tr>
-    <tr><td>Teks ditonjolkan, info tidak berlebihan</td><td>Teks jadi elemen utama. Info tinggal <b>task dan jenis teks</b>; topik dan keluarga task dihapus</td></tr>
-    <tr><td>Data dibersihkan dulu</td><td>Filter aturan: <b>6 dari 1.900 teks</b> dibuang. Prefilter LLM sudah dirancang</td></tr>
-    <tr><td>Pertanyaan 1 murni soal data</td><td>Empat pilihan: <b>bisa dipakai · ada yang hilang · tulisannya kacau · bukan teks yang semestinya</b></td></tr>
-    <tr><td>Ambigu pindah ke pertanyaan label</td><td>Annotator menjawab sendiri dulu. Kalau beda dari label, ada alasan <b>"label asli juga masuk akal"</b></td></tr>
-    <tr><td>Batas kurang cocok vs tidak cocok</td><td><b>Kurang pas, tapi bisa disesuaikan</b> (cukup ganti kata) vs <b>tidak cocok</b> (harus ditulis ulang)</td></tr>
-    <tr><td>Dua klasifikasi + satu NLI</td><td><b>SmSA, IndoToxic2024, IndoNLI</b>. Benchmark budaya dihindari</td></tr>
-  </table>
-  <div class="kaki"><span>NusaRasa</span><span>2 / 5</span></div>
-</section>
-
-<!-- 3 -->
 <section class="slide">
   <p class="alis">Form baru</p>
   <h2>Empat langkah per teks</h2>
@@ -133,34 +129,7 @@ td b{color:var(--ink)}
       <p style="margin-top:14px">Menggantikan 5 dimensi lama, yang tidak setara (ada yang menunjuk benda, isi, atau pengetahuan). Keempat elemen ini setingkat dan menjawab <b>kenapa</b> teks terasa khas atau asing. Elemen hanya dipakai sebagai alasan, sesuai masukan Pak Rahmad.</p>
     </div>
   </div>
-  <div class="kaki"><span>Mockup: arpinasaran.github.io/nusarasa-mockup</span><span>3 / 5</span></div>
-</section>
-
-<!-- 4 -->
-<section class="slide">
-  <p class="alis">Data</p>
-  <h2>Temuan yang memengaruhi rencana</h2>
-  <div class="kartu4">
-    <div class="kartu"><span class="tag ok">Tersedia</span><b>Pembanding hasil terjemahan</b><p>NLI: MNLI terjemahan mesin, plus 5 label Inggris per teks. Toksisitas: RTP-LX Indonesia. Sentimen: belum ada.</p></div>
-    <div class="kartu"><span class="tag merah">Bug</span><b>Label IndoToxic di pilot salah tampil</b><p>Semua teks tampil "bersih". P-039 dan P-040 aslinya toksik. Kesimpulan pilot soal label IndoToxic sedang dicek ulang.</p></div>
-    <div class="kartu"><span class="tag warn">Perlu sampling ulang</span><b>IndoToxic timpang</b><p>Hanya 39 dari 500 teks sampel yang toksik, dan banyak yang dinilai oleh 1 annotator saja.</p></div>
-    <div class="kartu"><span class="tag warn">Risiko model</span><b>Jenis teks bisa jadi jalan pintas</b><p>Tiap dataset punya jenis teks sendiri. Model bisa belajar jenis teks, bukan budaya. Perlu diseimbangkan dan dilaporkan per jenis teks.</p></div>
-  </div>
-  <div class="kaki"><span>NusaRasa</span><span>4 / 5</span></div>
-</section>
-
-<!-- 5 -->
-<section class="slide">
-  <p class="alis">Perlu diputuskan</p>
-  <h2>Lima keputusan</h2>
-  <div class="tanya">
-    <div><span class="no">1</span><p><b>Arah: tiga pertanyaan inti + empat elemen sebagai penjelas?</b><span>Data layak, label berlaku bagi orang Indonesia, isi cocok.</span></p></div>
-    <div><span class="no">2</span><p><b>Label dibuka setelah annotator menjawab, nama dataset disamarkan?</b><span>Supaya jawaban tidak ikut-ikutan label atau nama dataset.</span></p></div>
-    <div><span class="no">3</span><p><b>Task: tetap 3, tambah story cloze, atau tambah MCQA?</b><span>Paper sejenis biasanya cuma 1 jenis task. Perlukah pembanding terjemahan?</span></p></div>
-    <div><span class="no">4</span><p><b>Toksisitas dinilai dengan definisi dataset atau penilaian annotator?</b><span>Contoh sensitif dikirim lewat Slack.</span></p></div>
-    <div><span class="no">5</span><p><b>Uji coba kecil dulu (4 annotator × 40 teks), atau langsung produksi?</b><span>Form ini belum pernah dicoba siapa pun.</span></p></div>
-  </div>
-  <div class="kaki"><span>NusaRasa</span><span>5 / 5</span></div>
+  <div class="kaki"><span>Mockup: arpinasaran.github.io/nusarasa-mockup</span><span>2 / 2</span></div>
 </section>
 
 </div>
