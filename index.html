@@ -139,6 +139,7 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 .chip.id{background:var(--ok-soft);color:var(--ok)}
 .chip.daerah{background:var(--info-soft);color:var(--info)}
 .chip.asing{background:var(--warn-soft);color:var(--warn)}
+.chip.umum{background:var(--surface-2);color:var(--text);border:1px solid var(--line-strong)}
 .chip.tt{background:none;color:var(--muted);border:1px dashed var(--line-strong)}
 .kenal{margin-top:10px}
 
@@ -189,12 +190,13 @@ const TASKS = {
 
 // Satu skala untuk keenam baris. Urutan = prioritas terbalik: kalau ada beberapa hal, pilih yang paling bawah.
 const SKALA = [
-  ["tidak", "Tidak ada atau biasa di mana saja", "tidak disebut di teks, atau ada di mana-mana di dunia"],
+  ["tidak", "Tidak ada", "tidak ada hal jenis ini di teks"],
+  ["umum", "Biasa di mana saja", "ada, tapi ada di mana-mana di dunia"],
   ["id", "Akrab di Indonesia", "bukan hal yang ada di mana-mana, tapi akrab bagi hampir semua orang Indonesia"],
   ["daerah", "Akrab bagi komunitas tertentu", "hanya akrab bagi satu daerah, suku, atau agama"],
   ["asing", "Asing", "Anda tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia, atau janggal di sini"]
 ];
-const SINGKAT = {tidak: "Tidak ada / biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing", tt: "Tidak tahu"};
+const SINGKAT = {tidak: "Tidak ada", umum: "Biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing", tt: "Tidak tahu"};
 
 // Enam dimensi hasil pemadatan 12 elemen Chen Liu dkk. (TACL 2025). Tiap baris = satu pertanyaan tentang teks.
 // Tokoh dan latar: Context (situasional) + Demographics (nama sebagai proksi) + Relationship (peran)
@@ -207,32 +209,32 @@ const DIMS = [
   {k: "tokoh", lapis: "permukaan", nama: "Tokoh dan latar", q: "siapa dan di mana?",
     tanya: "Menurut Anda, tokoh dan latar di teks ini…",
     cari: "<b>Yang dicari:</b> orang dan tempat. Orang: nama tokoh, peran, atau kelompok (Pak RT, tukang bakso, santri). Latar: tempat, lingkungan, dan waktu kejadian (kota, kampung, warung, pesantren, musim).",
-    contoh: {tidak: "dokter, turis, kantor, Paris, Messi", id: "Jokowi, Bandung, warung, ojol, kos-kosan, bulan puasa", daerah: "I Wayan Sudira, Kecamatan Cibal, rumah gadang", asing: "Goma, musim dingin, Trader Joe's, Michael yang membeli gorengan di pinggir jalan"},
+    contoh: {tidak: "\"Harimau masih satu grup dengan singa.\"", umum: "dokter, turis, kantor, Paris, Messi", id: "Jokowi, Bandung, warung, ojol, kos-kosan, bulan puasa", daerah: "I Wayan Sudira, Kecamatan Cibal, rumah gadang", asing: "Goma, musim dingin, Trader Joe's, Michael yang membeli gorengan di pinggir jalan"},
     batas: "Lembaga, merek, dan nama hari raya masuk Benda dan istilah. Kata seperti \"turis\" atau \"presiden\" tetap tokoh, hanya biasanya biasa di mana saja. Tidak kenal namanya sama sekali? Jangan pilih Asing; centang \"ada yang tidak saya kenal\" di bawah."},
   {k: "benda", lapis: "permukaan", nama: "Benda dan istilah", q: "apa yang disebut?",
     tanya: "Menurut Anda, benda dan istilah di teks ini…",
     cari: "<b>Yang dicari:</b> hal lain yang disebut: makanan, barang, karya (lagu, film, cerita), olahraga, merek, lembaga, uang dan satuan, nama hari raya, serta istilah (RT, QRIS, UTBK).",
-    contoh: {tidak: "tas, ponsel, roti, sepak bola, Natal, PBB", id: "rendang, batik, angkot, Indomie, Grab, Lebaran, BPJS, QRIS", daerah: "kapurung, sasirangan, tari caci", asing: "sirop maple, bisbol, Thanksgiving, dolar, mil"},
+    contoh: {tidak: "\"Angka itu naik dua persen.\"", umum: "tas, ponsel, roti, sepak bola, Natal, PBB", id: "rendang, batik, angkot, Indomie, Grab, Lebaran, BPJS, QRIS", daerah: "kapurung, sasirangan, tari caci", asing: "sirop maple, bisbol, Thanksgiving, dolar, mil"},
     batas: "Yang disebut sebagai \"sesuatu\", bukan yang dikerjakan: Lebaran (hari raya) di sini, mudik dan tarawih (yang dikerjakan) di Perilaku. Orang dan tempat masuk Tokoh dan latar."},
   {k: "perilaku", lapis: "dalam", nama: "Perilaku", q: "apa yang dilakukan?",
     tanya: "Menurut Anda, perilaku yang digambarkan di teks ini…",
     cari: "<b>Yang dicari:</b> apa yang dilakukan orang, yang <b>bisa terekam kamera</b>: kebiasaan sehari-hari, ibadah, upacara dan tradisi yang dijalankan, tata krama, isyarat, dan cara meminta, menolak, atau berbasa-basi.",
-    contoh: {tidak: "makan, bekerja, mengantre, berterima kasih", id: "mudik, cium tangan orang tua, tarawih, menawar di pasar, basa-basi \"mampir dulu\"", daerah: "ngaben, upacara tiwah, makan bajamba", asing: "memanggil orang tua dengan nama depan, ikut parade Thanksgiving, memberi tip 20% di restoran"},
+    contoh: {tidak: "\"Suhu bumi naik satu derajat.\"", umum: "makan, bekerja, mengantre, berterima kasih", id: "mudik, cium tangan orang tua, tarawih, menawar di pasar, basa-basi \"mampir dulu\"", daerah: "ngaben, upacara tiwah, makan bajamba", asing: "memanggil orang tua dengan nama depan, ikut parade Thanksgiving, memberi tip 20% di restoran"},
     batas: "Yang dinilai lazim atau tidaknya perilaku itu di Indonesia, bukan baik atau buruknya. Kalau teksnya juga menilai perilaku itu (pantas, memalukan), penilaiannya masuk Nilai dan pandangan."},
   {k: "nilai", lapis: "dalam", nama: "Nilai dan pandangan", q: "apa yang dianggap baik atau buruk?",
     tanya: "Menurut Anda, nilai dan pandangan di teks ini…",
     cari: "<b>Yang dicari:</b> anggapan, yang <b>tidak terekam kamera</b>: apa yang dianggap baik, buruk, pantas, sopan, kasar, lucu, atau memalukan. Termasuk sikap, pendapat, dan anggapan tentang kelompok tertentu.",
-    contoh: {tidak: "korupsi itu buruk, anak perlu dilindungi", id: "\"diduga dukung Israel\" dianggap skandal, anak harus patuh pada orang tua, sungkan menolak", daerah: "pantangan adat satu kampung, larangan makan daging sapi bagi umat Hindu", asing: "tinggal bersama pacar sebelum menikah dianggap biasa"},
+    contoh: {tidak: "teksnya tidak menilai apa pun baik atau buruk", umum: "korupsi itu buruk, anak perlu dilindungi", id: "\"diduga dukung Israel\" dianggap skandal, anak harus patuh pada orang tua, sungkan menolak", daerah: "pantangan adat satu kampung, larangan makan daging sapi bagi umat Hindu", asing: "tinggal bersama pacar sebelum menikah dianggap biasa"},
     batas: "Yang dinilai: menurut Anda, pandangan yang diandaikan teks itu lazim di Indonesia atau tidak. Bukan setuju atau tidak, dan bukan apakah orang di sekitar Anda menganutnya. Memilih \"akrab\" tidak berarti membenarkan isinya."},
   {k: "knowledge", lapis: "dalam", nama: "Knowledge", q: "apa yang harus sudah diketahui?",
     tanya: "Menurut Anda, pengetahuan yang harus sudah diketahui supaya teks ini masuk akal…",
     cari: "<b>Yang dicari:</b> hal yang <b>tidak tertulis</b> di teks, tapi harus sudah ada di kepala pembaca: fakta, akal sehat, atau sejarah. Kalau teksnya soal, pengetahuan untuk menjawabnya ikut dihitung.",
-    contoh: {tidak: "teksnya bisa dipahami apa adanya, atau cukup pengetahuan umum: rumus, sains, sejarah dunia", id: "perkara bubur diaduk, bayar pakai QRIS, beda tanggal hari raya", daerah: "praktik Nyepi, jumlah rakaat tarawih", asing: "hak aborsi di Amerika, aturan bisbol, sistem negara bagian"},
+    contoh: {tidak: "teksnya bisa dipahami apa adanya", umum: "cukup pengetahuan umum: rumus, sains, sejarah dunia", id: "perkara bubur diaduk, bayar pakai QRIS, beda tanggal hari raya", daerah: "praktik Nyepi, jumlah rakaat tarawih", asing: "hak aborsi di Amerika, aturan bisbol, sistem negara bagian"},
     batas: "Ujinya: kalau pengetahuan itu dihapus dari kepala, teksnya masih bisa dipahami? Kalau masih, pilih \"Tidak ada\". Hal yang tertulis di teks sudah dinilai di baris lain. Anggapan baik-buruk yang diandaikan teks masuk Nilai dan pandangan, bukan di sini. Kalau ragu, pilih \"Tidak ada\"."},
-  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?",
+  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanpaTidakAda: true,
     tanya: "Menurut Anda, cara berbahasa di teks ini…",
     cari: "<b>Yang dicari:</b> cara teks ditulis atau diucapkan: logat dan bahasa daerah, bahasa gaul, ungkapan dan peribahasa, sapaan (Pak, Bu, Kak, beliau), umpatan, atau kalimat yang terasa terjemahan.",
-    contoh: {tidak: "bahasa Indonesia biasa, baku atau santai", id: "ungkapan yang rasanya hilang kalau diterjemahkan: santuy, \"anjeng\" sebagai penguat, \"Pak Gub\", \"Alhamdulillah\" dalam obrolan", daerah: "kata atau logat daerah: monggo, atuh, kan lah, beta", asing: "kalimat yang terasa terjemahan: \"melakukan banyak berkemah\", \"muncul kemenangan\""},
+    contoh: {umum: "bahasa Indonesia biasa, baku atau santai", id: "ungkapan yang rasanya hilang kalau diterjemahkan: santuy, \"anjeng\" sebagai penguat, \"Pak Gub\", \"Alhamdulillah\" dalam obrolan", daerah: "kata atau logat daerah: monggo, atuh, kan lah, beta", asing: "kalimat yang terasa terjemahan: \"melakukan banyak berkemah\", \"muncul kemenangan\""},
     batas: "Huruf kecil semua, spasi sebelum titik, dan singkatan seperti gw atau bgt tidak dihitung, dan bukan kerusakan. Istilah Inggris yang biasa dipakai di sini (meeting, healing) bukan asing. Kalau tulisannya sampai tidak bermakna, itu \"Tulisannya kacau\" di langkah 1."}
 ];
 
@@ -240,33 +242,33 @@ const DIMS = [
 const ITEMS = [
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
-    contoh: {g: "bisa", dim: {tokoh: "id", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "id"}}},
+    contoh: {g: "bisa", dim: {tokoh: "id", benda: "umum", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "id"}}},
   {task: "sentimen", register: "Ulasan", label: "Positif",
     bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
-    contoh: {g: "bisa", dim: {tokoh: "id", benda: "id", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "tidak"}}},
+    contoh: {g: "bisa", dim: {tokoh: "id", benda: "id", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "Istri Petinggi Grab-Bos Scarlett Panik Usai Diduga Dukung Israel"}],
-    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "id", perilaku: "tidak", nilai: "id", knowledge: "tidak", bahasa: "tidak"}}},
+    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "id", perilaku: "tidak", nilai: "id", knowledge: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Berita", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pemerintah telah melarang mudik untuk menekan penularan virus Corona COVID-19."},
       {k: "Hipotesis", v: "Pemerintah telah memperbolehkan mudik."}],
-    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "tidak", perilaku: "id", nilai: "tidak", knowledge: "tidak", bahasa: "tidak"}}},
+    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "umum", perilaku: "id", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Artikel web", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pura Ulun Danu Beratan juga sering menjadi tempat diadakannya berbagai acara, misalnya foto pre-wedding, festival seni, upacara Melasti (upacara penyucian diri untuk menyambut Hari Raya Nyepi), dan lain sebagainya."},
       {k: "Hipotesis", v: "Acara yang menggunakan Pura Ulan Beratan hanya acara keagamaan."}],
-    contoh: {g: "bisa", dim: {tokoh: "daerah", benda: "id", perilaku: "daerah", nilai: "tidak", knowledge: "tidak", bahasa: "tidak"}}},
+    contoh: {g: "bisa", dim: {tokoh: "daerah", benda: "id", perilaku: "daerah", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Wikipedia", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
       {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
-    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "tidak"}}},
+    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Panduan wisata", label: "Pasti benar",
     bagian: [
       {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
       {k: "Hipotesis", v: "prancis diperintah oleh keponakan napoleon setelah mereka memenangkan revolusi pada tahun 1848."}],
-    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "asing"}}},
+    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "umum", bahasa: "asing"}}},
   {task: "nli", register: "Percakapan telepon (transkrip)", label: "Mungkin benar",
     bagian: [
       {k: "Premis", v: "nah hal pertama bagi saya adalah saya bertanya-tanya saya melihat beberapa cara yang berbeda berbicara tentang apa itu privasi um jika privasi adalah sesuatu yang mengganggu negara pribadi anda maksud saya invasi privasi adalah sesuatu yang mengganggu negara pribadi anda yang satu hal dan jika privasi adalah sesuatu yang datang ke negara pribadi anda dan mengekstrak informasi dari itu …"},
@@ -308,7 +310,7 @@ const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringka
 
 // R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari keenam baris:
 // ada Asing di lapis dalam (perilaku, nilai, knowledge) -> asing sampai ke dalam; Asing hanya di lapis permukaan
-// (tokoh, benda, bahasa) -> asing di permukaan; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
+// (tokoh, benda, bahasa) -> asing di permukaan; "tidak" dan "umum" sama-sama biasa; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
 function opsiList(nama, daftar, nilai, reg) {
@@ -316,8 +318,9 @@ function opsiList(nama, daftar, nilai, reg) {
     `<button class="${nilai === v ? "on" : ""}" data-act="set" data-f="${nama}" data-v="${v}">
       <span class="bul"></span><span><span class="t">${esc(t)}</span>${d ? `<span class="d"><br>${esc(d.replace("{reg}", reg || ""))}</span>` : ""}</span>${nama === "g" ? `<span class="key">${i + 1}</span>` : ""}</button>`).join("")}</div>`;
 }
+const skalaDim = d => d.tanpaTidakAda ? SKALA.filter(x => x[0] !== "tidak") : SKALA;
 function opsiDim(d, nilai) {
-  return `<div class="opsi">${SKALA.map(([v, t, g], i) =>
+  return `<div class="opsi">${skalaDim(d).map(([v, t, g], i) =>
     `<button class="${nilai === v ? "on" : ""}" data-act="dim" data-k="${d.k}" data-v="${v}">
       <span class="bul"></span><span><span class="t">${esc(t)}</span> <span class="g">· ${esc(g)}</span><span class="d"><br>${esc(d.contoh[v])}</span></span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
@@ -344,11 +347,12 @@ function renderStepper() {
 
 function renderDim(s, a) {
   const multi = s.bagian.length > 1;
-  let h = `<details class="cara bantu" data-cara${caraBuka ? " open" : ""}><summary>Cara menilai: tidak ada atau di mana-mana? akrab di Indonesia?</summary>
+  let h = `<details class="cara bantu" data-cara${caraBuka ? " open" : ""}><summary>Cara menilai: ada? di mana-mana? akrab di Indonesia?</summary>
       <p style="margin:6px 0 4px">Enam baris = enam pertanyaan tentang teks: <b>siapa dan di mana</b>, <b>apa yang disebut</b>, <b>apa yang dilakukan</b>, <b>apa yang dianggap baik atau buruk</b>, <b>apa yang harus sudah diketahui</b>, dan <b>bagaimana ditulis</b>.</p>
       <p style="margin:0 0 4px">Jawab <b>menurut Anda, sebagai orang Indonesia</b>. Tidak ada jawaban benar atau salah, dan tidak perlu mencari di internet. Cari hal jenis itu di teks, lalu tanyakan berurutan:</p>
       <div class="peta">
-        <span>tidak ada, atau ada di mana-mana di dunia?</span><span>→ <b>Tidak ada atau biasa di mana saja</b> (tas, sepak bola, Natal)</span>
+        <span>tidak ada hal jenis itu di teks?</span><span>→ <b>Tidak ada</b></span>
+        <span>ada di mana-mana di dunia?</span><span>→ <b>Biasa di mana saja</b> (tas, sepak bola, Natal)</span>
         <span>kalau tidak: akrab bagi hampir semua orang Indonesia?</span><span>→ <b>Akrab di Indonesia</b>, walaupun mungkin juga dikenal di negara tetangga (rendang, batik, Grab)</span>
         <span>hanya akrab bagi satu daerah, suku, atau agama?</span><span>→ <b>Akrab bagi komunitas tertentu</b>, bukan profesi, hobi, atau tingkat pendidikan</span>
         <span>tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia?</span><span>→ <b>Asing</b></span>
@@ -491,9 +495,9 @@ document.addEventListener("keydown", e => {
   if (e.target.matches("textarea, input, select")) return;
   const a = jawab[idx], key = langkahList(a)[a.step];
   const n = parseInt(e.key, 10);
-  if (n >= 1 && n <= 4) {
-    if (key === "g" && !a.lewati) pilih("g", G[n - 1][0]);
-    else if (key === "dim" && a.aktif != null) pilihDim(DIMS[a.aktif].k, SKALA[n - 1][0]);
+  if (n >= 1 && n <= 5) {
+    if (key === "g" && !a.lewati && G[n - 1]) pilih("g", G[n - 1][0]);
+    else if (key === "dim" && a.aktif != null) { const d = DIMS[a.aktif], o = skalaDim(d)[n - 1]; if (o) pilihDim(d.k, o[0]); }
   } else if (e.key === "Enter" || e.key === "ArrowRight") {
     const b = document.getElementById("qNext"); if (!b.disabled) b.click();
   } else if (e.key === "ArrowLeft") {
