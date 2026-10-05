@@ -139,6 +139,7 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 .chip.id{background:var(--ok-soft);color:var(--ok)}
 .chip.daerah{background:var(--info-soft);color:var(--info)}
 .chip.asing{background:var(--warn-soft);color:var(--warn)}
+.chip.tt{background:none;color:var(--muted);border:1px dashed var(--line-strong)}
 .kenal{margin-top:10px}
 
 /* ringkasan */
@@ -193,7 +194,7 @@ const SKALA = [
   ["daerah", "Akrab bagi komunitas tertentu", "hanya akrab bagi satu daerah, suku, atau agama"],
   ["asing", "Asing", "Anda tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia, atau janggal di sini"]
 ];
-const SINGKAT = {tidak: "Tidak ada / biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing"};
+const SINGKAT = {tidak: "Tidak ada / biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing", tt: "Tidak tahu"};
 
 // Enam dimensi hasil pemadatan 12 elemen Chen Liu dkk. (TACL 2025). Tiap baris = satu pertanyaan tentang teks.
 // Tokoh dan latar: Context (situasional) + Demographics (nama sebagai proksi) + Relationship (peran)
@@ -307,7 +308,7 @@ const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringka
 
 // R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari keenam baris:
 // ada Asing di lapis dalam (perilaku, nilai, knowledge) -> asing sampai ke dalam; Asing hanya di lapis permukaan
-// (tokoh, benda, bahasa) -> asing di permukaan; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
+// (tokoh, benda, bahasa) -> asing di permukaan; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
 function opsiList(nama, daftar, nilai, reg) {
@@ -352,7 +353,7 @@ function renderDim(s, a) {
         <span>hanya akrab bagi satu daerah, suku, atau agama?</span><span>→ <b>Akrab bagi komunitas tertentu</b>, bukan profesi, hobi, atau tingkat pendidikan</span>
         <span>tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia?</span><span>→ <b>Asing</b></span>
       </div>
-      <p>Yang dihitung <b>dikenal</b>, bukan dijalankan: tarawih dikenal hampir semua orang Indonesia. Kalau satu baris punya beberapa hal dengan jawaban berbeda, pilih yang <b>paling bawah</b>. Tidak kenal sama sekali? Jangan pilih Asing, centang kotak di bawah.${multi ? " Nilai semua bagian teks bersama-sama." : ""}</p>
+      <p>Yang dihitung <b>dikenal</b>, bukan dijalankan: tarawih dikenal hampir semua orang Indonesia. Kalau satu baris punya beberapa hal dengan jawaban berbeda, pilih yang <b>paling bawah</b>. Tidak kenal atau tidak bisa memutuskan? Jangan pilih Asing; pilih <b>Tidak tahu, tidak bisa memutuskan</b>.${multi ? " Nilai semua bagian teks bersama-sama." : ""}</p>
     </details>`;
   h += DIMS.map((d, i) => {
     const v = a.dim[d.k], aktif = a.aktif === i;
@@ -362,6 +363,7 @@ function renderDim(s, a) {
         <div class="tanya" style="font-size:15.5px">${esc(d.tanya)}</div>
         <div class="cari">${d.cari}</div>
         ${opsiDim(d, v)}
+        <div class="lewati"><button class="btn tipis${v === "tt" ? " on" : ""}" data-act="dim" data-k="${d.k}" data-v="tt" style="padding-left:0">Tidak tahu, tidak bisa memutuskan</button></div>
         <details class="batas" data-batas="${d.k}"${batasBuka.has(d.k) ? " open" : ""}><summary>Batas dan kasus sulit</summary><div>${esc(d.batas)}</div></details>
       </div>`;
     }
@@ -370,7 +372,7 @@ function renderDim(s, a) {
       ${body}</div>`;
   }).join("");
   h += `<label class="cek kenal"><input type="checkbox" data-bool="tidakKenal"${a.tidakKenal ? " checked" : ""}>
-      <span><span class="t">Ada kata atau nama di teks ini yang tidak saya kenal</span><span class="d"><br>Jangan otomatis pilih Asing karena tidak kenal. Pilih sebisanya dari petunjuk di teks, lalu centang ini.</span></span></label>`;
+      <span><span class="t">Ada kata atau nama di teks ini yang tidak saya kenal</span><span class="d"><br>Jangan pilih Asing hanya karena tidak kenal. Kalau karena itu Anda tidak bisa memutuskan suatu baris, pilih \"Tidak tahu, tidak bisa memutuskan\" di baris itu.</span></span></label>`;
   return h;
 }
 
