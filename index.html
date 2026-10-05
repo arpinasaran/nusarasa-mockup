@@ -188,12 +188,12 @@ const TASKS = {
 
 // Satu skala untuk keenam baris. Urutan = prioritas terbalik: kalau ada beberapa hal, pilih yang paling bawah.
 const SKALA = [
-  ["tidak", "Biasa di mana saja", "tidak ada, atau ada di mana-mana di dunia"],
+  ["tidak", "Tidak ada atau biasa di mana saja", "tidak disebut di teks, atau ada di mana-mana di dunia"],
   ["id", "Akrab di Indonesia", "bukan hal yang ada di mana-mana, tapi akrab bagi hampir semua orang Indonesia"],
   ["daerah", "Akrab bagi komunitas tertentu", "hanya akrab bagi satu daerah, suku, atau agama"],
   ["asing", "Asing", "Anda tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia, atau janggal di sini"]
 ];
-const SINGKAT = {tidak: "Biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing"};
+const SINGKAT = {tidak: "Tidak ada / biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing"};
 
 // Enam dimensi hasil pemadatan 12 elemen Chen Liu dkk. (TACL 2025). Tiap baris = satu pertanyaan tentang teks.
 // Tokoh dan latar: Context (situasional) + Demographics (nama sebagai proksi) + Relationship (peran)
@@ -343,11 +343,11 @@ function renderStepper() {
 
 function renderDim(s, a) {
   const multi = s.bagian.length > 1;
-  let h = `<details class="cara bantu" data-cara${caraBuka ? " open" : ""}><summary>Cara menilai: ada di mana-mana? akrab di Indonesia?</summary>
+  let h = `<details class="cara bantu" data-cara${caraBuka ? " open" : ""}><summary>Cara menilai: tidak ada atau di mana-mana? akrab di Indonesia?</summary>
       <p style="margin:6px 0 4px">Enam baris = enam pertanyaan tentang teks: <b>siapa dan di mana</b>, <b>apa yang disebut</b>, <b>apa yang dilakukan</b>, <b>apa yang dianggap baik atau buruk</b>, <b>apa yang harus sudah diketahui</b>, dan <b>bagaimana ditulis</b>.</p>
       <p style="margin:0 0 4px">Jawab <b>menurut Anda, sebagai orang Indonesia</b>. Tidak ada jawaban benar atau salah, dan tidak perlu mencari di internet. Cari hal jenis itu di teks, lalu tanyakan berurutan:</p>
       <div class="peta">
-        <span>ada di mana-mana di dunia?</span><span>→ <b>Biasa di mana saja</b> (tas, sepak bola, Natal)</span>
+        <span>tidak ada, atau ada di mana-mana di dunia?</span><span>→ <b>Tidak ada atau biasa di mana saja</b> (tas, sepak bola, Natal)</span>
         <span>kalau tidak: akrab bagi hampir semua orang Indonesia?</span><span>→ <b>Akrab di Indonesia</b>, walaupun mungkin juga dikenal di negara tetangga (rendang, batik, Grab)</span>
         <span>hanya akrab bagi satu daerah, suku, atau agama?</span><span>→ <b>Akrab bagi komunitas tertentu</b>, bukan profesi, hobi, atau tingkat pendidikan</span>
         <span>tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia?</span><span>→ <b>Asing</b></span>
