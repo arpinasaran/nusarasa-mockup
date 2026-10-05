@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>NusaRasa Perubahan Desain</title>
+<style>
+:root{
+  --bg:#ece8e6; --slide:#fbf9f8; --ink:#1f1b1c; --soft:#5d5557; --line:#e2dbd9;
+  --accent:#b80f2a; --accent-soft:#f9e6e9; --ok:#1f6b3a; --ok-soft:#e5f1e9; --warn:#7a4f0c; --warn-soft:#fbf0d9;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow:hidden}
+.panggung{position:fixed;inset:0 0 52px 0;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;width:1280px;height:720px;background:var(--slide);padding:56px 72px 64px;display:none;flex-direction:column;
+  box-shadow:0 8px 40px rgba(40,20,20,.15);border-radius:6px;transform-origin:center center}
+.slide.aktif{display:flex}
+h2{font-size:44px;line-height:1.15;margin:0 0 28px;letter-spacing:-.01em}
+p{margin:0}
+
+/* tabel */
+table{border-collapse:collapse;width:100%}
+.tbl{font-size:19px}
+.tbl th{text-align:left;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);font-weight:700;padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+.tbl td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl .redup{color:var(--soft)}
+.tbl .baru{color:var(--ink)}
+.tbl .baru b{color:var(--accent)}
+
+/* kontrol */
+.kontrol{position:fixed;left:0;right:0;bottom:0;height:52px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;color:var(--soft)}
+.kontrol button{font:inherit;border:1px solid #cfc6c4;background:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;color:var(--ink)}
+.kontrol button:disabled{opacity:.4;cursor:default}
+
+@page{size:13.333in 7.5in;margin:0}
+@media print{
+  body{background:#fff;overflow:visible}
+  .panggung{position:static;display:block}
+  .slide{position:relative;display:flex !important;transform:none !important;box-shadow:none;border-radius:0;break-after:page;page-break-after:always}
+  .kontrol{display:none}
+}
+</style>
+</head>
+<body>
+<div class="panggung" id="panggung">
+
+<!-- 1 -->
+<section class="slide">
+  <h2>Selasa vs sekarang</h2>
+  <table class="tbl">
+    <tr><th style="width:17%">Bagian</th><th style="width:38%">Selasa, 29 Sep</th><th>Sekarang</th></tr>
+    <tr><td>Alur per teks</td><td class="redup">Kualitas → label tepat? → kecocokan isi → tabel dimensi → bahasa → layar 2</td><td class="baru"><b>Kualitas teks → 6 dimensi → ringkasan</b></td></tr>
+    <tr><td>Kualitas teks</td><td class="redup">Bisa dipahami? (bisa, ambigu, rusak, tidak paham)</td><td class="baru">Bisa dipakai? (bisa, ada yang hilang, tulisannya kacau, bukan teks yang semestinya), dinilai sesuai jenis teks</td></tr>
+    <tr><td>Label (T)</td><td class="redup">Annotator menilai label tepat atau tidak</td><td class="baru"><b>Dihapus.</b> Label hanya ditampilkan sebagai konteks</td></tr>
+    <tr><td>Kecocokan isi (R)</td><td class="redup">Ditanya langsung, 4 pilihan</td><td class="baru"><b>Tidak ditanya.</b> Dihitung dari jawaban 6 dimensi</td></tr>
+    <tr><td>Dimensi</td><td class="redup">5 dimensi: Barang dan karya, Acara budaya, Kebiasaan-norma-pandangan, Knowledge, Nama entitas; Bahasa terpisah</td><td class="baru"><b>6 dimensi</b> dari Chen Liu dkk. (TACL 2025): Tokoh dan latar, Benda dan istilah, Perilaku, Nilai dan pandangan, Knowledge, Bahasa</td></tr>
+    <tr><td>Skala</td><td class="redup">Tidak ada / umum / khas Indonesia / asing, lalu layar 2: dikenal oleh siapa</td><td class="baru"><b>Satu skala</b> untuk semua baris: biasa di mana saja / akrab di Indonesia / akrab bagi komunitas tertentu / asing</td></tr>
+    <tr><td>Pertanyaan lanjutan</td><td class="redup">Layar 2 (cakupan, daerah, agama), pilihan perilaku/sikap, tandai nama</td><td class="baru"><b>Tidak ada</b></td></tr>
+    <tr><td>Task</td><td class="redup">9 dataset, model per keluarga task</td><td class="baru">SmSA, IndoToxic2024, IndoNLI, dengan MNLI terjemahan sebagai pembanding</td></tr>
+  </table>
+</section>
+
+</div>
+<div class="kontrol">
+  <button id="prev">← Sebelumnya</button>
+  <span id="pos"></span>
+  <button id="next">Berikutnya →</button>
+  <button id="cetak" title="Simpan sebagai PDF lewat dialog cetak">PDF</button>
+</div>
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+function skala() {
+  const p = document.getElementById("panggung");
+  const s = Math.min(p.clientWidth / 1340, p.clientHeight / 760);
+  slides.forEach(el => el.style.transform = `scale(${s})`);
+}
+function tampil() {
+  slides.forEach((el, k) => el.classList.toggle("aktif", k === i));
+  document.getElementById("pos").textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById("prev").disabled = i === 0;
+  document.getElementById("next").disabled = i === slides.length - 1;
+  history.replaceState(null, "", "#" + (i + 1));
+}
+function ke(d) { i = Math.max(0, Math.min(slides.length - 1, i + d)); tampil(); }
+document.getElementById("prev").onclick = () => ke(-1);
+document.getElementById("next").onclick = () => ke(1);
+document.getElementById("cetak").onclick = () => window.print();
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); ke(1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); ke(-1); }
+});
+window.addEventListener("resize", skala);
+skala(); tampil();
+</script>
+</body>
+</html>
