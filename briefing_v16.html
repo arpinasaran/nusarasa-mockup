@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Briefing Annotator v16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..700&display=swap">
+<style>
+:root{--bg:#e6e9ee; --ink:#14243d; --soft:#5d6b7e; --tombol:#ffffff; --garis:#c9d1dc}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1826; --ink:#e7ecf3; --soft:#9aa8ba; --tombol:#1b2638; --garis:#34445c}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);overflow:hidden;font-family:'Inter','Helvetica Neue',Arial,sans-serif}
+.panggung{position:fixed;inset:0 0 56px 0;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;width:1920px;height:1080px;display:none;transform-origin:center center;box-shadow:0 10px 50px rgba(10,20,40,.25);overflow:hidden}
+.slide.aktif{display:block}
+.slide section{position:relative;width:1920px;height:1080px}
+.slide section *{margin:0;padding:0}
+.slide aside{display:none}
+.slide table{border-collapse:collapse;width:100%}
+.slide th{text-align:left;font-weight:600;padding:14px 16px;border-bottom:2px solid #14243d}
+.slide td{padding:14px 16px;border-bottom:1px solid #d9dee6;vertical-align:top;line-height:1.35}
+.slide ul{padding-left:1.2em}
+.slide li{margin:4px 0}
+.kontrol{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;color:var(--soft)}
+.kontrol button{font:inherit;border:1px solid var(--garis);background:var(--tombol);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer}
+.kontrol button:disabled{opacity:.4;cursor:default}
+.kontrol button:focus-visible{outline:2px solid #175f52;outline-offset:2px}
+@page{size:1920px 1080px;margin:0}
+@media print{
+  body{background:#fff;overflow:visible}
+  .panggung{position:static;display:block}
+  .slide{position:relative;display:block !important;transform:none !important;box-shadow:none;break-after:page;page-break-after:always}
+  .kontrol{display:none}
+}
+</style>
+</head>
+<body>
+<div class="panggung" id="panggung">
+<div class="slide"><section id="cover" data-transition="fade" style="background:#14243d; color:#fbfaf8; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:28px">
+  <p style="font-size:26px; font-weight:600; letter-spacing:4px; color:#7fb8ab">NUSARASA · BRIEFING ANNOTATOR</p>
+  <h1 style="font-family:'Source Serif 4',Georgia,serif; font-size:96px; font-weight:400; line-height:1.06; color:#fbfaf8">Anotasi<br>Kelayakan Budaya</h1>
+  <hr style="border:0; border-top:3px solid #1f7a6a; width:220px">
+  <p style="font-size:32px; color:#a8b6c9; line-height:1.4">Cara mengisi form v16<br>Oktober 2026</p>
+  <aside>Sambut annotator. Satu kalimat yang perlu nempel: jawab sebagai diri kalian sendiri, tidak ada jawaban benar atau salah. Briefing sekitar 15 menit, lalu langsung mencoba di form.</aside>
+</section>
+</div>
+<div class="slide"><section id="kenapa" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:32px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Kenapa anotasi ini ada</h2>
+  <p style="font-size:30px; line-height:1.5; color:#2b3a50">Kemampuan bahasa Indonesia sebuah model diukur pakai kumpulan teks. Banyak teks itu aslinya berbahasa asing lalu diterjemahkan, jadi isinya kadang menggambarkan kehidupan yang tidak umum di sini.</p>
+  <p style="font-size:30px; line-height:1.5; color:#2b3a50">Tugas kalian: baca satu teks, lalu tandai mana yang terasa <b>wajar</b> dan mana yang terasa <b>asing</b> bagi kalian sebagai orang Indonesia.</p>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:30px 36px; display:flex; flex-direction:column; gap:10px">
+    <h3 style="font-size:30px; font-weight:600; color:#175f52">Jawab sebagai diri kalian sendiri</h3>
+    <p style="font-size:28px; line-height:1.45; color:#2b3a50">Tidak ada jawaban benar atau salah. Jawaban kalian berbeda dari teman itu wajar, dan justru itu yang dicari.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Jangan lama di latar riset. Yang penting callout di bawah: tiap annotator adalah satu suara orang Indonesia, jadi tidak perlu menebak jawaban orang lain.</aside>
+</section>
+</div>
+<div class="slide"><section id="layar" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:32px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Satu teks, tiga langkah</h2>
+  <p style="font-size:28px; line-height:1.45; color:#2b3a50">Di kiri layar ada teksnya, tugas aslinya, dan labelnya. Di kanan, pertanyaan muncul satu langkah demi satu langkah. Form-nya sengaja ringkas: arti tiap pilihan ada di deck ini.</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px"><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px; padding:32px"><p style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; line-height:1; color:#175f52">1</p><h3 style="font-size:30px; font-weight:600; color:#14243d">Kelayakan</h3><p style="font-size:26px; line-height:1.45; color:#5d6b7e">Teks ini dapat digunakan untuk anotasi kalian?</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px; padding:32px"><p style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; line-height:1; color:#175f52">2</p><h3 style="font-size:30px; font-weight:600; color:#14243d">Akrab atau asing</h3><p style="font-size:26px; line-height:1.45; color:#5d6b7e">Lima baris: Nama, Konsep, Perilaku, Nilai dan pandangan, Bahasa.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px; padding:32px"><p style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; line-height:1; color:#175f52">3</p><h3 style="font-size:30px; font-weight:600; color:#14243d">Ringkasan</h3><p style="font-size:26px; line-height:1.45; color:#5d6b7e">Cek jawaban, tambahkan catatan kalau perlu, lalu simpan.</p></div></div>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><p style="font-size:26px; line-height:1.45; color:#2b3a50"><b style="color:#175f52">Labelnya cuma konteks.</b> Label ditampilkan supaya kalian tahu teks ini dipakai untuk apa. Kalian tidak diminta menilai labelnya benar atau salah.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Teks yang dijawab Tidak di langkah 1 selesai di situ. Teks lain melewati kelima baris lalu ringkasan. Form tidak punya tombol penjelasan, jadi slide berikutnya adalah panduan yang perlu diingat.</aside>
+</section>
+</div>
+<div class="slide"><section id="kelayakan" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:24px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Langkah 1: kelayakan teks</h2>
+  <p style="font-family:'Source Serif 4',Georgia,serif; font-size:38px; line-height:1.25; color:#14243d">“Apakah teks ini dapat digunakan untuk anotasi kamu?” Pilih <b style="color:#a1481a">Tidak</b> hanya kalau teksnya tidak bisa kalian pahami. Kalau ragu, pilih <b style="color:#175f52">Ya</b>.</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+    <div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Ya, dapat digunakan</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Masih bisa dipahami, walau ada salah ketik atau terasa janggal.</p></div>
+    <div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Tidak dapat digunakan</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Tidak bisa dipahami: rusak, terpotong, spam, atau bahasanya tidak kalian kuasai.</p></div>
+  </div>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:46%">Potongan teks</th><th style="width:14%">Jawaban</th><th style="width:40%">Kenapa</th></tr><tr><td>gila anjeng kereta cikarang ketahan kama bgt</td><td><b style="color:#175f52">Ya</b></td><td>slang dan salah ketik wajar di medsos</td></tr><tr style="background:#f3f6fa"><td>… dengan bonapartis … muncul kemenangan.</td><td><b style="color:#175f52">Ya</b></td><td>janggal, tapi masih bisa dipahami</td></tr><tr><td>… mengganggu negara pribadi anda …</td><td><b style="color:#a1481a">Tidak</b></td><td>maknanya rusak</td></tr></table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Nilai sesuai jenis teksnya: di media sosial, huruf kecil semua, singkatan, dan salah ketik itu biasa. Teks berbahasa daerah yang tidak bisa kalian baca dijawab Tidak; boleh tulis alasannya di catatan. "Negara pribadi" adalah terjemahan keliru dari "private state", jadi kalimatnya kehilangan makna.</aside>
+</section>
+</div>
+<div class="slide"><section id="skala" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:24px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Pilihan di tiap baris</h2>
+  <p style="font-size:26px; line-height:1.45; color:#2b3a50">Kelima baris memakai pilihan yang sama. Baris Bahasa tidak punya “Tidak ada”, karena tiap teks pasti punya cara ditulis.</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:27%">Pilihan</th><th style="width:50%">Artinya</th><th style="width:23%">Contoh</th></tr><tr><td><b style="color:#14243d">Tidak ada</b></td><td>tidak ada hal jenis itu di teks</td><td style="color:#5d6b7e">–</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Biasa di mana saja</b></td><td>ada, tapi ada di mana-mana di dunia</td><td style="color:#5d6b7e">tas, sepak bola, Natal</td></tr><tr><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>bukan hal yang ada di mana-mana, tapi akrab bagi hampir semua orang Indonesia</td><td style="color:#5d6b7e">rendang, batik, Grab</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>hanya akrab bagi satu daerah, suku, atau agama</td><td style="color:#5d6b7e">kapurung, ngaben</td></tr><tr><td><b style="color:#a1481a">Asing</b></td><td>kalian tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia, atau janggal di sini</td><td style="color:#5d6b7e">sirop maple, bisbol</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Tidak tahu, tidak bisa memutuskan</b></td><td>tidak kenal hal itu, atau benar-benar tidak bisa memilih</td><td style="color:#5d6b7e">–</td></tr></table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Asing tidak berarti teksnya jelek, dan akrab tidak berarti bagus. Yang ditanya cuma rasanya bagi kalian sebagai orang Indonesia. "Komunitas" berarti daerah, suku, atau agama, bukan profesi, hobi, atau tingkat pendidikan.</aside>
+</section>
+</div>
+<div class="slide"><section id="caramemilih" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Cara memilih: tanya berurutan</h2>
+  <div style="display:flex; gap:28px; align-items:flex-start">
+    <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:24px; flex:1"><tr><th style="width:64%">Tanyakan</th><th style="width:36%">Kalau ya</th></tr><tr><td>1. Tidak ada hal jenis itu di teks?</td><td><b>Tidak ada</b></td></tr><tr style="background:#f3f6fa"><td>2. Ada di mana-mana di dunia?</td><td><b>Biasa di mana saja</b></td></tr><tr><td>3. Akrab bagi hampir semua orang Indonesia?</td><td><b>Akrab di Indonesia</b></td></tr><tr style="background:#f3f6fa"><td>4. Hanya akrab bagi satu daerah, suku, atau agama?</td><td><b>Akrab bagi komunitas</b></td></tr><tr><td>5. Tahu apa itu, tapi bukan bagian hidup di sini?</td><td><b>Asing</b></td></tr></table>
+    <div style="width:600px; display:flex; flex-direction:column; gap:18px">
+      <div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Dikenal, bukan dijalankan</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Tarawih dikenal hampir semua orang Indonesia: Akrab di Indonesia.</p></div>
+      <div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Beberapa hal dalam satu baris</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Pilih jawaban yang paling bawah di daftar pilihan.</p></div>
+      <div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Tidak kenal</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Jangan pilih Asing. Pilih “Tidak tahu, tidak bisa memutuskan” di baris itu.</p></div>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Contoh beberapa hal dalam satu baris: teks menyebut rendang dan sirop maple. Rendang Akrab di Indonesia, sirop maple Asing; yang paling bawah di daftar adalah Asing, jadi baris Konsep dijawab Asing. Akrab di Indonesia tetap boleh dipilih walaupun hal itu juga dikenal di negara tetangga.</aside>
+</section>
+</div>
+<div class="slide"><section id="memilah" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Satu hal masuk baris mana?</h2>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:24px"><tr><th style="width:60%">Tanyakan dari atas</th><th style="width:40%">Barisnya</th></tr><tr><td>1. Nama orang atau tempat?</td><td><b style="color:#175f52">Nama</b></td></tr><tr style="background:#f3f6fa"><td>2. Hal lain yang disebut?</td><td><b style="color:#175f52">Konsep</b></td></tr><tr><td>3. Dilakukan orang, bisa terekam kamera?</td><td><b style="color:#175f52">Perilaku</b></td></tr><tr style="background:#f3f6fa"><td>4. Dianggap baik atau buruk?</td><td><b style="color:#175f52">Nilai dan pandangan</b></td></tr><tr><td>5. Cara teksnya ditulis?</td><td><b style="color:#175f52">Bahasa</b></td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px">
+    <p style="font-size:26px; line-height:1.45; color:#14243d">“Saat musim dingin, <b>Michael</b> mengajak tetangganya makan pancake bersirop maple di kedai dekat rumahnya di <b>Ohio</b>, lalu memberi tip 20%.”</p>
+    <p style="font-size:23px; line-height:1.45; color:#5d6b7e">Nama: Michael, Ohio · Konsep: musim dingin, tetangga, pancake, sirop maple, kedai · Perilaku: memberi tip 20%</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Satu hal masuk baris pertama yang cocok dari atas. Musim dingin dan kedai tidak punya nama, jadi masuk Konsep, bukan Nama. Perilaku dan Nilai dibedakan dengan tes kamera: yang bisa terekam kamera adalah Perilaku, anggapan yang tidak terekam adalah Nilai.</aside>
+</section>
+</div>
+<div class="slide"><section id="nama" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:22px">
+  <p style="font-size:22px; font-weight:600; letter-spacing:3px; color:#175f52">BARIS 1 · NAMA</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15; margin-top:-16px">Nama orang atau tempat?</h2>
+  <p style="font-size:25px; line-height:1.45; color:#2b3a50"><b>Yang dicari:</b> nama orang dan nama tempat: tokoh, kota, kampung, negara, jalan, gunung.</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pilihan</th><th style="width:70%">Contoh</th></tr><tr><td><b style="color:#14243d">Tidak ada</b></td><td>“Harga cabai naik lagi minggu ini.”</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Biasa di mana saja</b></td><td>Messi, Paris, Tokyo</td></tr><tr><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>Jokowi, Budi, Bandung, Kampung Melayu</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>I Wayan Sudira, Kecamatan Cibal</td></tr><tr><td><b style="color:#a1481a">Asing</b></td><td>Goma, Ohio, Michael yang membeli gorengan di pinggir jalan</td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:24px; font-weight:600; color:#175f52">Batasnya</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Hanya nama orang dan tempat. Merek, lembaga, hari raya, dan judul karya masuk Konsep walaupun ditulis dengan huruf kapital; toko berjaringan seperti Indomaret termasuk merek.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Michael yang membeli gorengan dijawab Asing karena nama itu janggal di latar Indonesia, bukan karena Michael tidak dikenal. Tidak kenal namanya sama sekali? Jangan pilih Asing; pilih Tidak tahu, dan kalau mau tulis namanya di catatan.</aside>
+</section>
+</div>
+<div class="slide"><section id="konsep" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:22px">
+  <p style="font-size:22px; font-weight:600; letter-spacing:3px; color:#175f52">BARIS 2 · KONSEP</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15; margin-top:-16px">Apa lagi yang disebut?</h2>
+  <p style="font-size:25px; line-height:1.45; color:#2b3a50"><b>Yang dicari:</b> semua hal lain yang disebut: peran dan kelompok (tukang bakso, santri), tempat dan waktu tanpa nama (warung, musim dingin, bulan puasa), makanan, barang, karya, olahraga, merek, lembaga, hari raya, uang, satuan, dan istilah (RT, QRIS).</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pilihan</th><th style="width:70%">Contoh</th></tr><tr><td><b style="color:#14243d">Tidak ada</b></td><td>“Angka itu naik dua persen.”</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Biasa di mana saja</b></td><td>tas, ponsel, dokter, kantor, sepak bola, Natal, PBB</td></tr><tr><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>rendang, angkot, warung, kos-kosan, Indomie, Lebaran, BPJS, QRIS</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>kapurung, sasirangan, rumah gadang, tari caci</td></tr><tr><td><b style="color:#a1481a">Asing</b></td><td>sirop maple, bisbol, musim dingin, sheriff, Thanksgiving, dolar, mil</td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:24px; font-weight:600; color:#175f52">Batasnya</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Yang disebut sebagai “sesuatu”, bukan yang dikerjakan: Lebaran di sini, mudik dan tarawih di Perilaku. Nama orang dan tempat masuk Nama.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Konsep adalah baris paling luas. Peran tanpa nama (tetangga, sheriff) dan latar tanpa nama (kedai, musim dingin) masuk sini.</aside>
+</section>
+</div>
+<div class="slide"><section id="perilaku" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:22px">
+  <p style="font-size:22px; font-weight:600; letter-spacing:3px; color:#175f52">BARIS 3 · PERILAKU</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15; margin-top:-16px">Apa yang dilakukan?</h2>
+  <p style="font-size:25px; line-height:1.45; color:#2b3a50"><b>Yang dicari:</b> apa yang dilakukan orang, yang <b>bisa terekam kamera</b>: kebiasaan sehari-hari, ibadah, upacara dan tradisi yang dijalankan, tata krama, isyarat, dan cara meminta, menolak, atau berbasa-basi.</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pilihan</th><th style="width:70%">Contoh</th></tr><tr><td><b style="color:#14243d">Tidak ada</b></td><td>“Suhu bumi naik satu derajat.”</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Biasa di mana saja</b></td><td>makan, bekerja, mengantre, berterima kasih</td></tr><tr><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>mudik, cium tangan orang tua, tarawih, menawar di pasar, basa-basi “mampir dulu”</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>ngaben, upacara tiwah, makan bajamba</td></tr><tr><td><b style="color:#a1481a">Asing</b></td><td>memanggil orang tua dengan nama depan, ikut parade Thanksgiving, memberi tip 20% di restoran</td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:24px; font-weight:600; color:#175f52">Batasnya</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Yang dinilai lazim atau tidaknya perilaku itu di Indonesia, bukan baik atau buruknya. Kalau teksnya juga menilai perilaku itu (pantas, memalukan), penilaiannya masuk Nilai dan pandangan.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Tes kamera: kalau kegiatan itu bisa direkam, masuk Perilaku. Anggapan di kepala orang tidak bisa direkam, jadi masuk Nilai.</aside>
+</section>
+</div>
+<div class="slide"><section id="nilai" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:22px">
+  <p style="font-size:22px; font-weight:600; letter-spacing:3px; color:#175f52">BARIS 4 · NILAI DAN PANDANGAN</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15; margin-top:-16px">Apa yang dianggap baik atau buruk?</h2>
+  <p style="font-size:25px; line-height:1.45; color:#2b3a50"><b>Yang dicari:</b> anggapan, yang <b>tidak terekam kamera</b>: apa yang dianggap baik, buruk, pantas, sopan, kasar, lucu, atau memalukan. Termasuk sikap, pendapat, dan anggapan tentang kelompok tertentu.</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pilihan</th><th style="width:70%">Contoh</th></tr><tr><td><b style="color:#14243d">Tidak ada</b></td><td>teksnya tidak menilai apa pun baik atau buruk</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Biasa di mana saja</b></td><td>korupsi itu buruk, anak perlu dilindungi</td></tr><tr><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>“diduga dukung Israel” dianggap skandal, anak harus patuh pada orang tua, sungkan menolak</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>pantangan adat satu kampung, larangan makan daging sapi bagi umat Hindu</td></tr><tr><td><b style="color:#a1481a">Asing</b></td><td>tinggal bersama pacar sebelum menikah dianggap biasa</td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:24px; font-weight:600; color:#175f52">Batasnya</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Yang dinilai: pandangan yang diandaikan teks itu lazim di Indonesia atau tidak. Bukan setuju atau tidak, dan bukan apakah orang di sekitar kalian menganutnya.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Memilih akrab tidak berarti membenarkan isinya. Ujaran kebencian terhadap suatu kelompok bisa saja Akrab di Indonesia kalau anggapannya memang beredar di sini.</aside>
+</section>
+</div>
+<div class="slide"><section id="bahasa" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:22px">
+  <p style="font-size:22px; font-weight:600; letter-spacing:3px; color:#175f52">BARIS 5 · BAHASA</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15; margin-top:-16px">Bagaimana ditulis?</h2>
+  <p style="font-size:25px; line-height:1.45; color:#2b3a50"><b>Yang dicari:</b> cara teks ditulis atau diucapkan: logat dan bahasa daerah, bahasa gaul, ungkapan dan peribahasa, sapaan (Pak, Bu, Kak, beliau), umpatan, atau kalimat yang terasa terjemahan.</p>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pilihan</th><th style="width:70%">Contoh</th></tr><tr><td><b style="color:#14243d">Biasa di mana saja</b></td><td>bahasa Indonesia biasa, baku atau santai</td></tr><tr style="background:#f3f6fa"><td><b style="color:#14243d">Akrab di Indonesia</b></td><td>santuy, “anjeng” sebagai penguat, “Pak Gub”, “Alhamdulillah” dalam obrolan</td></tr><tr><td><b style="color:#14243d">Akrab bagi komunitas tertentu</b></td><td>monggo, atuh, kan lah, beta</td></tr><tr style="background:#f3f6fa"><td><b style="color:#a1481a">Asing</b></td><td>kalimat yang terasa terjemahan: “melakukan banyak berkemah”, “muncul kemenangan”</td></tr></table>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:24px; font-weight:600; color:#175f52">Batasnya</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Huruf kecil semua, spasi sebelum titik, dan singkatan seperti gw atau bgt tidak dihitung. Istilah Inggris yang biasa dipakai di sini (meeting, healing) bukan asing.</p></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Baris ini tidak punya pilihan Tidak ada. Kalau tulisannya sampai tidak bisa dipahami, itu urusan langkah 1: pilih Tidak di sana.</aside>
+</section>
+</div>
+<div class="slide"><section id="contoh1" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:24px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Contoh 1 · ulasan serabi</h2>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px; border-left-color:#14243d">
+    <p style="font-family:'Source Serif 4',Georgia,serif; font-size:30px; line-height:1.4; color:#14243d">“serabi manis ini sudah jadi ikon <u>solo</u> . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali .”</p>
+    <p style="font-size:22px; line-height:1.45; color:#5d6b7e">Klasifikasi sentimen · Ulasan · Label: Positif</p>
+  </div>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pertanyaan</th><th style="width:70%">Jawaban</th></tr><tr><td>Kelayakan</td><td><b style="color:#14243d">Ya</b></td></tr><tr style="background:#f3f6fa"><td>Nama</td><td><b style="color:#14243d">Akrab di Indonesia</b>: Solo</td></tr><tr><td>Konsep</td><td><b style="color:#14243d">Akrab di Indonesia</b>: serabi, santan</td></tr><tr style="background:#f3f6fa"><td>Perilaku</td><td><b style="color:#14243d">Tidak ada</b></td></tr><tr><td>Nilai dan pandangan</td><td><b style="color:#14243d">Tidak ada</b></td></tr><tr style="background:#f3f6fa"><td>Bahasa</td><td><b style="color:#14243d">Biasa di mana saja</b>: spasi sebelum titik itu format datanya</td></tr></table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Kerjakan bareng di layar. Tanya dulu jawaban mereka sebelum membuka tabelnya. Serabi dikenal luas, jadi Akrab di Indonesia; kalau ada yang menjawab Akrab bagi komunitas tertentu karena mengaitkannya dengan Solo, itu wajar dan bukan kesalahan.</aside>
+</section>
+</div>
+<div class="slide"><section id="contoh2" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:24px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Contoh 2 · terjemahan mesin</h2>
+  <div style="background:#eef2f7; border-left:6px solid #175f52; border-radius:8px; padding:22px 32px; display:flex; flex-direction:column; gap:8px; border-left-color:#14243d">
+    <p style="font-family:'Source Serif 4',Georgia,serif; font-size:30px; line-height:1.4; color:#14243d">“… menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan.”</p>
+    <p style="font-size:22px; line-height:1.45; color:#5d6b7e">Natural Language Inference · Panduan wisata · Label: Pasti benar</p>
+  </div>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:23px"><tr><th style="width:30%">Pertanyaan</th><th style="width:70%">Jawaban</th></tr><tr><td>Kelayakan</td><td><b style="color:#14243d">Ya</b>: janggal, tapi masih bisa dipahami</td></tr><tr style="background:#f3f6fa"><td>Nama</td><td><b style="color:#14243d">Biasa di mana saja</b>: Napoleon, Prancis</td></tr><tr><td>Konsep</td><td><b style="color:#14243d">Biasa di mana saja</b>: revolusi</td></tr><tr style="background:#f3f6fa"><td>Perilaku</td><td><b style="color:#14243d">Tidak ada</b></td></tr><tr><td>Nilai dan pandangan</td><td><b style="color:#14243d">Tidak ada</b></td></tr><tr style="background:#f3f6fa"><td>Bahasa</td><td><b style="color:#a1481a">Asing</b>: “muncul kemenangan” terasa terjemahan</td></tr></table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Teks ini dari MNLI yang diterjemahkan mesin. Isinya tentang luar negeri, tapi sejarah Prancis dan Napoleon dikenal di mana-mana, jadi Biasa di mana saja, bukan Asing. Yang asing hanya cara menulisnya.</aside>
+</section>
+</div>
+<div class="slide"><section id="kesalahan" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:32px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Kesalahan yang paling sering</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px"><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Tidak karena teks sedikit janggal</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Janggal tapi paham: Ya, lalu Bahasa = Asing.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Asing karena slang atau salah ketik</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Bandingkan dengan jenis teksnya. Di media sosial itu wajar.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Asing untuk semua yang dari luar negeri</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Messi, Paris, sepak bola dikenal di mana-mana: Biasa di mana saja.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Asing karena tidak kenal</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Pilih Tidak tahu di baris itu. Kalau mau, tulis katanya di catatan.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Merek atau hari raya di baris Nama</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Indomie, Lebaran, Thanksgiving masuk Konsep.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#a1481a">Menilai Nilai dari setuju atau tidak</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Yang ditanya lazim atau tidak di sini, bukan pendapat kalian.</p></div></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Kesalahan pertama paling berbahaya: teks yang dijawab Tidak tidak ditanya apa-apa lagi, jadi datanya hilang. Ulangi aturannya: Tidak hanya kalau tidak bisa dipahami.</aside>
+</section>
+</div>
+<div class="slide"><section id="tips" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:32px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Yang membantu saat mengerjakan</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px"><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Keyboard</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Angka 1–5 memilih jawaban di baris yang sedang terbuka. Enter atau panah kanan untuk lanjut.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Catatan</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Selalu opsional. Kalau ragu, pilih yang paling mendekati lalu tulis alasannya di ringkasan.</p></div><div style="background:#ffffff; border:1px solid #d9e0ea; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:8px"><h3 style="font-size:26px; font-weight:600; color:#175f52">Simpan deck ini</h3><p style="font-size:23px; line-height:1.45; color:#2b3a50">Form tidak punya penjelasan. Kalau lupa arti pilihan atau batas baris, buka lagi slide di sini.</p></div></div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Briefing Annotator · Form v16</p>
+  <aside>Jawaban tersimpan per teks, jadi boleh berhenti di tengah dan lanjut dari tautan yang sama. Bagikan deck ini bersama tautan form.</aside>
+</section>
+</div>
+<div class="slide"><section id="tutup" data-transition="push" style="background:#14243d; color:#fbfaf8; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:36px">
+  <p style="font-size:26px; font-weight:600; letter-spacing:4px; color:#7fb8ab">YANG PALING DIBUTUHKAN</p>
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.25; color:#fbfaf8; width:1500px">Kalau ada yang bikin ragu atau terasa janggal, catat. Itu justru yang dicari.</h2>
+  <div style="display:flex; gap:28px; width:1500px">
+    <div style="flex:1; background:#1d3254; border-radius:16px; padding:32px; display:flex; flex-direction:column; gap:10px">
+      <h3 style="font-size:28px; font-weight:600; color:#9fd6c7">Jawab sebagai diri sendiri</h3>
+      <p style="font-size:26px; line-height:1.45; color:#c8d4e4">Tidak perlu menebak jawaban teman. Beda itu wajar.</p>
+    </div>
+    <div style="flex:1; background:#1d3254; border-radius:16px; padding:32px; display:flex; flex-direction:column; gap:10px">
+      <h3 style="font-size:28px; font-weight:600; color:#9fd6c7">Kalau ragu, pilih Ya</h3>
+      <p style="font-size:26px; line-height:1.45; color:#c8d4e4">Di langkah 1, Tidak hanya untuk teks yang tidak bisa dipahami.</p>
+    </div>
+    <div style="flex:1; background:#1d3254; border-radius:16px; padding:32px; display:flex; flex-direction:column; gap:10px">
+      <h3 style="font-size:28px; font-weight:600; color:#9fd6c7">Boleh bertanya</h3>
+      <p style="font-size:26px; line-height:1.45; color:#c8d4e4">Lebih baik bertanya daripada menebak.</p>
+    </div>
+  </div>
+  <aside>Tutup dengan mengulang tiga hal di kartu. Setelah ini bagikan tautan form, lalu coba dua contoh pertama bersama-sama.</aside>
+</section>
+</div>
+</div>
+<div class="kontrol">
+  <button id="prev">← Sebelumnya</button>
+  <span id="pos"></span>
+  <button id="next">Berikutnya →</button>
+  <button id="cetak">PDF</button>
+</div>
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+function skala() {
+  const p = document.getElementById("panggung");
+  const s = Math.min(p.clientWidth / 1980, p.clientHeight / 1120);
+  slides.forEach(el => el.style.transform = `scale(${s})`);
+}
+function tampil() {
+  slides.forEach((el, k) => el.classList.toggle("aktif", k === i));
+  document.getElementById("pos").textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById("prev").disabled = i === 0;
+  document.getElementById("next").disabled = i === slides.length - 1;
+  history.replaceState(null, "", "#" + (i + 1));
+}
+function ke(d) { i = Math.max(0, Math.min(slides.length - 1, i + d)); tampil(); }
+document.getElementById("prev").onclick = () => ke(-1);
+document.getElementById("next").onclick = () => ke(1);
+document.getElementById("cetak").onclick = () => window.print();
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); ke(1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); ke(-1); }
+});
+window.addEventListener("resize", skala);
+skala(); tampil();
+</script>
+</body>
+</html>

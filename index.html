@@ -98,10 +98,6 @@ main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minm
 .opsi .t{font-weight:600;font-size:14.5px}
 .opsi .key{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px;align-self:center}
 @media (max-width:640px){.opsi .key{display:none}}
-.cek{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer}
-.cek:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
-.cek input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
-.cek .t{font-weight:600;font-size:14px}
 .lewati{margin-top:8px}
 .sub{font-size:13.5px;color:var(--muted);margin:0 0 10px}
 .stop{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:14px}
@@ -129,7 +125,6 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 .chip.asing{background:var(--warn-soft);color:var(--warn)}
 .chip.umum{background:var(--surface-2);color:var(--text);border:1px solid var(--line-strong)}
 .chip.tt{background:none;color:var(--muted);border:1px dashed var(--line-strong)}
-.kenal{margin-top:10px}
 
 /* ringkasan */
 .blok{margin-bottom:18px}
@@ -246,7 +241,7 @@ const G = [
 const NAMA_LANGKAH = {g: "Kelayakan", dim: "Akrab atau asing", ringkas: "Ringkasan"};
 
 let idx = 0;
-const kosong = () => ({g: null, dim: {}, aktif: 0, tidakKenal: false, catatan: "", simpan: false, step: 0});
+const kosong = () => ({g: null, dim: {}, aktif: 0, catatan: "", simpan: false, step: 0});
 const jawab = ITEMS.map(kosong);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"}[c]));
 
@@ -321,17 +316,12 @@ function renderDim(s, a) {
       <button class="baris-h" data-act="aktif" data-i="${i}"><span class="n">${v && !aktif ? "✓" : i + 1}</span><span class="nm">${esc(d.nama)}</span><span class="q">${esc(d.q)}</span>${chip(v)}</button>
       ${body}</div>`;
   }).join("");
-  h += `<label class="cek kenal"><input type="checkbox" data-bool="tidakKenal"${a.tidakKenal ? " checked" : ""}>
-      <span class="t">Ada kata atau nama di teks ini yang tidak saya kenal</span></label>`;
   return h;
 }
 
 function renderRingkas(s, a) {
-  const baris = [];
-  if (a.tidakKenal) baris.push(["Ada yang tidak dikenal", "Ya"]);
   return `<div class="tanya">Ringkasan</div>
     <div class="ringkasan">${DIMS.map(d => `<div><span>${esc(d.nama)}</span>${chip(a.dim[d.k])}</div>`).join("")}</div>
-    ${baris.length ? `<div class="ringkasan">${baris.map(([x, y]) => `<div><span>${esc(x)}</span><span class="v">${esc(y)}</span></div>`).join("")}</div>` : ""}
     <textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea>`;
 }
 
@@ -422,10 +412,6 @@ document.addEventListener("click", e => {
   if (act === "langkah") a.step = +el.dataset.i;
   else if (act === "aktif") a.aktif = a.aktif === +el.dataset.i ? null : +el.dataset.i;
   render();
-});
-document.addEventListener("change", e => {
-  const el = e.target, a = jawab[idx];
-  if (el.dataset.bool) { a[el.dataset.bool] = el.checked; a.simpan = false; render(); }
 });
 document.addEventListener("input", e => { const f = e.target.dataset.txt; if (f) jawab[idx][f] = e.target.value; });
 document.addEventListener("keydown", e => {

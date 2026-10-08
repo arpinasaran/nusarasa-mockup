@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dimensi Form v16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..700&display=swap">
+<style>
+:root{--bg:#e6e9ee; --ink:#14243d; --soft:#5d6b7e; --tombol:#ffffff; --garis:#c9d1dc}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1826; --ink:#e7ecf3; --soft:#9aa8ba; --tombol:#1b2638; --garis:#34445c}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);overflow:hidden;font-family:'Inter','Helvetica Neue',Arial,sans-serif}
+.panggung{position:fixed;inset:0 0 56px 0;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;width:1920px;height:1080px;display:none;transform-origin:center center;box-shadow:0 10px 50px rgba(10,20,40,.25);overflow:hidden}
+.slide.aktif{display:block}
+.slide section{position:relative;width:1920px;height:1080px}
+.slide section *{margin:0;padding:0}
+.slide aside{display:none}
+.slide table{border-collapse:collapse;width:100%}
+.slide th{text-align:left;font-weight:600;padding:14px 16px;border-bottom:2px solid #14243d}
+.slide td{padding:14px 16px;border-bottom:1px solid #d9dee6;vertical-align:top;line-height:1.35}
+.slide ul{padding-left:1.2em}
+.slide li{margin:4px 0}
+.kontrol{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;color:var(--soft)}
+.kontrol button{font:inherit;border:1px solid var(--garis);background:var(--tombol);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer}
+.kontrol button:disabled{opacity:.4;cursor:default}
+.kontrol button:focus-visible{outline:2px solid #175f52;outline-offset:2px}
+@page{size:1920px 1080px;margin:0}
+@media print{
+  body{background:#fff;overflow:visible}
+  .panggung{position:static;display:block}
+  .slide{position:relative;display:block !important;transform:none !important;box-shadow:none;break-after:page;page-break-after:always}
+  .kontrol{display:none}
+}
+</style>
+</head>
+<body>
+<div class="panggung" id="panggung">
+<div class="slide"><section id="ringkas" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Dimensi Senin dan v16</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="width:800px; background:#eef2f7; border-radius:16px; padding:28px 32px; display:flex; flex-direction:column; gap:14px">
+      <p style="font-size:22px; font-weight:600; letter-spacing:2px; color:#5d6b7e">SENIN (V15) · 6 DIMENSI</p>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Tokoh dan latar</p><p style="font-size:22px; color:#5d6b7e">siapa dan di mana?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Benda dan istilah</p><p style="font-size:22px; color:#5d6b7e">apa yang disebut?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Perilaku</p><p style="font-size:22px; color:#5d6b7e">apa yang dilakukan?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Nilai dan pandangan</p><p style="font-size:22px; color:#5d6b7e">apa yang dianggap baik atau buruk?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#5d6b7e">Knowledge <span style="font-size:20px; font-weight:600; letter-spacing:1px; color:#a1481a">DIBUANG</span></p><p style="font-size:22px; color:#5d6b7e">apa yang harus sudah diketahui?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Bahasa</p><p style="font-size:22px; color:#5d6b7e">bagaimana ditulis?</p></div>
+    </div>
+    <div style="flex:1; background:#ffffff; border:2px solid #175f52; border-radius:16px; padding:28px 32px; display:flex; flex-direction:column; gap:14px">
+      <p style="font-size:22px; font-weight:600; letter-spacing:2px; color:#175f52">V16 · 5 DIMENSI</p>
+      <div><p style="font-size:28px; font-weight:600; color:#175f52">Nama <span style="font-size:20px; font-weight:600; letter-spacing:1px; color:#175f52">BARU</span></p><p style="font-size:22px; color:#5d6b7e">nama orang atau tempat?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#175f52">Konsep <span style="font-size:20px; font-weight:600; letter-spacing:1px; color:#175f52">BARU</span></p><p style="font-size:22px; color:#5d6b7e">apa lagi yang disebut?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Perilaku</p><p style="font-size:22px; color:#5d6b7e">apa yang dilakukan?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Nilai dan pandangan</p><p style="font-size:22px; color:#5d6b7e">apa yang dianggap baik atau buruk?</p></div>
+      <div><p style="font-size:28px; font-weight:600; color:#14243d">Bahasa</p><p style="font-size:22px; color:#5d6b7e">bagaimana ditulis?</p></div>
+    </div>
+  </div>
+  <p style="font-size:22px; line-height:1.4; color:#5d6b7e">Mock v16: claude.ai/artifact/AJh5GJPtbxGeDpELjSTPK6 · pilihan jawaban masih seperti v15</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Dimensi v16 · Senin = mockup v15, 5 Oktober</p>
+  <aside>Kiri: enam dimensi mockup v15 yang dipresentasikan Senin. Kanan: lima dimensi v16. Tokoh dan latar serta Benda dan istilah disusun ulang jadi Nama dan Konsep, Knowledge dibuang, sisanya tetap. Yang diubah di deck ini hanya dimensinya; pilihan jawaban (skala akrab, netral atau asing untuk Nilai, alami atau tidak untuk Bahasa) dibahas di langkah berikutnya.</aside>
+</section>
+</div>
+<div class="slide"><section id="masukan" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Masukan dan keputusannya</h2>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:24px">
+    <tr><th style="width:46%; padding:10px 16px">Masukan</th><th style="width:54%; padding:10px 16px">Di v16</th></tr>
+    <tr><td style="padding:10px 16px">Pertimbangkan dimensi Knowledge dihapus</td><td style="padding:10px 16px"><b style="color:#a1481a">Dibuang</b></td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px">Susun ulang dimensi 1 dan 2: nama dipisah seperti entity name di NER, yang bukan nama digabung ke concept (Pak Rahmad)</td><td style="padding:10px 16px">Tokoh dan latar serta Benda dan istilah jadi <b style="color:#175f52">Nama</b> (nama orang dan tempat) dan <b style="color:#175f52">Konsep</b> (semua hal lain yang disebut)</td></tr><tr><td style="padding:10px 16px">Perlukah istilah, tokoh, latar dipisah?</td><td style="padding:10px 16px">Tidak; ketiganya cukup dipilah dengan satu pertanyaan: bernama atau tidak</td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px">Value: asing atau netral · Bahasa: alami atau tidak</td><td style="padding:10px 16px">Nilai dan Bahasa tetap dimensi sendiri; pilihannya diubah di langkah berikutnya</td></tr>
+  </table>
+  <p style="font-size:24px; line-height:1.4; color:#2b3a50">Di mock juga: pertanyaan G jadi “Apakah teks ini dapat digunakan untuk anotasi kamu?” dengan pilihan Ya atau Tidak.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Dimensi v16 · Senin = mockup v15, 5 Oktober</p>
+  <aside>Semua masukan yang menyangkut dimensi sudah dijawab. Dua masukan soal pilihan jawaban (Nilai asing atau netral, Bahasa alami atau tidak menurut registernya) dan "akrab" diganti "dikenal" sengaja ditunda: dimensinya disepakati dulu, baru skalanya. Masukan soal G sudah diterapkan di mock karena tidak menyangkut dimensi.</aside>
+</section>
+</div>
+<div class="slide"><section id="memilah" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Cara memilah satu hal di teks</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#ffffff; border:2px solid #175f52; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:12px">
+      <p style="font-size:22px; font-weight:600; letter-spacing:2px; color:#175f52">TANYA BERURUTAN</p>
+      <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:24px"><tr><td style="padding:10px 16px">1. Nama orang atau tempat?</td><td style="padding:10px 16px"><b style="color:#175f52">Nama</b></td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px">2. Hal lain yang disebut?</td><td style="padding:10px 16px"><b style="color:#175f52">Konsep</b></td></tr><tr><td style="padding:10px 16px">3. Dilakukan orang, bisa terekam kamera?</td><td style="padding:10px 16px"><b style="color:#14243d">Perilaku</b></td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px">4. Dianggap baik atau buruk?</td><td style="padding:10px 16px"><b style="color:#14243d">Nilai dan pandangan</b></td></tr><tr><td style="padding:10px 16px">5. Cara teksnya ditulis?</td><td style="padding:10px 16px"><b style="color:#14243d">Bahasa</b></td></tr></table>
+    </div>
+    <div style="width:640px; background:#eef2f7; border-radius:16px; padding:26px 30px; display:flex; flex-direction:column; gap:14px">
+      <p style="font-size:22px; font-weight:600; letter-spacing:2px; color:#5d6b7e">ATURAN BATAS</p>
+      <p style="font-size:24px; line-height:1.4; color:#2b3a50">Merek, lembaga, hari raya, dan judul karya masuk <b>Konsep</b>, walau ditulis dengan huruf kapital.</p>
+      <p style="font-size:24px; line-height:1.4; color:#2b3a50">Lebaran (yang disebut) masuk <b>Konsep</b>; mudik (yang dikerjakan) masuk <b>Perilaku</b>.</p>
+      <p style="font-size:24px; line-height:1.4; color:#2b3a50">Kalau teks menilai perilaku itu (pantas, memalukan), penilaiannya masuk <b>Nilai</b>.</p>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <p style="font-size:26px; line-height:1.4; color:#14243d">“Saat musim dingin, <b>Michael</b> mengajak tetangganya makan pancake bersirop maple di kedai dekat rumahnya di <b>Ohio</b>, lalu memberi tip 20%.”</p>
+    <p style="font-size:24px; line-height:1.4; color:#5d6b7e">Nama: Michael, Ohio · Konsep: musim dingin, tetangga, pancake, sirop maple, kedai · Perilaku: memberi tip 20%</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Dimensi v16 · Senin = mockup v15, 5 Oktober</p>
+  <aside>Urutan ini yang nanti ditulis di panduan annotator. Satu hal masuk dimensi pertama yang cocok dari atas. Perilaku dan Nilai dibedakan dengan tes kamera dari v15: yang bisa terekam kamera adalah Perilaku, anggapan yang tidak terekam adalah Nilai. Latar tanpa nama (musim dingin, kedai) dan peran (tetangga) masuk Konsep.</aside>
+</section>
+</div>
+<div class="slide"><section id="cakupan" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px; gap:24px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Unsur Chen Liu di v16</h2>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:22px">
+    <tr><th style="width:36%; padding:8px 16px">Unsur Chen Liu</th><th style="width:32%; padding:8px 16px">Senin (v15)</th><th style="width:32%; padding:8px 16px">v16</th></tr>
+    <tr><td style="padding:8px 16px"><b>Concepts</b></td><td style="padding:8px 16px">Benda dan istilah</td><td style="padding:8px 16px">Konsep</td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Artifacts</b></td><td style="padding:8px 16px">Benda dan istilah</td><td style="padding:8px 16px">Konsep</td></tr><tr><td style="padding:8px 16px"><b>Knowledge</b></td><td style="padding:8px 16px">Knowledge</td><td style="padding:8px 16px"><span style="color:#a1481a; font-weight:600">tidak ada</span></td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Values</b></td><td style="padding:8px 16px">Nilai dan pandangan</td><td style="padding:8px 16px">Nilai dan pandangan</td></tr><tr><td style="padding:8px 16px"><b>Norms &amp; Morals</b></td><td style="padding:8px 16px">Perilaku, Nilai dan pandangan</td><td style="padding:8px 16px">Perilaku, Nilai dan pandangan</td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Dialects; Styles, Registers, Genres</b></td><td style="padding:8px 16px">Bahasa</td><td style="padding:8px 16px">Bahasa</td></tr><tr><td style="padding:8px 16px"><b>Relationship</b></td><td style="padding:8px 16px">Tokoh dan latar</td><td style="padding:8px 16px">Konsep, Bahasa <span style="color:#5d6b7e">(sebagian)</span></td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Context: situasional</b></td><td style="padding:8px 16px">Tokoh dan latar</td><td style="padding:8px 16px">Konsep</td></tr><tr><td style="padding:8px 16px"><b>Context: historis</b></td><td style="padding:8px 16px">Knowledge</td><td style="padding:8px 16px"><span style="color:#a1481a; font-weight:600">tidak ada</span></td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Context: non-verbal</b></td><td style="padding:8px 16px">Perilaku</td><td style="padding:8px 16px">Perilaku</td></tr><tr><td style="padding:8px 16px"><b>Communicative Goals</b></td><td style="padding:8px 16px">Perilaku</td><td style="padding:8px 16px">Perilaku</td></tr><tr style="background:#f3f6fa"><td style="padding:8px 16px"><b>Demographics</b></td><td style="padding:8px 16px">Tokoh dan latar</td><td style="padding:8px 16px">Nama, Konsep <span style="color:#5d6b7e">(sebagian)</span></td></tr>
+  </table>
+  <p style="font-size:22px; line-height:1.4; color:#5d6b7e">Yang tidak tertampung hanya Knowledge dan Context historis, karena Knowledge dibuang.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Dimensi v16 · Senin = mockup v15, 5 Oktober</p>
+  <aside>Taksonomi Chen Liu dkk. (TACL 2025): lima unsur ideasional, dua linguistik, empat sosial; Context dipecah ke jenisnya. "Sebagian" berarti hanya sebagian isi unsur itu yang tertampung: peran dan kelompok ada di Konsep, sapaan di Bahasa, nama di Nama. Context linguistik (teks di sekitarnya) tidak dimasukkan karena teks dinilai lepas. Knowledge dan Context historis perlu ditulis sebagai batasan di skripsi; alasannya dari pilot: Knowledge bagian yang paling lama dan paling subjektif. Peristiwa sejarah yang disebut langsung di teks tetap masuk Konsep.</aside>
+</section>
+</div>
+<div class="slide"><section id="alternatif" data-transition="fade" style="background:#fbfaf8; color:#14243d; font-family:'Inter','Helvetica Neue',Arial,sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:28px">
+  <h2 style="font-family:'Source Serif 4',Georgia,serif; font-size:60px; font-weight:400; line-height:1.15">Kenapa bukan yang lain</h2>
+  <table style="font-family:'Inter','Helvetica Neue',Arial,sans-serif; color:#14243d; font-size:24px">
+    <tr><th style="width:46%; padding:10px 16px">Alternatif</th><th style="width:54%; padding:10px 16px">Kenapa tidak dipilih</th></tr>
+    <tr><td style="padding:10px 16px"><b>Selasa: Barang dan karya, Acara budaya, Kebiasaan, Knowledge, Nama entitas</b></td><td style="padding:10px 16px">Dua sumber bingung di pilot: Knowledge, dan Acara vs Kebiasaan</td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px"><b>Senin (v15): enam dimensi Chen Liu</b></td><td style="padding:10px 16px">Nama tersebar di dua dimensi dan butuh aturan khusus</td></tr><tr><td style="padding:10px 16px"><b>v16 + Latar</b></td><td style="padding:10px 16px">Di Chen Liu hanya Context situasional; latar asing ±0,9% teks sampel</td></tr><tr style="background:#f3f6fa"><td style="padding:10px 16px"><b>v16 + Kelompok</b></td><td style="padding:10px 16px">Toksisitas pakai IndoToxic2024 (data asli); kelompok bisa ditarik otomatis</td></tr><tr><td style="padding:10px 16px"><b>v16 + Hubungan</b></td><td style="padding:10px 16px">Sapaan ±4–5% teks sampel, hampir semuanya wajar</td></tr>
+  </table>
+  <p style="font-size:24px; line-height:1.4; color:#2b3a50">Kalau RTP-LX masuk lagi sebagai pembanding toksisitas terjemahan, Kelompok layak ditambah.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#6b7787">NusaRasa · Dimensi v16 · Senin = mockup v15, 5 Oktober</p>
+  <aside>Angka dari pencarian kata kunci di 4.000 teks master_sample_4000_v2.csv, jadi perkiraan kasar. Latar asing: salju, musim dingin, kasino, gurun, dan sejenisnya (SIB-200 3%, SmSA 0%). Sapaan: Pak, Bu, Mas, Kak, dan sejenisnya. Kelompok disebut di ±21% teks IndoDiscourse, tapi di data toksisitas asli kelompoknya hampir selalu wajar atau khas, dan kalau asing tetap tertangkap di Konsep. Bukti pilot Selasa dari wawancara annotator 23 September.</aside>
+</section>
+</div>
+</div>
+<div class="kontrol">
+  <button id="prev">← Sebelumnya</button>
+  <span id="pos"></span>
+  <button id="next">Berikutnya →</button>
+  <button id="cetak">PDF</button>
+</div>
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+function skala() {
+  const p = document.getElementById("panggung");
+  const s = Math.min(p.clientWidth / 1980, p.clientHeight / 1120);
+  slides.forEach(el => el.style.transform = `scale(${s})`);
+}
+function tampil() {
+  slides.forEach((el, k) => el.classList.toggle("aktif", k === i));
+  document.getElementById("pos").textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById("prev").disabled = i === 0;
+  document.getElementById("next").disabled = i === slides.length - 1;
+  history.replaceState(null, "", "#" + (i + 1));
+}
+function ke(d) { i = Math.max(0, Math.min(slides.length - 1, i + d)); tampil(); }
+document.getElementById("prev").onclick = () => ke(-1);
+document.getElementById("next").onclick = () => ke(1);
+document.getElementById("cetak").onclick = () => window.print();
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); ke(1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); ke(-1); }
+});
+window.addEventListener("resize", skala);
+skala(); tampil();
+</script>
+</body>
+</html>
