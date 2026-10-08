@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Mockup Form v15</title>
+<title>Mockup Form v16</title>
 <style>
 :root{
   --bg:#f6f4f3; --surface:#ffffff; --surface-2:#faf8f7; --text:#1d1b1b; --muted:#6c6567;
@@ -19,7 +19,7 @@
     --line:#332e2f; --line-strong:#4a4243;
     --accent:#ff6378; --accent-strong:#ff8696; --accent-soft:#3a1d23; --accent-line:#6d2c37; --on-accent:#1b0b0e;
     --ok:#86d6a0; --ok-soft:#18301f; --warn:#f0c46a; --warn-soft:#33290f; --info:#8cc4ef; --info-soft:#152a3a;
-    --shadow:rgba(0,0,0,.35);
+    --shadow:rgba(0,0,0,.35); color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
@@ -27,7 +27,7 @@
   --line:#332e2f; --line-strong:#4a4243;
   --accent:#ff6378; --accent-strong:#ff8696; --accent-soft:#3a1d23; --accent-line:#6d2c37; --on-accent:#1b0b0e;
   --ok:#86d6a0; --ok-soft:#18301f; --warn:#f0c46a; --warn-soft:#33290f; --info:#8cc4ef; --info-soft:#152a3a;
-  --shadow:rgba(0,0,0,.35);
+  --shadow:rgba(0,0,0,.35); color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -87,7 +87,6 @@ main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minm
 .tanya{font-size:17px;font-weight:650;margin:0 0 4px;line-height:1.4}
 .bantu{font-size:13px;color:var(--muted);margin:0 0 10px}
 .d{font-size:12.5px;color:var(--muted)}
-body:not(.penjelasan) .bantu, body:not(.penjelasan) .d{display:none}
 .jarak{height:10px}
 
 .opsi{display:grid;gap:7px}
@@ -97,7 +96,6 @@ body:not(.penjelasan) .bantu, body:not(.penjelasan) .d{display:none}
 .opsi button.on{border-color:var(--accent);background:var(--accent-soft)}
 .opsi button.on .bul{border:5px solid var(--accent)}
 .opsi .t{font-weight:600;font-size:14.5px}
-.opsi .g{font-size:13px;color:var(--muted)}
 .opsi .key{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px;align-self:center}
 @media (max-width:640px){.opsi .key{display:none}}
 .cek{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;cursor:pointer}
@@ -105,19 +103,14 @@ body:not(.penjelasan) .bantu, body:not(.penjelasan) .d{display:none}
 .cek input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex:none}
 .cek .t{font-weight:600;font-size:14px}
 .lewati{margin-top:8px}
+.sub{font-size:13.5px;color:var(--muted);margin:0 0 10px}
 .stop{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:14px}
 .stop b{display:block;margin-bottom:6px}
 textarea,input[type=text],select{width:100%;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font-size:14px;background:var(--surface)}
 textarea{min-height:52px;resize:vertical}
 textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accent-line);border-color:var(--accent)}
 
-/* langkah 2: cara menilai + enam baris */
-.cara{border:1px dashed var(--line-strong);border-radius:10px;padding:10px 12px;margin:0 0 12px;font-size:13px;color:var(--text)}
-.cara summary{cursor:pointer;font-weight:650;font-size:13.5px}
-.cara ol{margin:6px 0 8px;padding-left:20px}
-.cara .peta{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:5px 10px;margin:0 0 8px;align-items:baseline}
-.cara .peta span:nth-child(odd){color:var(--muted)}
-.cara p{margin:0}
+/* langkah 2: lima baris */
 .baris{border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:var(--surface)}
 .baris.aktif{border-color:var(--accent-line);box-shadow:0 1px 6px var(--shadow)}
 .baris-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:9px 12px;text-align:left;border-radius:10px}
@@ -129,11 +122,6 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 .baris-h .q{font-size:12.5px;color:var(--muted)}
 @media (max-width:480px){.baris-h .q{display:none}}
 .baris-b{padding:0 12px 12px}
-.cari{font-size:13px;background:var(--surface-2);border-radius:8px;padding:8px 10px;margin:4px 0 10px}
-.cari b{font-weight:650}
-.batas{margin-top:8px;font-size:13px}
-.batas summary{cursor:pointer;color:var(--accent);font-size:12.5px;font-weight:600}
-.batas div{padding:6px 2px 0;color:var(--text)}
 .chip{margin-left:auto;flex:none;font-size:12px;font-weight:600;border-radius:999px;padding:1px 10px;white-space:nowrap}
 .chip.tidak{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
 .chip.id{background:var(--ok-soft);color:var(--ok)}
@@ -154,7 +142,7 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 .ringkasan .chip{margin-left:0}
 </style>
 </head>
-<body class="penjelasan">
+<body>
 <header><div class="isi">
   <h1>NusaRasa <span>Anotasi</span></h1>
   <div class="navteks">
@@ -165,7 +153,6 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
   <div class="demo">Demo:
     <button class="btn tipis" id="btnContoh">Isi contoh</button>
     <button class="btn tipis" id="btnReset">Kosongkan</button>
-    <button class="btn tipis on" id="btnPenjelasan">Penjelasan</button>
   </div>
 </div></header>
 
@@ -188,109 +175,82 @@ const TASKS = {
   nli: {nama: "Natural Language Inference", desk: "menentukan apakah hipotesis pasti benar, mungkin benar, atau pasti salah kalau premisnya benar."}
 };
 
-// Satu skala untuk keenam baris. Urutan = prioritas terbalik: kalau ada beberapa hal, pilih yang paling bawah.
+// Satu skala untuk kelima baris (sama dengan v15). Arti tiap pilihan ada di deck briefing, bukan di form. Urutan = prioritas terbalik: kalau ada beberapa hal, pilih yang paling bawah.
 const SKALA = [
-  ["tidak", "Tidak ada", "tidak ada hal jenis ini di teks"],
-  ["umum", "Biasa di mana saja", "ada, tapi ada di mana-mana di dunia"],
-  ["id", "Akrab di Indonesia", "bukan hal yang ada di mana-mana, tapi akrab bagi hampir semua orang Indonesia"],
-  ["daerah", "Akrab bagi komunitas tertentu", "hanya akrab bagi satu daerah, suku, atau agama"],
-  ["asing", "Asing", "Anda tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia, atau janggal di sini"]
+  ["tidak", "Tidak ada"],
+  ["umum", "Biasa di mana saja"],
+  ["id", "Akrab di Indonesia"],
+  ["daerah", "Akrab bagi komunitas tertentu"],
+  ["asing", "Asing"]
 ];
 const SINGKAT = {tidak: "Tidak ada", umum: "Biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing", tt: "Tidak tahu"};
 
-// Enam dimensi hasil pemadatan 12 elemen Chen Liu dkk. (TACL 2025). Tiap baris = satu pertanyaan tentang teks.
-// Tokoh dan latar: Context (situasional) + Demographics (nama sebagai proksi) + Relationship (peran)
-// Benda dan istilah: Concepts (makanan, hari raya, olahraga, istilah) + Artifacts
+// Lima dimensi v16. Knowledge dibuang; nama dipisah dari konsep (saran Pak Rahmad: nama bisa ditarik seperti NER).
+// Pemetaan ke Chen Liu dkk. (TACL 2025):
+// Nama: Demographics (nama sebagai proksi), hanya nama orang dan tempat
+// Konsep: Concepts + Artifacts + Context situasional (latar tanpa nama) + peran dan kelompok
 // Perilaku: Norms & Morals (deskriptif) + Communicative Goals + Context (non-verbal)
-// Nilai dan pandangan: Values (umum, bias, kebencian, persepsi lain) + Norms & Morals (normatif)
-// Knowledge: Knowledge (faktual, akal sehat) + Context (historis)
+// Nilai dan pandangan: Values + Norms & Morals (normatif)
 // Bahasa: Dialects + Styles, Registers, Genres
+// Tidak diinstrumentasi: Knowledge dan Context historis.
 const DIMS = [
-  {k: "tokoh", lapis: "permukaan", nama: "Tokoh dan latar", q: "siapa dan di mana?",
-    tanya: "Menurut Anda, tokoh dan latar di teks ini…",
-    cari: "<b>Yang dicari:</b> orang dan tempat. Orang: nama tokoh, peran, atau kelompok (Pak RT, tukang bakso, santri). Latar: tempat, lingkungan, dan waktu kejadian (kota, kampung, warung, pesantren, musim).",
-    contoh: {tidak: "\"Harimau masih satu grup dengan singa.\"", umum: "dokter, turis, kantor, Paris, Messi", id: "Jokowi, Bandung, warung, ojol, kos-kosan, bulan puasa", daerah: "I Wayan Sudira, Kecamatan Cibal, rumah gadang", asing: "Goma, musim dingin, Trader Joe's, Michael yang membeli gorengan di pinggir jalan"},
-    batas: "Lembaga, merek, dan nama hari raya masuk Benda dan istilah. Kata seperti \"turis\" atau \"presiden\" tetap tokoh, hanya biasanya biasa di mana saja. Tidak kenal namanya sama sekali? Jangan pilih Asing; centang \"ada yang tidak saya kenal\" di bawah."},
-  {k: "benda", lapis: "permukaan", nama: "Benda dan istilah", q: "apa yang disebut?",
-    tanya: "Menurut Anda, benda dan istilah di teks ini…",
-    cari: "<b>Yang dicari:</b> hal lain yang disebut: makanan, barang, karya (lagu, film, cerita), olahraga, merek, lembaga, uang dan satuan, nama hari raya, serta istilah (RT, QRIS, UTBK).",
-    contoh: {tidak: "\"Angka itu naik dua persen.\"", umum: "tas, ponsel, roti, sepak bola, Natal, PBB", id: "rendang, batik, angkot, Indomie, Grab, Lebaran, BPJS, QRIS", daerah: "kapurung, sasirangan, tari caci", asing: "sirop maple, bisbol, Thanksgiving, dolar, mil"},
-    batas: "Yang disebut sebagai \"sesuatu\", bukan yang dikerjakan: Lebaran (hari raya) di sini, mudik dan tarawih (yang dikerjakan) di Perilaku. Orang dan tempat masuk Tokoh dan latar."},
-  {k: "perilaku", lapis: "dalam", nama: "Perilaku", q: "apa yang dilakukan?",
-    tanya: "Menurut Anda, perilaku yang digambarkan di teks ini…",
-    cari: "<b>Yang dicari:</b> apa yang dilakukan orang, yang <b>bisa terekam kamera</b>: kebiasaan sehari-hari, ibadah, upacara dan tradisi yang dijalankan, tata krama, isyarat, dan cara meminta, menolak, atau berbasa-basi.",
-    contoh: {tidak: "\"Suhu bumi naik satu derajat.\"", umum: "makan, bekerja, mengantre, berterima kasih", id: "mudik, cium tangan orang tua, tarawih, menawar di pasar, basa-basi \"mampir dulu\"", daerah: "ngaben, upacara tiwah, makan bajamba", asing: "memanggil orang tua dengan nama depan, ikut parade Thanksgiving, memberi tip 20% di restoran"},
-    batas: "Yang dinilai lazim atau tidaknya perilaku itu di Indonesia, bukan baik atau buruknya. Kalau teksnya juga menilai perilaku itu (pantas, memalukan), penilaiannya masuk Nilai dan pandangan."},
-  {k: "nilai", lapis: "dalam", nama: "Nilai dan pandangan", q: "apa yang dianggap baik atau buruk?",
-    tanya: "Menurut Anda, nilai dan pandangan di teks ini…",
-    cari: "<b>Yang dicari:</b> anggapan, yang <b>tidak terekam kamera</b>: apa yang dianggap baik, buruk, pantas, sopan, kasar, lucu, atau memalukan. Termasuk sikap, pendapat, dan anggapan tentang kelompok tertentu.",
-    contoh: {tidak: "teksnya tidak menilai apa pun baik atau buruk", umum: "korupsi itu buruk, anak perlu dilindungi", id: "\"diduga dukung Israel\" dianggap skandal, anak harus patuh pada orang tua, sungkan menolak", daerah: "pantangan adat satu kampung, larangan makan daging sapi bagi umat Hindu", asing: "tinggal bersama pacar sebelum menikah dianggap biasa"},
-    batas: "Yang dinilai: menurut Anda, pandangan yang diandaikan teks itu lazim di Indonesia atau tidak. Bukan setuju atau tidak, dan bukan apakah orang di sekitar Anda menganutnya. Memilih \"akrab\" tidak berarti membenarkan isinya."},
-  {k: "knowledge", lapis: "dalam", nama: "Knowledge", q: "apa yang harus sudah diketahui?",
-    tanya: "Menurut Anda, pengetahuan yang harus sudah diketahui supaya teks ini masuk akal…",
-    cari: "<b>Yang dicari:</b> hal yang <b>tidak tertulis</b> di teks, tapi harus sudah ada di kepala pembaca: fakta, akal sehat, atau sejarah. Kalau teksnya soal, pengetahuan untuk menjawabnya ikut dihitung.",
-    contoh: {tidak: "teksnya bisa dipahami apa adanya", umum: "cukup pengetahuan umum: rumus, sains, sejarah dunia", id: "perkara bubur diaduk, bayar pakai QRIS, beda tanggal hari raya", daerah: "praktik Nyepi, jumlah rakaat tarawih", asing: "hak aborsi di Amerika, aturan bisbol, sistem negara bagian"},
-    batas: "Ujinya: kalau pengetahuan itu dihapus dari kepala, teksnya masih bisa dipahami? Kalau masih, pilih \"Tidak ada\". Hal yang tertulis di teks sudah dinilai di baris lain. Anggapan baik-buruk yang diandaikan teks masuk Nilai dan pandangan, bukan di sini. Kalau ragu, pilih \"Tidak ada\"."},
-  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanpaTidakAda: true,
-    tanya: "Menurut Anda, cara berbahasa di teks ini…",
-    cari: "<b>Yang dicari:</b> cara teks ditulis atau diucapkan: logat dan bahasa daerah, bahasa gaul, ungkapan dan peribahasa, sapaan (Pak, Bu, Kak, beliau), umpatan, atau kalimat yang terasa terjemahan.",
-    contoh: {umum: "bahasa Indonesia biasa, baku atau santai", id: "ungkapan yang rasanya hilang kalau diterjemahkan: santuy, \"anjeng\" sebagai penguat, \"Pak Gub\", \"Alhamdulillah\" dalam obrolan", daerah: "kata atau logat daerah: monggo, atuh, kan lah, beta", asing: "kalimat yang terasa terjemahan: \"melakukan banyak berkemah\", \"muncul kemenangan\""},
-    batas: "Huruf kecil semua, spasi sebelum titik, dan singkatan seperti gw atau bgt tidak dihitung, dan bukan kerusakan. Istilah Inggris yang biasa dipakai di sini (meeting, healing) bukan asing. Kalau tulisannya sampai tidak bermakna, itu \"Tulisannya kacau\" di langkah 1."}
+  {k: "nama", lapis: "permukaan", nama: "Nama", q: "nama orang atau tempat?", tanya: "Menurut kamu, nama orang dan tempat di teks ini…"},
+  {k: "konsep", lapis: "permukaan", nama: "Konsep", q: "apa lagi yang disebut?", tanya: "Menurut kamu, hal-hal yang disebut di teks ini…"},
+  {k: "perilaku", lapis: "dalam", nama: "Perilaku", q: "apa yang dilakukan?", tanya: "Menurut kamu, perilaku yang digambarkan di teks ini…"},
+  {k: "nilai", lapis: "dalam", nama: "Nilai dan pandangan", q: "apa yang dianggap baik atau buruk?", tanya: "Menurut kamu, nilai dan pandangan di teks ini…"},
+  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanya: "Menurut kamu, cara berbahasa di teks ini…", tanpaTidakAda: true}
 ];
 
 // Cakupan task mengikuti masukan Pak Rahmad (29 Sep): SmSA, IndoToxic2024, IndoNLI, ditambah MNLI terjemahan sebagai pembanding.
 const ITEMS = [
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
-    contoh: {g: "bisa", dim: {tokoh: "id", benda: "umum", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "id"}}},
   {task: "sentimen", register: "Ulasan", label: "Positif",
     bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
-    contoh: {g: "bisa", dim: {tokoh: "id", benda: "id", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "tidak", bahasa: "umum"}}},
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "Istri Petinggi Grab-Bos Scarlett Panik Usai Diduga Dukung Israel"}],
-    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "id", perilaku: "tidak", nilai: "id", knowledge: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "id", perilaku: "tidak", nilai: "id", bahasa: "umum"}}},
   {task: "nli", register: "Berita", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pemerintah telah melarang mudik untuk menekan penularan virus Corona COVID-19."},
       {k: "Hipotesis", v: "Pemerintah telah memperbolehkan mudik."}],
-    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "umum", perilaku: "id", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Artikel web", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pura Ulun Danu Beratan juga sering menjadi tempat diadakannya berbagai acara, misalnya foto pre-wedding, festival seni, upacara Melasti (upacara penyucian diri untuk menyambut Hari Raya Nyepi), dan lain sebagainya."},
       {k: "Hipotesis", v: "Acara yang menggunakan Pura Ulan Beratan hanya acara keagamaan."}],
-    contoh: {g: "bisa", dim: {tokoh: "daerah", benda: "id", perilaku: "daerah", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "daerah", konsep: "id", perilaku: "daerah", nilai: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Wikipedia", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
       {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
-    contoh: {g: "bisa", dim: {tokoh: "tidak", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "umum"}}},
   {task: "nli", register: "Panduan wisata", label: "Pasti benar",
     bagian: [
       {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
       {k: "Hipotesis", v: "prancis diperintah oleh keponakan napoleon setelah mereka memenangkan revolusi pada tahun 1848."}],
-    contoh: {g: "bisa", dim: {tokoh: "umum", benda: "tidak", perilaku: "tidak", nilai: "tidak", knowledge: "umum", bahasa: "asing"}}},
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "asing"}}},
   {task: "nli", register: "Percakapan telepon (transkrip)", label: "Mungkin benar",
     bagian: [
       {k: "Premis", v: "nah hal pertama bagi saya adalah saya bertanya-tanya saya melihat beberapa cara yang berbeda berbicara tentang apa itu privasi um jika privasi adalah sesuatu yang mengganggu negara pribadi anda maksud saya invasi privasi adalah sesuatu yang mengganggu negara pribadi anda yang satu hal dan jika privasi adalah sesuatu yang datang ke negara pribadi anda dan mengekstrak informasi dari itu …"},
       {k: "Hipotesis", v: "semua invasi privasi harus dihukum berat, karena itu akan mengajarkan para penjahat bahwa itu tidak layak dilakukan."}],
-    contoh: {g: "kacau", dim: {}}}
+    contoh: {g: "tidak", dim: {}}}
 ];
 
 const G = [
-  ["bisa", "Bisa dipakai", "teksnya utuh dan wajar"],
-  ["hilang", "Ada yang hilang", "terpotong di awal atau akhir, atau bolong di tengah"],
-  ["kacau", "Tulisannya kacau", "bahkan untuk ukuran {reg}"],
-  ["bukan", "Bukan teks yang semestinya", "spam, iklan, bukan bahasa Indonesia, atau campur aduk"]
+  ["ya", "Ya, dapat digunakan"],
+  ["tidak", "Tidak dapat digunakan"]
 ];
-const NAMA_LANGKAH = {g: "Kualitas teks", dim: "Akrab atau asing", ringkas: "Ringkasan"};
+const NAMA_LANGKAH = {g: "Kelayakan", dim: "Akrab atau asing", ringkas: "Ringkasan"};
 
-let idx = 0, caraBuka = true;
-const batasBuka = new Set();
-const kosong = () => ({g: null, lewati: false, dim: {}, aktif: 0, tidakKenal: false, catatan: "", simpan: false, step: 0});
+let idx = 0;
+const kosong = () => ({g: null, dim: {}, aktif: 0, tidakKenal: false, catatan: "", simpan: false, step: 0});
 const jawab = ITEMS.map(kosong);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"}[c]));
 
-const berhenti = a => a.lewati || (a.g && a.g !== "bisa");
+const berhenti = a => a.g === "tidak";
 const dimLengkap = a => DIMS.every(d => a.dim[d.k]);
 const ada = (a, v) => DIMS.some(d => a.dim[d.k] === v);
 
@@ -300,7 +260,7 @@ function langkahList(a) {
 }
 function beres(a, key) {
   switch (key) {
-    case "g": return !!(a.g || a.lewati);
+    case "g": return !!a.g;
     case "dim": return dimLengkap(a);
     case "ringkas": return a.simpan;
   }
@@ -308,21 +268,21 @@ function beres(a, key) {
 const selesai = a => berhenti(a) || a.simpan;
 const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringkas" || beres(a, k));
 
-// R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari keenam baris:
-// ada Asing di lapis dalam (perilaku, nilai, knowledge) -> asing sampai ke dalam; Asing hanya di lapis permukaan
-// (tokoh, benda, bahasa) -> asing di permukaan; "tidak" dan "umum" sama-sama biasa; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
+// R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari kelima baris:
+// ada Asing di lapis dalam (perilaku, nilai) -> asing sampai ke dalam; Asing hanya di lapis permukaan
+// (nama, konsep, bahasa) -> asing di permukaan; "tidak" dan "umum" sama-sama biasa; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
-function opsiList(nama, daftar, nilai, reg) {
-  return `<div class="opsi">${daftar.map(([v, t, d], i) =>
+function opsiList(nama, daftar, nilai) {
+  return `<div class="opsi">${daftar.map(([v, t], i) =>
     `<button class="${nilai === v ? "on" : ""}" data-act="set" data-f="${nama}" data-v="${v}">
-      <span class="bul"></span><span><span class="t">${esc(t)}</span>${d ? `<span class="d"><br>${esc(d.replace("{reg}", reg || ""))}</span>` : ""}</span>${nama === "g" ? `<span class="key">${i + 1}</span>` : ""}</button>`).join("")}</div>`;
+      <span class="bul"></span><span class="t">${esc(t)}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
 const skalaDim = d => d.tanpaTidakAda ? SKALA.filter(x => x[0] !== "tidak") : SKALA;
 function opsiDim(d, nilai) {
-  return `<div class="opsi">${skalaDim(d).map(([v, t, g], i) =>
+  return `<div class="opsi">${skalaDim(d).map(([v, t], i) =>
     `<button class="${nilai === v ? "on" : ""}" data-act="dim" data-k="${d.k}" data-v="${v}">
-      <span class="bul"></span><span><span class="t">${esc(t)}</span> <span class="g">· ${esc(g)}</span><span class="d"><br>${esc(d.contoh[v])}</span></span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
+      <span class="bul"></span><span class="t">${esc(t)}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
 const chip = v => v ? `<span class="chip ${v}">${esc(SINGKAT[v])}</span>` : "";
 function renderKiri() {
@@ -339,36 +299,22 @@ function renderStepper() {
   const a = jawab[idx], L = langkahList(a);
   document.getElementById("stepper").innerHTML = L.map((k, i) => {
     const n = DIMS.filter(d => a.dim[d.k]).length;
-    const ekstra = k === "dim" && n < 6 && n > 0 ? ` <small>${n}/6</small>` : "";
+    const ekstra = k === "dim" && n < DIMS.length && n > 0 ? ` <small>${n}/${DIMS.length}</small>` : "";
     return `<button class="${i === a.step ? "ini" : ""}${beres(a, k) ? " beres" : ""}" data-act="langkah" data-i="${i}"${bisaDibuka(a, i) ? "" : " disabled"}>
       <span class="n">${beres(a, k) ? "✓" : i + 1}</span>${esc(NAMA_LANGKAH[k])}${ekstra}</button>`;
   }).join("");
 }
 
 function renderDim(s, a) {
-  const multi = s.bagian.length > 1;
-  let h = `<details class="cara bantu" data-cara${caraBuka ? " open" : ""}><summary>Cara menilai: ada? di mana-mana? akrab di Indonesia?</summary>
-      <p style="margin:6px 0 4px">Enam baris = enam pertanyaan tentang teks: <b>siapa dan di mana</b>, <b>apa yang disebut</b>, <b>apa yang dilakukan</b>, <b>apa yang dianggap baik atau buruk</b>, <b>apa yang harus sudah diketahui</b>, dan <b>bagaimana ditulis</b>.</p>
-      <p style="margin:0 0 4px">Jawab <b>menurut Anda, sebagai orang Indonesia</b>. Tidak ada jawaban benar atau salah, dan tidak perlu mencari di internet. Cari hal jenis itu di teks, lalu tanyakan berurutan:</p>
-      <div class="peta">
-        <span>tidak ada hal jenis itu di teks?</span><span>→ <b>Tidak ada</b></span>
-        <span>ada di mana-mana di dunia?</span><span>→ <b>Biasa di mana saja</b> (tas, sepak bola, Natal)</span>
-        <span>kalau tidak: akrab bagi hampir semua orang Indonesia?</span><span>→ <b>Akrab di Indonesia</b>, walaupun mungkin juga dikenal di negara tetangga (rendang, batik, Grab)</span>
-        <span>hanya akrab bagi satu daerah, suku, atau agama?</span><span>→ <b>Akrab bagi komunitas tertentu</b>, bukan profesi, hobi, atau tingkat pendidikan</span>
-        <span>tahu apa itu, tapi bukan bagian dari kehidupan di Indonesia?</span><span>→ <b>Asing</b></span>
-      </div>
-      <p>Yang dihitung <b>dikenal</b>, bukan dijalankan: tarawih dikenal hampir semua orang Indonesia. Kalau satu baris punya beberapa hal dengan jawaban berbeda, pilih yang <b>paling bawah</b>. Tidak kenal atau tidak bisa memutuskan? Jangan pilih Asing; pilih <b>Tidak tahu, tidak bisa memutuskan</b>.${multi ? " Nilai semua bagian teks bersama-sama." : ""}</p>
-    </details>`;
+  let h = "";
   h += DIMS.map((d, i) => {
     const v = a.dim[d.k], aktif = a.aktif === i;
     let body = "";
     if (aktif) {
       body = `<div class="baris-b">
         <div class="tanya" style="font-size:15.5px">${esc(d.tanya)}</div>
-        <div class="cari">${d.cari}</div>
         ${opsiDim(d, v)}
         <div class="lewati"><button class="btn tipis${v === "tt" ? " on" : ""}" data-act="dim" data-k="${d.k}" data-v="tt" style="padding-left:0">Tidak tahu, tidak bisa memutuskan</button></div>
-        <details class="batas" data-batas="${d.k}"${batasBuka.has(d.k) ? " open" : ""}><summary>Batas dan kasus sulit</summary><div>${esc(d.batas)}</div></details>
       </div>`;
     }
     return `<div class="baris${aktif ? " aktif" : ""}${v ? " isi" : ""}">
@@ -376,7 +322,7 @@ function renderDim(s, a) {
       ${body}</div>`;
   }).join("");
   h += `<label class="cek kenal"><input type="checkbox" data-bool="tidakKenal"${a.tidakKenal ? " checked" : ""}>
-      <span><span class="t">Ada kata atau nama di teks ini yang tidak saya kenal</span><span class="d"><br>Jangan pilih Asing hanya karena tidak kenal. Kalau karena itu Anda tidak bisa memutuskan suatu baris, pilih \"Tidak tahu, tidak bisa memutuskan\" di baris itu.</span></span></label>`;
+      <span class="t">Ada kata atau nama di teks ini yang tidak saya kenal</span></label>`;
   return h;
 }
 
@@ -384,10 +330,9 @@ function renderRingkas(s, a) {
   const baris = [];
   if (a.tidakKenal) baris.push(["Ada yang tidak dikenal", "Ya"]);
   return `<div class="tanya">Ringkasan</div>
-    <p class="bantu">Cek sekali lagi. Klik langkah di atas untuk mengubah jawaban.</p>
     <div class="ringkasan">${DIMS.map(d => `<div><span>${esc(d.nama)}</span>${chip(a.dim[d.k])}</div>`).join("")}</div>
     ${baris.length ? `<div class="ringkasan">${baris.map(([x, y]) => `<div><span>${esc(x)}</span><span class="v">${esc(y)}</span></div>`).join("")}</div>` : ""}
-    <textarea data-txt="catatan" placeholder="Catatan (opsional), misalnya bagian yang terasa asing atau daerah asalnya">${esc(a.catatan)}</textarea>`;
+    <textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea>`;
 }
 
 function renderQ() {
@@ -396,12 +341,11 @@ function renderQ() {
   const key = L[a.step];
   let h = "";
   if (key === "g") {
-    h = `<div class="tanya">Teks ini bisa dipakai?</div>
-      <p class="bantu">Nilai sesuai jenis teksnya. Di media sosial, huruf kecil semua, singkatan, dan salah ketik itu biasa.</p>
-      ${opsiList("g", G, a.g, s.register.toLowerCase())}
-      <div class="lewati"><button class="btn tipis" data-act="lewati" style="padding-left:0">${a.lewati ? "↩ Batal lewati" : "Saya tidak paham bahasanya, lewati teks ini"}</button></div>`;
+    h = `<div class="tanya">Apakah teks ini dapat digunakan untuk anotasi kamu?</div>
+      <p class="sub">Pilih Tidak hanya kalau teksnya tidak bisa dipahami kamu.</p>
+      ${opsiList("g", G, a.g)}`;
     if (berhenti(a)) {
-      h += `<div class="stop"><b>${a.lewati ? "Teks ini akan diberikan ke annotator lain." : "Teks ini selesai di sini."}</b>
+      h += `<div class="stop"><b>Teks ini selesai di sini.</b>
         <textarea data-txt="catatan" placeholder="Catatan (opsional)">${esc(a.catatan)}</textarea></div>`;
     }
   } else if (key === "dim") h = renderDim(s, a);
@@ -447,8 +391,7 @@ function pilihDim(k, v) {
     let j = -1;
     for (let o = 1; o <= DIMS.length; o++) { const c = (i + o) % DIMS.length; if (!a.dim[DIMS[c].k]) { j = c; break; } }
     if (j >= 0) { a.aktif = j; render(); }
-    // Setelah teks pertama selesai, kotak "Cara menilai" ditutup supaya baris tidak terdorong ke bawah.
-    else if (!sudahLengkap) { a.aktif = null; caraBuka = false; render(); majuLangkah(a, a.step); }
+    else if (!sudahLengkap) { a.aktif = null; render(); majuLangkah(a, a.step); }
     else { a.aktif = null; render(); }
   }, 200);
 }
@@ -456,9 +399,9 @@ function pilih(f, v) {
   const a = jawab[idx];
   a.simpan = false;
   a[f] = v;
-  if (f === "g" && v !== "bisa") { a.dim = {}; a.aktif = 0; }
+  if (f === "g" && v === "tidak") { a.dim = {}; a.aktif = 0; }
   render();
-  if (f === "g" && v === "bisa") majuLangkah(a, a.step);
+  if (f === "g" && v === "ya") majuLangkah(a, a.step);
 }
 function lanjut() {
   const a = jawab[idx], L = langkahList(a), key = L[a.step];
@@ -478,7 +421,6 @@ document.addEventListener("click", e => {
   if (act === "dim") return pilihDim(el.dataset.k, el.dataset.v);
   if (act === "langkah") a.step = +el.dataset.i;
   else if (act === "aktif") a.aktif = a.aktif === +el.dataset.i ? null : +el.dataset.i;
-  else if (act === "lewati") { a.lewati = !a.lewati; if (a.lewati) { a.g = null; a.dim = {}; a.aktif = 0; } a.step = 0; }
   render();
 });
 document.addEventListener("change", e => {
@@ -486,17 +428,12 @@ document.addEventListener("change", e => {
   if (el.dataset.bool) { a[el.dataset.bool] = el.checked; a.simpan = false; render(); }
 });
 document.addEventListener("input", e => { const f = e.target.dataset.txt; if (f) jawab[idx][f] = e.target.value; });
-document.addEventListener("toggle", e => {
-  const el = e.target;
-  if (el.matches?.("[data-cara]")) caraBuka = el.open;
-  else if (el.matches?.("[data-batas]")) el.open ? batasBuka.add(el.dataset.batas) : batasBuka.delete(el.dataset.batas);
-}, true);
 document.addEventListener("keydown", e => {
   if (e.target.matches("textarea, input, select")) return;
   const a = jawab[idx], key = langkahList(a)[a.step];
   const n = parseInt(e.key, 10);
   if (n >= 1 && n <= 5) {
-    if (key === "g" && !a.lewati && G[n - 1]) pilih("g", G[n - 1][0]);
+    if (key === "g" && G[n - 1]) pilih("g", G[n - 1][0]);
     else if (key === "dim" && a.aktif != null) { const d = DIMS[a.aktif], o = skalaDim(d)[n - 1]; if (o) pilihDim(d.k, o[0]); }
   } else if (e.key === "Enter" || e.key === "ArrowRight") {
     const b = document.getElementById("qNext"); if (!b.disabled) b.click();
@@ -515,10 +452,6 @@ document.getElementById("btnContoh").onclick = () => {
   a.g = c.g; a.dim = {...c.dim}; a.aktif = null;
   a.step = langkahList(a).length - 1;
   jawab[idx] = a; render();
-};
-document.getElementById("btnPenjelasan").onclick = e => {
-  document.body.classList.toggle("penjelasan");
-  e.currentTarget.classList.toggle("on", document.body.classList.contains("penjelasan"));
 };
 
 render();
