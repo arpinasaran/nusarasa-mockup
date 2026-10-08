@@ -53,6 +53,8 @@ header h1 span{color:var(--accent)}
 .navteks .btn{padding:4px 10px}
 .navteks .pos b{font-weight:700}
 .navteks .pos small{color:var(--muted)}
+.panduan{font-size:13px;color:var(--accent);text-decoration:none;font-weight:600}
+.panduan:hover{text-decoration:underline}
 .demo{display:flex;align-items:center;gap:2px;border-left:1px solid var(--line);padding-left:10px;font-size:12px;color:var(--muted)}
 
 /* dua kolom */
@@ -145,6 +147,7 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
     <span class="pos" id="posisi"></span>
     <button class="btn" id="tNext" title="Teks berikutnya">›</button>
   </div>
+  <a class="panduan" href="https://arpinasaran.github.io/nusarasa-mockup/briefing_v16.html" target="_blank" rel="noopener">Panduan ↗</a>
   <div class="demo">Demo:
     <button class="btn tipis" id="btnContoh">Isi contoh</button>
     <button class="btn tipis" id="btnReset">Kosongkan</button>
@@ -170,15 +173,31 @@ const TASKS = {
   nli: {nama: "Natural Language Inference", desk: "menentukan apakah hipotesis pasti benar, mungkin benar, atau pasti salah kalau premisnya benar."}
 };
 
-// Satu skala untuk kelima baris (sama dengan v15). Arti tiap pilihan ada di deck briefing, bukan di form. Urutan = prioritas terbalik: kalau ada beberapa hal, pilih yang paling bawah.
-const SKALA = [
-  ["tidak", "Tidak ada"],
-  ["umum", "Biasa di mana saja"],
-  ["id", "Akrab di Indonesia"],
-  ["daerah", "Akrab bagi komunitas tertentu"],
-  ["asing", "Asing"]
+// Pilihan jawaban v16. Arti tiap pilihan ada di deck briefing, bukan di form.
+// Nama, Konsep, Perilaku: dari yang paling asing ke tidak ada. Kalau ada beberapa hal dalam satu baris, pilih yang paling atas.
+const SKALA_FAMILIAR = unsur => [
+  ["asing", "Asing, tidak familiar di Indonesia"],
+  ["daerah", "Familiar bagi komunitas Indonesia tertentu"],
+  ["id", "Familiar di Indonesia"],
+  ["umum", "Familiar di dalam dan luar Indonesia"],
+  ["tidak", `Tidak ada unsur ${unsur} dalam teks`]
 ];
-const SINGKAT = {tidak: "Tidak ada", umum: "Biasa", id: "Akrab di Indonesia", daerah: "Akrab komunitas", asing: "Asing", tt: "Tidak tahu"};
+// Nilai dan pandangan: bertentangan atau netral (masukan Pak Rahmad: asing atau netral).
+const SKALA_NILAI = [
+  ["bertentangan", "Bertentangan dengan nilai di Indonesia"],
+  ["netral", "Netral, tidak bertentangan"]
+];
+// Bahasa (usulan, belum final): gaya berbahasa dibanding jenis teksnya (Styles, Registers, Genres di Chen Liu;
+// masukan: alami atau tidak, disesuaikan registernya).
+const SKALA_BAHASA = [
+  ["terjemahan", "Tidak alami: terasa terjemahan"],
+  ["register", "Tidak alami: gayanya tidak cocok dengan jenis teksnya"],
+  ["alami", "Alami untuk jenis teksnya"]
+];
+const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Familiar di Indonesia", umum: "Dalam dan luar Indonesia", tidak: "Tidak ada",
+  bertentangan: "Bertentangan", netral: "Netral", terjemahan: "Terasa terjemahan", register: "Gaya tidak cocok", alami: "Alami", tt: "Tidak tahu"};
+// Warna chip mengikuti arti: merah-kuning untuk yang asing atau tidak alami, abu untuk yang netral.
+const CHIP = {bertentangan: "asing", terjemahan: "asing", register: "asing", netral: "umum", alami: "umum"};
 
 // Lima dimensi v16. Knowledge dibuang; nama dipisah dari konsep (saran Pak Rahmad: nama bisa ditarik seperti NER).
 // Pemetaan ke Chen Liu dkk. (TACL 2025):
@@ -189,44 +208,44 @@ const SINGKAT = {tidak: "Tidak ada", umum: "Biasa", id: "Akrab di Indonesia", da
 // Bahasa: Dialects + Styles, Registers, Genres
 // Tidak diinstrumentasi: Knowledge dan Context historis.
 const DIMS = [
-  {k: "nama", lapis: "permukaan", nama: "Nama", q: "nama orang atau tempat?", tanya: "Menurut kamu, nama orang dan tempat di teks ini…"},
-  {k: "konsep", lapis: "permukaan", nama: "Konsep", q: "apa lagi yang disebut?", tanya: "Menurut kamu, hal-hal yang disebut di teks ini…"},
-  {k: "perilaku", lapis: "dalam", nama: "Perilaku", q: "apa yang dilakukan?", tanya: "Menurut kamu, perilaku yang digambarkan di teks ini…"},
-  {k: "nilai", lapis: "dalam", nama: "Nilai dan pandangan", q: "apa yang dianggap baik atau buruk?", tanya: "Menurut kamu, nilai dan pandangan di teks ini…"},
-  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanya: "Menurut kamu, cara berbahasa di teks ini…", tanpaTidakAda: true}
+  {k: "nama", lapis: "permukaan", nama: "Nama", q: "nama orang atau tempat?", tanya: "Menurut kamu, nama orang dan tempat di teks ini…", opsi: SKALA_FAMILIAR("nama")},
+  {k: "konsep", lapis: "permukaan", nama: "Konsep", q: "apa lagi yang disebut?", tanya: "Menurut kamu, hal-hal yang disebut di teks ini…", opsi: SKALA_FAMILIAR("konsep")},
+  {k: "perilaku", lapis: "dalam", nama: "Perilaku", q: "apa yang dilakukan?", tanya: "Menurut kamu, perilaku yang digambarkan di teks ini…", opsi: SKALA_FAMILIAR("perilaku")},
+  {k: "nilai", lapis: "dalam", nama: "Nilai dan pandangan", q: "apa yang dianggap baik atau buruk?", tanya: "Menurut kamu, nilai dan pandangan di teks ini…", opsi: SKALA_NILAI},
+  {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanya: "Menurut kamu, gaya bahasa teks ini untuk jenis teksnya…", opsi: SKALA_BAHASA}
 ];
 
 // Cakupan task mengikuti masukan Pak Rahmad (29 Sep): SmSA, IndoToxic2024, IndoNLI, ditambah MNLI terjemahan sebagai pembanding.
 const ITEMS = [
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "alami"}}},
   {task: "sentimen", register: "Ulasan", label: "Positif",
     bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "alami"}}},
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "Istri Petinggi Grab-Bos Scarlett Panik Usai Diduga Dukung Israel"}],
-    contoh: {g: "ya", dim: {nama: "umum", konsep: "id", perilaku: "tidak", nilai: "id", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "alami"}}},
   {task: "nli", register: "Berita", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pemerintah telah melarang mudik untuk menekan penularan virus Corona COVID-19."},
       {k: "Hipotesis", v: "Pemerintah telah memperbolehkan mudik."}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "netral", bahasa: "alami"}}},
   {task: "nli", register: "Artikel web", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pura Ulun Danu Beratan juga sering menjadi tempat diadakannya berbagai acara, misalnya foto pre-wedding, festival seni, upacara Melasti (upacara penyucian diri untuk menyambut Hari Raya Nyepi), dan lain sebagainya."},
       {k: "Hipotesis", v: "Acara yang menggunakan Pura Ulan Beratan hanya acara keagamaan."}],
-    contoh: {g: "ya", dim: {nama: "daerah", konsep: "id", perilaku: "daerah", nilai: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "daerah", konsep: "id", perilaku: "daerah", nilai: "netral", bahasa: "alami"}}},
   {task: "nli", register: "Wikipedia", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
       {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "umum"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "alami"}}},
   {task: "nli", register: "Panduan wisata", label: "Pasti benar",
     bagian: [
       {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
       {k: "Hipotesis", v: "prancis diperintah oleh keponakan napoleon setelah mereka memenangkan revolusi pada tahun 1848."}],
-    contoh: {g: "ya", dim: {nama: "umum", konsep: "umum", perilaku: "tidak", nilai: "tidak", bahasa: "asing"}}},
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "terjemahan"}}},
   {task: "nli", register: "Percakapan telepon (transkrip)", label: "Mungkin benar",
     bagian: [
       {k: "Premis", v: "nah hal pertama bagi saya adalah saya bertanya-tanya saya melihat beberapa cara yang berbeda berbicara tentang apa itu privasi um jika privasi adalah sesuatu yang mengganggu negara pribadi anda maksud saya invasi privasi adalah sesuatu yang mengganggu negara pribadi anda yang satu hal dan jika privasi adalah sesuatu yang datang ke negara pribadi anda dan mengekstrak informasi dari itu …"},
@@ -238,7 +257,7 @@ const G = [
   ["ya", "Ya, dapat digunakan"],
   ["tidak", "Tidak dapat digunakan"]
 ];
-const NAMA_LANGKAH = {g: "Kelayakan", dim: "Akrab atau asing", ringkas: "Ringkasan"};
+const NAMA_LANGKAH = {g: "Kelayakan", dim: "Penilaian", ringkas: "Ringkasan"};
 
 let idx = 0;
 const kosong = () => ({g: null, dim: {}, aktif: 0, catatan: "", simpan: false, step: 0});
@@ -264,8 +283,9 @@ const selesai = a => berhenti(a) || a.simpan;
 const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringkas" || beres(a, k));
 
 // R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari kelima baris:
-// ada Asing di lapis dalam (perilaku, nilai) -> asing sampai ke dalam; Asing hanya di lapis permukaan
-// (nama, konsep, bahasa) -> asing di permukaan; "tidak" dan "umum" sama-sama biasa; "tt" (tidak tahu) dihitung sebagai jawaban kosong; lalu akrab komunitas -> akrab di Indonesia -> biasa di mana saja.
+// Perilaku Asing atau Nilai Bertentangan -> asing sampai ke dalam; Asing hanya di Nama atau Konsep -> asing di permukaan;
+// Bahasa "terasa terjemahan" dicatat terpisah sebagai artefak terjemahan; "tt" (tidak tahu) dihitung sebagai jawaban kosong;
+// lalu familiar komunitas -> familiar di Indonesia -> familiar di dalam dan luar Indonesia.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
 function opsiList(nama, daftar, nilai) {
@@ -273,13 +293,13 @@ function opsiList(nama, daftar, nilai) {
     `<button class="${nilai === v ? "on" : ""}" data-act="set" data-f="${nama}" data-v="${v}">
       <span class="bul"></span><span class="t">${esc(t)}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
-const skalaDim = d => d.tanpaTidakAda ? SKALA.filter(x => x[0] !== "tidak") : SKALA;
+const skalaDim = d => d.opsi;
 function opsiDim(d, nilai) {
   return `<div class="opsi">${skalaDim(d).map(([v, t], i) =>
     `<button class="${nilai === v ? "on" : ""}" data-act="dim" data-k="${d.k}" data-v="${v}">
       <span class="bul"></span><span class="t">${esc(t)}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
-const chip = v => v ? `<span class="chip ${v}">${esc(SINGKAT[v])}</span>` : "";
+const chip = v => v ? `<span class="chip ${CHIP[v] || v}">${esc(SINGKAT[v])}</span>` : "";
 function renderKiri() {
   const s = ITEMS[idx], a = jawab[idx], t = TASKS[s.task];
   document.getElementById("kiri").innerHTML = `
