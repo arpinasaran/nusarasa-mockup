@@ -98,6 +98,7 @@ main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minm
 .opsi button.on{border-color:var(--accent);background:var(--accent-soft)}
 .opsi button.on .bul{border:5px solid var(--accent)}
 .opsi .t{font-weight:600;font-size:14.5px}
+.opsi .catat{font-size:12.5px;color:var(--muted)}
 .opsi .key{margin-left:auto;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px;align-self:center}
 @media (max-width:640px){.opsi .key{display:none}}
 .lewati{margin-top:8px}
@@ -177,9 +178,9 @@ const TASKS = {
 // Nama, Konsep, Perilaku: dari yang paling asing ke tidak ada. Kalau ada beberapa hal dalam satu baris, pilih yang paling atas.
 const SKALA_FAMILIAR = unsur => [
   ["asing", "Asing, tidak familiar di Indonesia"],
-  ["daerah", "Familiar bagi komunitas Indonesia tertentu"],
+  ["daerah", "Familiar hanya bagi komunitas Indonesia tertentu", "komunitas kultural: daerah, suku, atau agama"],
   ["id", "Familiar di Indonesia"],
-  ["umum", "Familiar di dalam dan luar Indonesia"],
+  ["umum", "Familiar tidak hanya di Indonesia", "di luar negeri pun begitu"],
   ["tidak", `Tidak ada unsur ${unsur} dalam teks`]
 ];
 // Nilai dan pandangan: bertentangan atau netral (masukan Pak Rahmad: asing atau netral).
@@ -188,18 +189,16 @@ const SKALA_NILAI = [
   ["netral", "Netral, tidak bertentangan"]
 ];
 // Bahasa: gaya berbahasa dibanding teks sejenisnya (Styles, Registers, Genres dan Dialects di Chen Liu;
-// masukan: alami atau tidak, disesuaikan registernya). "Terasa terjemahan" = kalimatnya kaku;
-// "gaya asing" = kalimatnya lancar tapi cara bicaranya dari budaya lain.
+// masukan: alami atau tidak, disesuaikan registernya). "Terasa terjemahan" = kalimatnya kaku.
 const SKALA_BAHASA = [
   ["terjemahan", "Tidak alami, terasa terjemahan"],
-  ["asing", "Gaya asing, tidak familiar di Indonesia"],
-  ["daerah", "Gaya khas komunitas Indonesia tertentu"],
-  ["id", "Gaya yang familiar di Indonesia"]
+  ["daerah", "Gaya khas komunitas Indonesia tertentu", "komunitas kultural: daerah, suku, atau agama"],
+  ["wajar", "Gaya yang wajar di Indonesia"]
 ];
-const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Familiar di Indonesia", umum: "Dalam dan luar Indonesia", tidak: "Tidak ada",
+const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Familiar di Indonesia", umum: "Tidak hanya di Indonesia", tidak: "Tidak ada", wajar: "Wajar",
   bertentangan: "Bertentangan", netral: "Netral", terjemahan: "Terasa terjemahan", tt: "Tidak tahu"};
 // Warna chip mengikuti arti: merah-kuning untuk yang asing atau tidak alami, abu untuk yang netral.
-const CHIP = {bertentangan: "asing", terjemahan: "asing", netral: "umum"};
+const CHIP = {bertentangan: "asing", terjemahan: "asing", netral: "umum", wajar: "umum"};
 
 // Lima dimensi v16. Knowledge dibuang; nama dipisah dari konsep (saran Pak Rahmad: nama bisa ditarik seperti NER).
 // Pemetaan ke Chen Liu dkk. (TACL 2025):
@@ -221,28 +220,28 @@ const DIMS = [
 const ITEMS = [
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "wajar"}}},
   {task: "sentimen", register: "Ulasan", label: "Positif",
     bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "wajar"}}},
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
     bagian: [{k: "Teks", v: "Istri Petinggi Grab-Bos Scarlett Panik Usai Diduga Dukung Israel"}],
-    contoh: {g: "ya", dim: {nama: "umum", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "wajar"}}},
   {task: "nli", register: "Berita", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pemerintah telah melarang mudik untuk menekan penularan virus Corona COVID-19."},
       {k: "Hipotesis", v: "Pemerintah telah memperbolehkan mudik."}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "netral", bahasa: "wajar"}}},
   {task: "nli", register: "Artikel web", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Pura Ulun Danu Beratan juga sering menjadi tempat diadakannya berbagai acara, misalnya foto pre-wedding, festival seni, upacara Melasti (upacara penyucian diri untuk menyambut Hari Raya Nyepi), dan lain sebagainya."},
       {k: "Hipotesis", v: "Acara yang menggunakan Pura Ulan Beratan hanya acara keagamaan."}],
-    contoh: {g: "ya", dim: {nama: "daerah", konsep: "id", perilaku: "daerah", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "daerah", konsep: "id", perilaku: "daerah", nilai: "netral", bahasa: "wajar"}}},
   {task: "nli", register: "Wikipedia", label: "Pasti salah",
     bagian: [
       {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
       {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "id"}}},
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "wajar"}}},
   {task: "nli", register: "Panduan wisata", label: "Pasti benar",
     bagian: [
       {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
@@ -286,8 +285,8 @@ const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringka
 
 // R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari kelima baris:
 // Perilaku Asing atau Nilai Bertentangan -> asing sampai ke dalam; Asing hanya di Nama atau Konsep -> asing di permukaan;
-// Bahasa "terasa terjemahan" dicatat terpisah sebagai artefak terjemahan, Bahasa "gaya asing" dihitung asing di permukaan; "tt" (tidak tahu) dihitung sebagai jawaban kosong;
-// lalu familiar komunitas -> familiar di Indonesia -> familiar di dalam dan luar Indonesia.
+// Bahasa "terasa terjemahan" dicatat terpisah sebagai artefak terjemahan; "tt" (tidak tahu) dihitung sebagai jawaban kosong;
+// lalu familiar hanya bagi komunitas -> familiar di Indonesia -> familiar tidak hanya di Indonesia.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
 function opsiList(nama, daftar, nilai) {
@@ -297,9 +296,9 @@ function opsiList(nama, daftar, nilai) {
 }
 const skalaDim = d => d.opsi;
 function opsiDim(d, nilai) {
-  return `<div class="opsi">${skalaDim(d).map(([v, t], i) =>
+  return `<div class="opsi">${skalaDim(d).map(([v, t, catat], i) =>
     `<button class="${nilai === v ? "on" : ""}" data-act="dim" data-k="${d.k}" data-v="${v}">
-      <span class="bul"></span><span class="t">${esc(t)}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
+      <span class="bul"></span><span><span class="t">${esc(t)}</span>${catat ? ` <span class="catat">(${esc(catat)})</span>` : ""}</span><span class="key">${i + 1}</span></button>`).join("")}</div>`;
 }
 const chip = v => v ? `<span class="chip ${CHIP[v] || v}">${esc(SINGKAT[v])}</span>` : "";
 function renderKiri() {
