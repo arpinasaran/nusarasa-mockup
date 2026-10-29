@@ -185,11 +185,12 @@ const SKALA_FAMILIAR = unsur => [
   ["asing", "Asing, tidak familiar di Indonesia"],
   ["tidak", `Tidak ada unsur ${unsur} dalam teks`]
 ];
-// Nilai dan pandangan: tidak wajar atau wajar/netral (masukan Pak Rahmad: asing atau netral).
-// Teks yang tidak memuat nilai apa pun dijawab "Wajar atau netral".
+// Nilai dan pandangan: skala tiga titik, dari sangat wajar ke tidak wajar (saran Pak Fajri supaya lebih seperti skala Likert).
+// "Sangat wajar" = anggapan yang khas dan kuat dipegang di Indonesia. Teks yang tidak memuat nilai apa pun dijawab "Wajar atau netral".
 const SKALA_NILAI = [
-  ["tidakwajar", "Tidak wajar di Indonesia"],
-  ["netral", "Wajar atau netral di Indonesia"]
+  ["sangatwajar", "Sangat wajar di Indonesia"],
+  ["netral", "Wajar atau netral di Indonesia"],
+  ["tidakwajar", "Tidak wajar di Indonesia"]
 ];
 // Bahasa: ragam bahasa teks (Styles, Registers, Genres dan Dialects di Chen Liu), dari umum ke spesifik
 // (masukan Pak Fajri, 23 Okt). Teks berbahasa asing tidak sampai ke sini: sudah disaring di langkah Kelayakan.
@@ -199,9 +200,9 @@ const SKALA_BAHASA = [
   ["daerah", "Khas komunitas tertentu", "komunitas kultural"]
 ];
 const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Familiar di Indonesia", umum: "Tidak hanya di Indonesia", tidak: "Tidak ada",
-  tidakwajar: "Tidak wajar", netral: "Wajar atau netral", baku: "Baku", sehari: "Sehari-hari", tt: "Tidak tahu"};
+  sangatwajar: "Sangat wajar", tidakwajar: "Tidak wajar", netral: "Wajar atau netral", baku: "Baku", sehari: "Sehari-hari", tt: "Tidak tahu"};
 // Warna chip mengikuti arti: merah-kuning untuk yang asing, abu untuk yang netral.
-const CHIP = {tidakwajar: "asing", netral: "umum", baku: "umum", sehari: "id"};
+const CHIP = {sangatwajar: "id", tidakwajar: "asing", netral: "umum", baku: "umum", sehari: "id"};
 
 // Lima dimensi sama dengan v16. Knowledge dibuang; nama dipisah dari konsep (saran Pak Rahmad: nama bisa ditarik seperti NER).
 // Nama = semua nama diri (orang, tempat, lembaga, merek, judul karya, hari raya); Konsep = hal dan istilah tanpa nama diri.
