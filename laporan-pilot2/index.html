@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Laporan Pilot 2 untuk Pak Rahmad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400..800;1,400..800&display=swap">
+<style>
+:root{--bg:#e6e9ee; --ink:#14243d; --soft:#5d6b7e; --tombol:#ffffff; --garis:#c9d1dc}
+@media (prefers-color-scheme: dark){:root{--bg:#0f1826; --ink:#e7ecf3; --soft:#9aa8ba; --tombol:#1b2638; --garis:#34445c}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);overflow:hidden;font-family:'Inter','Helvetica Neue',Arial,sans-serif}
+.panggung{position:fixed;inset:0 0 56px 0;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;width:1920px;height:1080px;display:none;transform-origin:center center;box-shadow:0 10px 50px rgba(10,20,40,.25);overflow:hidden}
+.slide.aktif{display:block}
+.slide section{position:relative;width:1920px;height:1080px}
+.slide section *{margin:0;padding:0}
+.slide aside{display:none}
+.slide table{border-collapse:collapse;width:100%}
+.slide th{text-align:left;font-weight:600;padding:14px 16px;border-bottom:2px solid #14243d}
+.slide td{padding:14px 16px;border-bottom:1px solid #d9dee6;vertical-align:top;line-height:1.35}
+.slide ul{padding-left:1.2em}
+.slide li{margin:4px 0}
+.kontrol{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;color:var(--soft)}
+.kontrol button{font:inherit;border:1px solid var(--garis);background:var(--tombol);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer}
+.kontrol button:disabled{opacity:.4;cursor:default}
+.kontrol button:focus-visible{outline:2px solid #175f52;outline-offset:2px}
+@page{size:1920px 1080px;margin:0}
+@media print{
+  body{background:#fff;overflow:visible}
+  .panggung{position:static;display:block}
+  .slide{position:relative;display:block !important;transform:none !important;box-shadow:none;break-after:page;page-break-after:always}
+  .kontrol{display:none}
+}
+</style>
+</head>
+<body>
+<div class="panggung" id="panggung">
+<div class="slide"><section id="cover" data-transition="fade" style="display:flex; flex-direction:column; justify-content:center; padding:128px; background:#1f2b27">
+  <div style="display:flex; flex-direction:column; gap:36px">
+    <h1 style="font-family:Domine, Georgia, serif; font-size:96px; font-weight:600; line-height:1.1; color:#f7f4ee">Pilot 2 dan form v3</h1>
+    <p style="width:1300px; font-family:'Nunito Sans', Verdana, sans-serif; font-size:32px; line-height:1.4; color:#c9d3cd">Ringkasan untuk Pak Rahmad mengenai piloting kedua yang dilakukan, dan perubahan form anotasi dari hasil pilot dan nasihat Pak Fajri.</p>
+  </div>
+  <aside>Deck ini ringkasan dari deck lengkap "Pilot 2 NusaRasa: Laporan Apa Adanya" (24 slide). Semua angka diambil dari deck itu.</aside>
+</section>
+</div>
+<div class="slide"><section id="alur" data-transition="fade" style="display:flex; flex-direction:column; gap:48px; padding:128px; background:#f7f4ee">
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <h2 style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:600; line-height:1.15; color:#1f2b27">Perubahan dalam tiga minggu</h2>
+  </div>
+  <div style="display:flex; flex-direction:row; gap:24px; align-items:stretch">
+  <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; color:#5e6863">8 OKTOBER</p>
+    <p style="font-family:Domine, Georgia, serif; font-size:32px; font-weight:700; color:#1f2b27">Mockup v1</p>
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">Lima dimensi, termasuk masukan Bapak memisahkan Nama dari Konsep.</p>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; color:#5e6863">20 OKTOBER</p>
+    <p style="font-family:Domine, Georgia, serif; font-size:32px; font-weight:700; color:#1f2b27">Pilot 2</p>
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">Tiga annotator menilai 30 teks dengan mockup v1, tanpa briefing.</p>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; color:#5e6863">22 OKTOBER</p>
+    <p style="font-family:Domine, Georgia, serif; font-size:32px; font-weight:700; color:#1f2b27">Mockup v2</p>
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">Revisi dari hasil pilot: Nama untuk semua nama diri, pilihan Nilai dan Bahasa diganti.</p>
+  </div>
+  <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:28px; background:#1f2b27; border-top:6px solid #e8a27a; border-radius:12px">
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; font-weight:700; letter-spacing:2px; color:#e8a27a">23 OKTOBER&nbsp;</p>
+    <p style="font-family:Domine, Georgia, serif; font-size:32px; font-weight:700; color:#f7f4ee">Mockup v3</p>
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#c9d3cd">Masukan Pak Fajri: urutan pilihan, pilihan Bahasa, teks berbahasa asing disaring.</p>
+  </div>
+  </div>
+  <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; line-height:1.4; color:#3f4b46">Lima dimensinya tetap: Nama, Konsep, Perilaku, Nilai dan pandangan, Bahasa. Yang berubah hanya bunyi dan urutan pilihan, serta aturan kelayakan.</p>
+  <aside>Mockup v1 sama dengan form v16 yang dipakai di aplikasi pilot 2. Pak Fajri sudah melihat v2 di rapat Jumat 23 Oktober; perbedaan rinci v1 sampai v3 ada di slide 6.</aside>
+</section>
+</div>
+<div class="slide"><section id="angka" data-transition="fade" style="display:flex; flex-direction:column; gap:36px; padding:128px; background:#f7f4ee">
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <h2 style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:600; line-height:1.15; color:#1f2b27">Pilot 2 Overview</h2>
+  </div>
+  <div style="display:flex; flex-direction:row; gap:24px">
+    <div style="display:flex; flex-direction:row; gap:16px; align-items:baseline; flex:1; padding:20px 28px; background:#ece7dc; border-radius:12px">
+      <p style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:700; color:#2d5b87">30</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; color:#3f4b46">teks utama</p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:16px; align-items:baseline; flex:1; padding:20px 28px; background:#ece7dc; border-radius:12px">
+      <p style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:700; color:#2d5b87">8</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; color:#3f4b46">dataset</p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:16px; align-items:baseline; flex:1; padding:20px 28px; background:#ece7dc; border-radius:12px">
+      <p style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:700; color:#2d5b87">4</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; color:#3f4b46">task</p>
+    </div>
+    <div style="display:flex; flex-direction:row; gap:16px; align-items:baseline; flex:1; padding:20px 28px; background:#ece7dc; border-radius:12px">
+      <p style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:700; color:#2d5b87">3</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; color:#3f4b46">annotator</p>
+    </div>
+  </div>
+  <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; line-height:1.4; color:#3f4b46">12 teks hasil terjemahan (RTP-LX, GoEmotions-MT, MNLI) dan 18 teks asli Indonesia (IndoToxic2024, EmoT, IndoNLI, TyDiQA-GoldP, IDK-MRC).</p>
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; font-weight:700; color:#1f2b27">Teks yang dijawab sama oleh ketiganya</p>
+    <table style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; color:#1f2b27">
+      <tr style="background:#ece7dc"><th style="width:17%">Kelayakan</th><th style="width:16%">Nama</th><th style="width:16%">Konsep</th><th style="width:17%">Perilaku</th><th style="width:17%">Nilai</th><th style="width:17%">Bahasa</th></tr>
+      <tr><td>23 dari 30</td><td>10 dari 23</td><td>13 dari 23</td><td>5 dari 23</td><td>8 dari 23</td><td>12 dari 23</td></tr>
+    </table>
+  </div>
+  <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:26px; line-height:1.4; color:#3f4b46">Waktu per teks sangat berbeda: 26 detik (NR-04), 51 detik (NR-01), dan 107 detik (NR-02).</p>
+  <aside>Kesepakatan Nama sampai Bahasa dihitung dari 23 teks yang dijawab Ya oleh ketiganya. Perilaku paling jarang disepakati. Waktu per teks adalah nilai tengah waktu aktif. Tiap orang juga mengisi 2 teks latihan dan 3 teks ulangan, dengan teks dan urutan yang sama.</aside>
+</section>
+</div>
+<div class="slide"><section id="temuan" data-transition="fade" style="display:flex; flex-direction:column; gap:48px; padding:128px; background:#f7f4ee">
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <h2 style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:600; line-height:1.15; color:#1f2b27">Finding Hasil Piloting</h2>
+  </div>
+  <div style="display:grid; gap:24px; grid-template-columns:1fr 1fr 1fr">
+    <div style="display:flex; flex-direction:column; gap:10px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:28px; font-weight:800; color:#1f2b27">Hampir tidak ada yang menjawab asing</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">Hanya 6 dari 240 jawaban Nama, Konsep, dan Perilaku yang Asing, semuanya di teks asli Indonesia. Teks tentang politik Amerika pun dijawab familiar.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:28px; font-weight:800; color:#1f2b27">Konsep dan Perilaku diisi mirip satu sama lain</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">NR-01 dan NR-04 menjawab keduanya sama di 26 dari 30 dan 23 dari 27 teks. Perilaku paling jarang disepakati.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px; padding:28px; background:#fffdf8; border:1px solid #d8d1c3; border-radius:12px">
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:28px; font-weight:800; color:#1f2b27">Patokan tiap orang berbeda</p>
+      <p style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.4; color:#3f4b46">NR-02 menjawab Tidak layak 7 kali dan Tidak tahu 14 kali; NR-01 tidak pernah memilih keduanya. NR-04 empat kali lebih cepat dari NR-02.</p>
+    </div>
+  </div>
+  <aside>Teks politik Amerika adalah P2-03 dari MNLI ("dem yang pro-kehidupan … melawan republik yang pro-pilih"). Kutipan NR-02 di P2-10: "konsep perilaku bisa dipahamin semua orang asalkan mereka paham bahasanya kan". NR-01 di teks latihan: "Seperti teks terjemahan, karena kaku, tapi masih wajar". Pilot 2 dikerjakan tanpa briefing, jadi sebagian temuan ini diharapkan berkurang dengan briefing dan panduan.</aside>
+</section>
+</div>
+<div class="slide"><section id="perubahan" data-transition="fade" style="display:flex; flex-direction:column; gap:32px; padding:128px 128px 160px; background:#f7f4ee">
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <h2 style="font-family:Domine, Georgia, serif; font-size:60px; font-weight:600; line-height:1.15; color:#1f2b27">Dari mockup v1 ke v3</h2>
+  </div>
+  <table style="font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; line-height:1.35; color:#1f2b27">
+    <tr style="background:#ece7dc"><th style="width:15%">Bagian</th><th style="width:25%">v1, dipakai pilot 2</th><th style="width:30%">v3, sekarang</th><th style="width:30%">Dasar perubahan</th></tr>
+    <tr><td>Kelayakan</td><td>"Tidak bisa dipakai" hanya kalau teks tidak dipahami</td><td>"Tidak bisa dipakai" juga diterapkan untuk teks berbahasa asing</td><td>Masukan Pak Fajri mengenai opsi-opsi pada bahasa</td></tr>
+    <tr><td>Nama</td><td>Nama orang dan tempat</td><td>Nama entitas</td><td>Lebih general</td></tr>
+    <tr><td>Urutan pilihan</td><td>Dari Asing ke Tidak hanya di Indonesia</td><td>Dari Tidak hanya di Indonesia ke Asing, lalu Tidak ada</td><td>Masukan Pak Fajri dan Pak Rahmad: dari umum ke spesifik</td></tr>
+    <tr><td>Nilai</td><td>Bertentangan · Netral</td><td>Sangat wajar · Wajar atau netral · Tidak wajar</td><td>Saran dari Pak Fajri supaya lebih Likert Scale</td></tr>
+    <tr><td>Bahasa</td><td>Terasa terjemahan · Gaya khas komunitas · Gaya yang wajar</td><td>Baku · Sehari-hari · Khas komunitas tertentu</td><td>Masukan Pak Fajri, bahasa asing atau bahasa daerah ini dicegah dari awal untuk masuk</td></tr>
+  </table>
+  <p style="position:absolute; bottom:64px; left:128px; width:1664px; font-family:'Nunito Sans', Verdana, sans-serif; font-size:24px; color:#5e6863">Mockup v3: <a href="https://arpinasaran.github.io/nusarasa-mockup/v3/">arpinasaran.github.io/nusarasa-mockup/v3</a> · panduan annotator: <a href="https://arpinasaran.github.io/nusarasa-mockup/v3/briefing.html">…/v3/briefing.html</a></p>
+  <aside>Tanda (v2) berarti perubahan itu sudah masuk di revisi 22 Oktober; sisanya baru di v3. Karena urutan dibalik, aturan kalau ada beberapa hal dalam satu baris menjadi "pilih yang paling bawah sebelum Tidak ada"; hasilnya tetap yang paling spesifik. Contoh Bertentangan untuk keluhan biasa: NR-04 di P2-22 (keluhan soal tugas sekolah). Contoh khas komunitas untuk bahasa gaul: NR-02 di P2-01, dengan catatan "bahasa orang kota jabodetabek".</aside>
+</section>
+</div>
+</div>
+<div class="kontrol">
+  <button id="prev">← Sebelumnya</button>
+  <span id="pos"></span>
+  <button id="next">Berikutnya →</button>
+  <button id="cetak">PDF</button>
+</div>
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let i = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+function skala() {
+  const p = document.getElementById("panggung");
+  const s = Math.min(p.clientWidth / 1980, p.clientHeight / 1120);
+  slides.forEach(el => el.style.transform = `scale(${s})`);
+}
+function tampil() {
+  slides.forEach((el, k) => el.classList.toggle("aktif", k === i));
+  document.getElementById("pos").textContent = `${i + 1} / ${slides.length}`;
+  document.getElementById("prev").disabled = i === 0;
+  document.getElementById("next").disabled = i === slides.length - 1;
+  history.replaceState(null, "", "#" + (i + 1));
+}
+function ke(d) { i = Math.max(0, Math.min(slides.length - 1, i + d)); tampil(); }
+document.getElementById("prev").onclick = () => ke(-1);
+document.getElementById("next").onclick = () => ke(1);
+document.getElementById("cetak").onclick = () => window.print();
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); ke(1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); ke(-1); }
+});
+window.addEventListener("resize", skala);
+skala(); tampil();
+</script>
+</body>
+</html>
