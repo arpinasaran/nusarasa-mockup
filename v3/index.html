@@ -179,8 +179,8 @@ const TASKS = {
 // Nama, Konsep, Perilaku: dari yang paling umum ke paling spesifik, lalu tidak ada (masukan Pak Fajri, 23 Okt).
 // Kalau ada beberapa hal dalam satu baris, pilih yang paling bawah sebelum "Tidak ada" (yang paling spesifik).
 const SKALA_FAMILIAR = unsur => [
-  ["umum", "Familiar tidak hanya di Indonesia", "di luar negeri pun familiar"],
-  ["id", "Familiar di Indonesia"],
+  ["umum", "Familiar secara umum, di Indonesia maupun di luar negeri"],
+  ["id", "Familiar hanya di Indonesia"],
   ["daerah", "Familiar hanya bagi komunitas Indonesia tertentu", "komunitas kultural"],
   ["asing", "Asing, tidak familiar di Indonesia"],
   ["tidak", `Tidak ada unsur ${unsur} dalam teks`]
@@ -193,13 +193,13 @@ const SKALA_NILAI = [
   ["tidakwajar", "Tidak wajar di Indonesia"]
 ];
 // Bahasa: ragam bahasa teks (Styles, Registers, Genres dan Dialects di Chen Liu), dari umum ke spesifik
-// (masukan Pak Fajri, 23 Okt). Teks berbahasa asing tidak sampai ke sini: sudah disaring di langkah Kelayakan.
+// (masukan Pak Fajri, 23 Okt). Teks yang sebagian besar berbahasa asing atau daerah tidak sampai ke sini: sudah disaring di langkah Kelayakan.
 const SKALA_BAHASA = [
   ["baku", "Baku"],
   ["sehari", "Sehari-hari", "tidak baku"],
   ["daerah", "Khas komunitas tertentu", "komunitas kultural"]
 ];
-const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Familiar di Indonesia", umum: "Tidak hanya di Indonesia", tidak: "Tidak ada",
+const SINGKAT = {asing: "Asing", daerah: "Komunitas tertentu", id: "Hanya di Indonesia", umum: "Familiar secara umum", tidak: "Tidak ada",
   sangatwajar: "Sangat wajar", tidakwajar: "Tidak wajar", netral: "Wajar atau netral", baku: "Baku", sehari: "Sehari-hari", tt: "Tidak tahu"};
 // Warna chip mengikuti arti: merah-kuning untuk yang asing, abu untuk yang netral.
 const CHIP = {sangatwajar: "id", tidakwajar: "asing", netral: "umum", baku: "umum", sehari: "id"};
@@ -295,7 +295,7 @@ const bisaDibuka = (a, i) => langkahList(a).slice(0, i).every(k => k === "ringka
 // R tidak ditanya dan tidak ditampilkan ke annotator. Saat analisis, R diturunkan dari kelima baris:
 // Perilaku Asing atau Nilai Tidak wajar -> asing sampai ke dalam; Asing hanya di Nama atau Konsep -> asing di permukaan;
 // Bahasa tidak ikut menentukan asing (v3: baku, sehari-hari, khas komunitas); "tt" (tidak tahu) dihitung sebagai jawaban kosong;
-// lalu familiar hanya bagi komunitas -> familiar di Indonesia -> familiar tidak hanya di Indonesia.
+// lalu familiar hanya bagi komunitas -> familiar hanya di Indonesia -> familiar secara umum.
 // Lapis mengikuti surface vs deep adaptation (Chen Liu dkk. §7).
 
 function opsiList(nama, daftar, nilai) {
@@ -362,7 +362,7 @@ function renderQ() {
   let h = "";
   if (key === "g") {
     h = `<div class="tanya">Apakah teks ini dapat digunakan untuk anotasi kamu?</div>
-      <p class="sub">Pilih Tidak hanya kalau teksnya tidak bisa kamu pahami, atau seluruhnya atau sebagian besar berbahasa asing.</p>
+      <p class="sub">Pilih Tidak hanya kalau teksnya tidak bisa kamu pahami, atau sebagian besar berbahasa asing atau daerah.</p>
       ${opsiList("g", G, a.g)}`;
     if (berhenti(a)) {
       h += `<div class="stop"><b>Teks ini selesai di sini.</b>
