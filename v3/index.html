@@ -169,10 +169,10 @@ textarea:focus,input[type=text]:focus,select:focus{outline:2px solid var(--accen
 
 <script>
 const TASKS = {
-  sentimen: {nama: "Klasifikasi sentimen", desk: "menentukan apakah teks bernada positif, netral, atau negatif."},
   toksisitas: {nama: "Klasifikasi toksisitas", desk: "menentukan apakah unggahan mengandung ujaran kasar, hinaan, ancaman, atau serangan terhadap kelompok."},
+  emosi: {nama: "Klasifikasi emosi", desk: "menentukan emosi yang paling menonjol di teks: senang, sedih, marah, takut, atau cinta."},
   nli: {nama: "Natural Language Inference", desk: "menentukan apakah hipotesis pasti benar, mungkin benar, atau pasti salah kalau premisnya benar."},
-  ujian: {nama: "Soal ujian", desk: "menjawab soal pilihan ganda dari ujian sekolah."}
+  qa: {nama: "Tanya jawab", desk: "mencari jawaban pertanyaan di dalam paragraf, atau menyatakan bahwa paragrafnya tidak memuat jawaban."}
 };
 
 // Pilihan jawaban v3. Arti tiap pilihan ada di deck briefing, bukan di form.
@@ -221,46 +221,49 @@ const DIMS = [
   {k: "bahasa", lapis: "permukaan", nama: "Bahasa", q: "bagaimana ditulis?", tanya: "Menurut kamu, ragam bahasa teks ini…", opsi: SKALA_BAHASA}
 ];
 
-// Cakupan task mengikuti masukan Pak Rahmad (29 Sep): SmSA, IndoToxic2024, IndoNLI, ditambah MNLI terjemahan sebagai pembanding.
+// Satu teks dari tiap dataset: 4 task, masing-masing satu dataset asli dan satu pembanding.
+// Diambil dari butir pilot 2, kecuali IDK-MRC. Contoh jawaban hanya untuk tombol "Isi contoh".
 const ITEMS = [
+  // IndoToxic2024 (asli), pilot 2 P2-13. Menfess: "Sdf" dan "sender" khas base Twitter Indonesia.
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
-    bagian: [{k: "Teks", v: "gila anjeng kereta cikarang ketahan kama bgt buang2 waktu gw hampir 30 menit"}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "sehari"}}},
-  {task: "sentimen", register: "Ulasan", label: "Positif",
-    bagian: [{k: "Teks", v: "serabi manis ini sudah jadi ikon solo . sekarang mudah didapat di beberapa kota . rasanya enak legit dan gurih . santan nya terasa sekali ."}],
-    contoh: {g: "ya", dim: {nama: "id", konsep: "id", perilaku: "tidak", nilai: "netral", bahasa: "sehari"}}},
-  {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
-    bagian: [{k: "Teks", v: "Istri Petinggi Grab-Bos Scarlett Panik Usai Diduga Dukung Israel"}],
+    bagian: [{k: "Teks", v: "Sdf! Ada yang mau tidak temenan sma aku btw sender cewe ya cuman gendut bgt klo mau temanan reply aja biar snder dm."}],
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "id", perilaku: "id", nilai: "netral", bahasa: "sehari"}}},
+  // RTP-LX (transkreasi), pilot 2 P2-04. Bantalan di bawah karpet jarang ada di rumah Indonesia.
+  {task: "toksisitas", register: "Teks web (potongan awal kalimat)", label: "Tidak toksik",
+    bagian: [{k: "Teks", v: "Kami tidak menyangka bahwa seharusnya ada bantalan di bawah karpet, jadi saat Erik"}],
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "asing", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}},
+  // EmoT (asli), pilot 2 P2-22.
+  {task: "emosi", register: "Media sosial", label: "Sedih",
+    bagian: [{k: "Teks", v: "pas mau tepar tiba ingat tugas b indo mtk ekonomi -_-"}],
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "id", perilaku: "umum", nilai: "netral", bahasa: "sehari"}}},
+  // GoEmotions-MT (terjemahan LLM), pilot 2 P2-24. Pulang mengambil senapan: perilaku yang asing di sini.
+  {task: "emosi", register: "Media sosial (komentar forum)", label: "Takut",
+    bagian: [{k: "Teks", v: "Ini bikin ngeri banget denger kamu ngalamin itu. Orang kayak gitu cuma selangkah lagi buat pulang bawa senapan atau pisau."}],
+    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "asing", nilai: "netral", bahasa: "sehari"}}},
+  // IndoNLI (asli), pilot 2 P2-27.
+  {task: "nli", register: "Artikel (Wikipedia, berita, atau web)", label: "Mungkin benar",
+    bagian: [
+      {k: "Premis", v: "Direktur Jenderal Anggaran Kementerian Keuangan Askolani mengaku pemerintah masih mengkaji jumlah anggaran untuk vaksinasi gratis ke seluruh masyarakat."},
+      {k: "Hipotesis", v: "Direktur Jenderal Anggaran Kementerian Keuangan Askolani mengaku kepada wartawan Kompas bahwa pemerintah masih mengkaji jumlah anggaran untuk vaksinasi gratis ke seluruh masyarakat."}],
     contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}},
-  {task: "nli", register: "Berita", label: "Pasti salah",
+  // MNLI terjemahan, pilot 2 P2-03. Pro-kehidupan dan pro-pilih: debat aborsi di AS.
+  {task: "nli", register: "Artikel web (majalah)", label: "Pasti salah",
     bagian: [
-      {k: "Premis", v: "Pemerintah telah melarang mudik untuk menekan penularan virus Corona COVID-19."},
-      {k: "Hipotesis", v: "Pemerintah telah memperbolehkan mudik."}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "id", nilai: "netral", bahasa: "baku"}}},
-  {task: "nli", register: "Artikel web", label: "Pasti salah",
+      {k: "Premis", v: "beberapa dem yang pro-kehidupan sedang melakukan kampanye serius di tingkat negara bagian, sering melawan republik yang pro-pilih."},
+      {k: "Hipotesis", v: "kampanye konyol sedang diciptakan oleh demokrat bodoh."}],
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "asing", perilaku: "umum", nilai: "tidakwajar", bahasa: "baku"}}},
+  // TyDi QA GoldP (asli), pilot 2 P2-30.
+  {task: "qa", register: "Wikipedia", label: "9.32 Ha",
     bagian: [
-      {k: "Premis", v: "Pura Ulun Danu Beratan juga sering menjadi tempat diadakannya berbagai acara, misalnya foto pre-wedding, festival seni, upacara Melasti (upacara penyucian diri untuk menyambut Hari Raya Nyepi), dan lain sebagainya."},
-      {k: "Hipotesis", v: "Acara yang menggunakan Pura Ulan Beratan hanya acara keagamaan."}],
-    contoh: {g: "ya", dim: {nama: "daerah", konsep: "umum", perilaku: "daerah", nilai: "netral", bahasa: "baku"}}},
-  {task: "nli", register: "Wikipedia", label: "Pasti salah",
+      {k: "Paragraf", v: "Beberapa bulan kemudian, tepatnya tanggal 24 Agustus 1961, telah menjadi tanggal yang paling bersejarah bagi kaum Muslimin di Jakarta khususnya, dan Indonesia pada umumnya, untuk pertama kalinya di bekas taman itu, kota Jakarta akan memiliki sebuah masjid besar dan monumental. Maka dengan ucapan Bismillahirrahmanirrahim Presiden RI Ir. Soekarno meresmikan permulaan pembangunan Masjid Istiqlal diatas area seluas 9.32 Ha. Yang ditandai dengan pemasangan tiang pancang disaksikan oleh ribuan ummat Islam. Sebuah masjid yang akan menjadi simbol kemerdekaan bagi bangsa Indonesia."},
+      {k: "Pertanyaan", v: "Berapa luas masjid Istiqlal?"}],
+    contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "umum", nilai: "sangatwajar", bahasa: "baku"}}},
+  // IDK-MRC (asli), test set. Pertanyaannya sengaja tidak terjawab oleh paragraf.
+  {task: "qa", register: "Wikipedia", label: "Tidak ada jawaban di paragraf",
     bagian: [
-      {k: "Premis", v: "Sebagian besar semut dikenal sebagai serangga sosial, dengan koloni dan sarang-sarangnya yang teratur beranggotakan ribuan semut per koloni. Anggota koloni terbagi menjadi semut pekerja, semut pejantan, dan ratu semut."},
-      {k: "Hipotesis", v: "Koloni semut umumnya beranggotakan puluhan semut per koloni"}],
-    contoh: {g: "ya", dim: {nama: "tidak", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}},
-  {task: "nli", register: "Panduan wisata", label: "Pasti benar",
-    bagian: [
-      {k: "Premis", v: "tanggapan rezim tentang penindasan yang ganas ditambah berbagai ketidakpuasan lainnya menyebabkan revolusi ketiga pada tahun 1848, dengan bonapartis, yang dipimpin oleh keponakan napoleon, muncul kemenangan."},
-      {k: "Hipotesis", v: "prancis diperintah oleh keponakan napoleon setelah mereka memenangkan revolusi pada tahun 1848."}],
-    contoh: {g: "ya", dim: {nama: "umum", konsep: "umum", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}},
-  {task: "nli", register: "Percakapan telepon (transkrip)", label: "Mungkin benar",
-    bagian: [
-      {k: "Premis", v: "nah hal pertama bagi saya adalah saya bertanya-tanya saya melihat beberapa cara yang berbeda berbicara tentang apa itu privasi um jika privasi adalah sesuatu yang mengganggu negara pribadi anda maksud saya invasi privasi adalah sesuatu yang mengganggu negara pribadi anda yang satu hal dan jika privasi adalah sesuatu yang datang ke negara pribadi anda dan mengekstrak informasi dari itu …"},
-      {k: "Hipotesis", v: "semua invasi privasi harus dihukum berat, karena itu akan mengajarkan para penjahat bahwa itu tidak layak dilakukan."}],
-    contoh: {g: "tidak", dim: {}}},
-  // Contoh gate v3: teks berbahasa asing dijawab Tidak (IndoMMLU, master_sample_4000_v2 baris 480).
-  {task: "ujian", register: "Soal ujian", label: "–",
-    bagian: [{k: "Teks", v: "Jakarta as many other big cities has to deal with the urban heat island effect. To cope with this problem Jakarta has plans to increase the amount of green parks and trees in the city, from 10 % to the ideal amount of …."}],
-    contoh: {g: "tidak", dim: {}}}
+      {k: "Paragraf", v: "Sapta Darma merupakan aliran kerohanian di Indonesia yang berarti 'tujuh kewajiban suci'.[1] Aliran ini diyakini bermula dari turunnya wahyu kepada Bapa Panuntun Agung Sri Gutama pada dini hari Jumat Wage tanggal 27 Desember 1952 di kediamannya di Kampung Koplakan, Kecamatan Pare, Kabupaten Kediri, Jawa Timur.[2]"},
+      {k: "Pertanyaan", v: "Di kota manakah Sapta Darma terakhir muncul?"}],
+    contoh: {g: "ya", dim: {nama: "daerah", konsep: "daerah", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}}
 ];
 
 const G = [
