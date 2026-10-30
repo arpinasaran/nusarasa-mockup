@@ -361,8 +361,8 @@ function renderQ() {
   const key = L[a.step];
   let h = "";
   if (key === "g") {
-    h = `<div class="tanya">Apakah teks ini dapat digunakan untuk anotasi kamu?</div>
-      <p class="sub">Pilih Tidak hanya kalau teksnya tidak bisa kamu pahami, atau sebagian besar berbahasa asing atau daerah.</p>
+    h = `<div class="tanya">Apakah teks ini bisa kamu nilai?</div>
+      <p class="sub">Pilih Tidak kalau teksnya tidak bisa dipahami atau sebagian besar bukan bahasa Indonesia.</p>
       ${opsiList("g", G, a.g)}`;
     if (berhenti(a)) {
       h += `<div class="stop"><b>Teks ini selesai di sini.</b>
