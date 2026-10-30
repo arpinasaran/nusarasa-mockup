@@ -172,7 +172,7 @@ const TASKS = {
   toksisitas: {nama: "Klasifikasi toksisitas", desk: "menentukan apakah unggahan mengandung ujaran kasar, hinaan, ancaman, atau serangan terhadap kelompok."},
   emosi: {nama: "Klasifikasi emosi", desk: "menentukan emosi yang paling menonjol di teks: senang, sedih, marah, takut, atau cinta."},
   nli: {nama: "Natural Language Inference", desk: "menentukan apakah hipotesis pasti benar, mungkin benar, atau pasti salah kalau premisnya benar."},
-  qa: {nama: "Tanya jawab", desk: "mencari jawaban pertanyaan di dalam paragraf, atau menyatakan bahwa paragrafnya tidak memuat jawaban."}
+  qa: {nama: "Tanya jawab", desk: "menjawab pertanyaan berdasarkan isi paragraf."}
 };
 
 // Pilihan jawaban v3. Arti tiap pilihan ada di deck briefing, bukan di form.
@@ -222,7 +222,7 @@ const DIMS = [
 ];
 
 // Satu teks dari tiap dataset: 4 task, masing-masing satu dataset asli dan satu pembanding.
-// Diambil dari butir pilot 2, kecuali IDK-MRC. Contoh jawaban hanya untuk tombol "Isi contoh".
+// Diambil dari butir pilot 2, kecuali Belebele. Contoh jawaban hanya untuk tombol "Isi contoh".
 const ITEMS = [
   // IndoToxic2024 (asli), pilot 2 P2-13. Menfess: "Sdf" dan "sender" khas base Twitter Indonesia.
   {task: "toksisitas", register: "Media sosial", label: "Tidak toksik",
@@ -258,12 +258,13 @@ const ITEMS = [
       {k: "Paragraf", v: "Beberapa bulan kemudian, tepatnya tanggal 24 Agustus 1961, telah menjadi tanggal yang paling bersejarah bagi kaum Muslimin di Jakarta khususnya, dan Indonesia pada umumnya, untuk pertama kalinya di bekas taman itu, kota Jakarta akan memiliki sebuah masjid besar dan monumental. Maka dengan ucapan Bismillahirrahmanirrahim Presiden RI Ir. Soekarno meresmikan permulaan pembangunan Masjid Istiqlal diatas area seluas 9.32 Ha. Yang ditandai dengan pemasangan tiang pancang disaksikan oleh ribuan ummat Islam. Sebuah masjid yang akan menjadi simbol kemerdekaan bagi bangsa Indonesia."},
       {k: "Pertanyaan", v: "Berapa luas masjid Istiqlal?"}],
     contoh: {g: "ya", dim: {nama: "id", konsep: "umum", perilaku: "umum", nilai: "sangatwajar", bahasa: "baku"}}},
-  // IDK-MRC (asli), test set. Pertanyaannya sengaja tidak terjawab oleh paragraf.
-  {task: "qa", register: "Wikipedia", label: "Tidak ada jawaban di paragraf",
+  // Belebele (terjemahan dari FLORES), test ind_Latn. Pilihan ganda; pengganti IDK-MRC sesuai usulan email 29 Okt.
+  {task: "qa", register: "Wikijunior (buku anak)", label: "Seluncur salju",
     bagian: [
-      {k: "Paragraf", v: "Sapta Darma merupakan aliran kerohanian di Indonesia yang berarti 'tujuh kewajiban suci'.[1] Aliran ini diyakini bermula dari turunnya wahyu kepada Bapa Panuntun Agung Sri Gutama pada dini hari Jumat Wage tanggal 27 Desember 1952 di kediamannya di Kampung Koplakan, Kecamatan Pare, Kabupaten Kediri, Jawa Timur.[2]"},
-      {k: "Pertanyaan", v: "Di kota manakah Sapta Darma terakhir muncul?"}],
-    contoh: {g: "ya", dim: {nama: "daerah", konsep: "daerah", perilaku: "tidak", nilai: "netral", bahasa: "baku"}}}
+      {k: "Paragraf", v: "Sepak bola nasional Italia, juga tim sepak bola nasional Jerman merupakan tim tersukses di peringkat kedua dunia dan merupakan juara Piala Dunia FIFA pada 2006. Olahraga populer antara lain: sepak bola, basket, voli, polo air, anggar, rugbi, balap sepeda, hoki es, hoki, dan balapan motor F1. Olahraga musim dingin paling populer di kawasan Utara, dengan orang Italia yang berkompetisi dalam pertandingan internasional dan acara Olimpiade."},
+      {k: "Pertanyaan", v: "Menurut kutipan tersebut, manakah olah raga berikut yang mungkin paling populer di wilayah paling Utara Italia?"},
+      {k: "Pilihan jawaban", v: "1. Sepak bola · 2. Bola voli · 3. Seluncur salju · 4. Balap motor F1"}],
+    contoh: {g: "ya", dim: {nama: "umum", konsep: "asing", perilaku: "asing", nilai: "netral", bahasa: "baku"}}}
 ];
 
 const G = [
